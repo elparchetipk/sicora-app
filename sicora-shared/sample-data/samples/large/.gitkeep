@@ -1,0 +1,7 @@
+# Datasets grandes para testing de escalabilidad
+# TAMAÑO: 100K+ registros sintéticos
+# PROPÓSITO: Testing de escalabilidad, stress testing, performance optimization
+# 
+# Los archivos de datos NO se commitean por seguridad
+# Solo datos sintéticos, nunca información real
+# Ver SECURITY-POLICY.md para más información

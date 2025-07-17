@@ -1,0 +1,77 @@
+openapi: 3.0.3
+info:
+  title: SICORA User API
+  version: 1.0.0
+  description: API de gestión de usuarios para SICORA
+paths:
+  /users:
+    get:
+      summary: Listar usuarios
+      responses:
+        '200':
+          description: Lista de usuarios
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+    post:
+      summary: Crear usuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: Usuario creado
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+        document_number:
+          type: string
+        document_type:
+          type: string
+        role:
+          type: string
+          enum: [APPRENTICE, INSTRUCTOR, ADMINISTRATIVE, ADMIN]
+        is_active:
+          type: boolean
+        must_change_password:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        last_login_at:
+          type: string
+          format: date-time
+          nullable: true
+      required:
+        - id
+        - first_name
+        - last_name
+        - email
+        - document_number
+        - document_type
+        - role
+        - is_active
+        - must_change_password
+        - created_at
+        - updated_at

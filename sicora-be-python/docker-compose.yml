@@ -1,0 +1,215 @@
+version: '3.9'
+
+services:
+  # API Gateway
+  apigateway:
+    build:
+      context: ./apigateway
+      dockerfile: Dockerfile
+    container_name: sicora-python-apigateway
+    restart: unless-stopped
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://sicora_user:sicora_password@postgres:5432/sicora_dev
+      - REDIS_URL=redis://redis:6379
+      - PORT=8000
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - sicora-network
+    volumes:
+      - ./shared:/app/shared:ro
+
+  # User Service
+  userservice:
+    build:
+      context: ./userservice
+      dockerfile: Dockerfile
+    container_name: sicora-python-userservice
+    restart: unless-stopped
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://sicora_user:sicora_password@postgres:5432/sicora_dev
+      - REDIS_URL=redis://redis:6379
+      - JWT_SECRET=your-jwt-secret-key
+      - PORT=8001
+    ports:
+      - "8001:8001"
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - sicora-network
+    volumes:
+      - ./shared:/app/shared:ro
+
+  # Schedule Service
+  scheduleservice:
+    build:
+      context: ./scheduleservice
+      dockerfile: Dockerfile
+    container_name: sicora-python-scheduleservice
+    restart: unless-stopped
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://sicora_user:sicora_password@postgres:5432/sicora_dev
+      - REDIS_URL=redis://redis:6379
+      - PORT=8002
+    ports:
+      - "8002:8002"
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - sicora-network
+    volumes:
+      - ./shared:/app/shared:ro
+
+  # Attendance Service
+  attendanceservice:
+    build:
+      context: ./attendanceservice
+      dockerfile: Dockerfile
+    container_name: sicora-python-attendanceservice
+    restart: unless-stopped
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://sicora_user:sicora_password@postgres:5432/sicora_dev
+      - REDIS_URL=redis://redis:6379
+      - PORT=8003
+    ports:
+      - "8003:8003"
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - sicora-network
+    volumes:
+      - ./shared:/app/shared:ro
+
+  # Evalin Service
+  evalinservice:
+    build:
+      context: ./evalinservice
+      dockerfile: Dockerfile
+    container_name: sicora-python-evalinservice
+    restart: unless-stopped
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://sicora_user:sicora_password@postgres:5432/sicora_dev
+      - REDIS_URL=redis://redis:6379
+      - PORT=8004
+    ports:
+      - "8004:8004"
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - sicora-network
+    volumes:
+      - ./shared:/app/shared:ro
+
+  # Evalproy Service
+  evalproyservice:
+    build:
+      context: ./evalproyservice
+      dockerfile: Dockerfile
+    container_name: sicora-python-evalproyservice
+    restart: unless-stopped
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://sicora_user:sicora_password@postgres:5432/sicora_dev
+      - REDIS_URL=redis://redis:6379
+      - PORT=8005
+    ports:
+      - "8005:8005"
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - sicora-network
+    volumes:
+      - ./shared:/app/shared:ro
+
+  # Knowledge Base Service
+  kbservice:
+    build:
+      context: ./kbservice
+      dockerfile: Dockerfile
+    container_name: sicora-python-kbservice
+    restart: unless-stopped
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://sicora_user:sicora_password@postgres:5432/sicora_dev
+      - REDIS_URL=redis://redis:6379
+      - CHROMA_PERSIST_DIRECTORY=/app/chroma_db
+      - PORT=8006
+    ports:
+      - "8006:8006"
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - sicora-network
+    volumes:
+      - ./shared:/app/shared:ro
+      - kb_data:/app/chroma_db
+
+  # AI Service
+  aiservice:
+    build:
+      context: ./aiservice
+      dockerfile: Dockerfile
+    container_name: sicora-python-aiservice
+    restart: unless-stopped
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://sicora_user:sicora_password@postgres:5432/sicora_dev
+      - REDIS_URL=redis://redis:6379
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - PORT=8007
+    ports:
+      - "8007:8007"
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - sicora-network
+    volumes:
+      - ./shared:/app/shared:ro
+
+  # Servicios de infraestructura (referencia a sicora-infra)
+  postgres:
+    image: postgres:15-alpine
+    container_name: sicora-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: sicora_dev
+      POSTGRES_USER: sicora_user
+      POSTGRES_PASSWORD: sicora_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./shared/database/init:/docker-entrypoint-initdb.d
+    networks:
+      - sicora-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: sicora-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - sicora-network
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  kb_data:
+    driver: local
+
+networks:
+  sicora-network:
+    driver: bridge
+    external: true

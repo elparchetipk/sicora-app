@@ -1,0 +1,30 @@
+# Configuración pnpm para servidor MCP SICORA
+
+# Usar pnpm como gestor de paquetes por defecto
+package-manager=pnpm
+
+# Configuración de hoisting
+hoist-pattern[]=*
+
+# Configuración de peer dependencies
+auto-install-peers=true
+
+# Configuración de cache
+store-dir=~/.pnpm-store
+
+# Configuración de registry
+registry=https://registry.npmjs.org/
+
+# Configuración de workspace
+# Habilitar workspaces si es necesario
+# workspace-root=true
+
+# Configuración de resolución
+resolution-mode=highest
+
+# Configuración de instalación
+prefer-frozen-lockfile=true
+
+# Configuración de desarrollo
+save-exact=false
+save-prefix=^

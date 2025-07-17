@@ -1,0 +1,74 @@
+{
+  "name": "sicora-mcp-server",
+  "version": "1.0.0",
+  "description": "Servidor MCP especializado para el desarrollo de SICORA - Sistema de Control de Registros Académicos",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/index.ts",
+    "start": "node dist/index.js",
+    "watch": "tsx watch src/index.ts",
+    "lint": "eslint src/**/*.ts",
+    "test": "jest",
+    "install:deps": "pnpm install",
+    "clean": "rm -rf dist node_modules",
+    "setup": "pnpm install && pnpm build",
+    "mcp:setup": "./scripts/configure-mcp.sh",
+    "mcp:dev": "./scripts/dev.sh dev",
+    "mcp:build": "./scripts/dev.sh build",
+    "mcp:status": "./scripts/dev.sh status",
+    "mcp:clean": "./scripts/dev.sh clean",
+    "prestart": "pnpm run build",
+    "postinstall": "echo '✅ Dependencias instaladas. Ejecuta: pnpm run mcp:setup para configurar el servidor MCP'"
+  },
+  "bin": {
+    "sicora-mcp": "./dist/index.js"
+  },
+  "keywords": [
+    "mcp",
+    "sicora",
+    "sena",
+    "academic",
+    "education",
+    "development",
+    "ai",
+    "assistant"
+  ],
+  "author": "SICORA Development Team",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^0.5.0",
+    "@types/node": "^20.0.0",
+    "dotenv": "^16.0.0",
+    "fs-extra": "^11.0.0",
+    "glob": "^10.0.0",
+    "yaml": "^2.0.0",
+    "zod": "^3.22.0",
+    "chokidar": "^3.5.0",
+    "semver": "^7.5.0"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.0",
+    "@types/jest": "^29.0.0",
+    "@types/semver": "^7.5.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0",
+    "jest": "^29.0.0",
+    "ts-jest": "^29.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sicora-dev/sicora-mcp-server.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sicora-dev/sicora-mcp-server/issues"
+  },
+  "homepage": "https://github.com/sicora-dev/sicora-mcp-server#readme"
+}

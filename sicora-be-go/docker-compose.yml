@@ -1,0 +1,148 @@
+version: '3.9'
+
+services:
+  # Servicios Go
+  userservice:
+    build:
+      context: ./userservice
+      dockerfile: Dockerfile
+    container_name: sicora-go-userservice
+    restart: unless-stopped
+    environment:
+      - DATABASE_URL=postgres://sicora_user:sicora_password@postgres:5432/sicora_dev
+      - REDIS_URL=redis://redis:6379
+      - JWT_SECRET=your-jwt-secret-key
+      - PORT=8001
+    ports:
+      - "8001:8001"
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - sicora-network
+    volumes:
+      - ./shared:/app/shared:ro
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  scheduleservice:
+    build:
+      context: ./scheduleservice
+      dockerfile: Dockerfile
+    container_name: sicora-go-scheduleservice
+    restart: unless-stopped
+    environment:
+      - DATABASE_URL=postgres://sicora_user:sicora_password@postgres:5432/sicora_dev
+      - REDIS_URL=redis://redis:6379
+      - PORT=8002
+    ports:
+      - "8002:8002"
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - sicora-network
+    volumes:
+      - ./shared:/app/shared:ro
+
+  attendanceservice:
+    build:
+      context: ./attendanceservice
+      dockerfile: Dockerfile
+    container_name: sicora-go-attendanceservice
+    restart: unless-stopped
+    environment:
+      - DATABASE_URL=postgres://sicora_user:sicora_password@postgres:5432/sicora_dev
+      - REDIS_URL=redis://redis:6379
+      - PORT=8003
+    ports:
+      - "8003:8003"
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - sicora-network
+    volumes:
+      - ./shared:/app/shared:ro
+
+  projectevalservice:
+    build:
+      context: ./projectevalservice
+      dockerfile: Dockerfile
+    container_name: sicora-go-projectevalservice
+    restart: unless-stopped
+    environment:
+      - DATABASE_URL=postgres://sicora_user:sicora_password@postgres:5432/sicora_dev
+      - REDIS_URL=redis://redis:6379
+      - PORT=8007
+    ports:
+      - "8007:8007"
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - sicora-network
+    volumes:
+      - ./shared:/app/shared:ro
+
+  evalinservice:
+    build:
+      context: ./evalinservice
+      dockerfile: Dockerfile
+    container_name: sicora-go-evalinservice
+    restart: unless-stopped
+    environment:
+      - DATABASE_URL=postgres://sicora_user:sicora_password@postgres:5432/sicora_dev
+      - REDIS_URL=redis://redis:6379
+      - PORT=8004
+    ports:
+      - "8004:8004"
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - sicora-network
+    volumes:
+      - ./shared:/app/shared:ro
+
+  # Servicios de infraestructura (referencia a sicora-infra)
+  postgres:
+    image: postgres:15-alpine
+    container_name: sicora-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: sicora_dev
+      POSTGRES_USER: sicora_user
+      POSTGRES_PASSWORD: sicora_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./shared/database/init:/docker-entrypoint-initdb.d
+    networks:
+      - sicora-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: sicora-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - sicora-network
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  sicora-network:
+    driver: bridge
+    external: true

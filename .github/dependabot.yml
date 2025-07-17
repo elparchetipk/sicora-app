@@ -1,0 +1,99 @@
+version: 2
+updates:
+  # Frontend dependencies
+  - package-ecosystem: 'npm'
+    directory: '/sicora-app-fe'
+    schedule:
+      interval: 'weekly'
+      day: 'monday'
+      time: '09:00'
+    open-pull-requests-limit: 10
+    reviewers:
+      - 'sicora-team'
+    assignees:
+      - 'sicora-team'
+    commit-message:
+      prefix: 'build(frontend)'
+      include: 'scope'
+    labels:
+      - 'dependencies'
+      - 'frontend'
+    ignore:
+      - dependency-name: '@types/*'
+        update-types: ['version-update:semver-patch']
+
+  # Backend Go dependencies
+  - package-ecosystem: 'gomod'
+    directory: '/sicora-be-go'
+    schedule:
+      interval: 'weekly'
+      day: 'monday'
+      time: '09:30'
+    open-pull-requests-limit: 5
+    reviewers:
+      - 'sicora-team'
+    assignees:
+      - 'sicora-team'
+    commit-message:
+      prefix: 'build(backend-go)'
+      include: 'scope'
+    labels:
+      - 'dependencies'
+      - 'backend-go'
+
+  # Backend Python dependencies
+  - package-ecosystem: 'pip'
+    directory: '/sicora-be-python'
+    schedule:
+      interval: 'weekly'
+      day: 'monday'
+      time: '10:00'
+    open-pull-requests-limit: 5
+    reviewers:
+      - 'sicora-team'
+    assignees:
+      - 'sicora-team'
+    commit-message:
+      prefix: 'build(backend-python)'
+      include: 'scope'
+    labels:
+      - 'dependencies'
+      - 'backend-python'
+
+  # Docker dependencies
+  - package-ecosystem: 'docker'
+    directory: '/sicora-infra'
+    schedule:
+      interval: 'weekly'
+      day: 'tuesday'
+      time: '09:00'
+    open-pull-requests-limit: 3
+    reviewers:
+      - 'sicora-team'
+    assignees:
+      - 'sicora-team'
+    commit-message:
+      prefix: 'build(docker)'
+      include: 'scope'
+    labels:
+      - 'dependencies'
+      - 'docker'
+
+  # GitHub Actions dependencies
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      day: 'tuesday'
+      time: '09:30'
+    open-pull-requests-limit: 3
+    reviewers:
+      - 'sicora-team'
+    assignees:
+      - 'sicora-team'
+    commit-message:
+      prefix: 'ci'
+      include: 'scope'
+    labels:
+      - 'dependencies'
+      - 'github-actions'

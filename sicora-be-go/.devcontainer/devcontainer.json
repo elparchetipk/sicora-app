@@ -1,0 +1,60 @@
+{
+  "name": "SICORA Backend - Go Stack",
+  "image": "mcr.microsoft.com/devcontainers/go:1.22-bullseye",
+  "features": {
+    "ghcr.io/devcontainers/features/go:1": {
+      "version": "1.22"
+    },
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/git:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "golang.go",
+        "ms-azuretools.vscode-docker",
+        "redhat.vscode-yaml",
+        "GitHub.copilot",
+        "GitHub.copilot-chat"
+      ],
+      "settings": {
+        "go.toolsManagement.autoUpdate": true,
+        "go.useLanguageServer": true,
+        "go.lintTool": "golangci-lint",
+        "go.lintOnSave": "package",
+        "go.formatTool": "gofumpt",
+        "go.testFlags": ["-v"],
+        "files.exclude": {
+          "**/bin": true,
+          "**/vendor": true
+        }
+      }
+    }
+  },
+  "forwardPorts": [8080, 8000, 5432, 6379],
+  "portsAttributes": {
+    "8080": {
+      "label": "Go API",
+      "onAutoForward": "notify"
+    },
+    "8000": {
+      "label": "Go API (alt)",
+      "onAutoForward": "notify"
+    },
+    "5432": {
+      "label": "PostgreSQL",
+      "onAutoForward": "silent"
+    },
+    "6379": {
+      "label": "Redis",
+      "onAutoForward": "silent"
+    }
+  },
+  "mounts": [
+    "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
+  ],
+  "postCreateCommand": "make setup",
+  "remoteUser": "vscode",
+  "workspaceFolder": "/workspaces/sicora-be-go"
+}

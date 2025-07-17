@@ -1,0 +1,22 @@
+basePath: /api/v1
+host: localhost:8000
+info:
+  contact:
+    email: dev@sicora.sena.edu.co
+    name: Equipo de Desarrollo SICORA
+  description: Microservicio kbservice del Sistema de Información de Coordinación
+    Académica (SICORA) - SENA
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  termsOfService: http://swagger.io/terms/
+  title: SICORA kbservice API
+  version: "1.0"
+paths: {}
+securityDefinitions:
+  BearerAuth:
+    description: Type "Bearer" followed by a space and JWT token.
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

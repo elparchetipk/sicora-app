@@ -1,0 +1,95 @@
+# Binarios
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*/bin/
+bin/
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool
+*.out
+coverage.html
+coverage.xml
+
+# Go workspace file
+go.work
+
+# Dependency directories
+vendor/
+
+# Go modules
+go.sum
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+logs/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Redis dump file
+dump.rdb
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Backup files
+*.bak
+*.backup
+
+# Docker
+.docker/
+
+# Swagger docs (generados automáticamente)
+docs/swagger.json
+docs/swagger.yaml
+docs/docs.go
+
+# Air live reload
+tmp/
+
+# Delve debugger
+__debug_bin
+
+# Test coverage
+*.cover
+*.coverprofile
+
+# Build artifacts
+dist/
+build/
+
+# Local development
+.local/
+
+# Certificates
+*.pem
+*.crt
+*.key
+
+# Profiling
+*.prof
+*.pprof

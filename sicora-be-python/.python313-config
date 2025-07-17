@@ -1,0 +1,29 @@
+# SICORA Backend Python Stack - Configuración de Compatibilidad Python 3.13
+#
+# Este archivo especifica las versiones exactas y configuraciones
+# necesarias para garantizar compatibilidad con Python 3.13
+
+# Versión exacta de Python requerida
+PYTHON_VERSION=3.13.3
+
+# Paquetes problemáticos a evitar (incompatibles con Python 3.13)
+EXCLUDED_PACKAGES="chromadb,chroma-hnswlib,llama-index"
+
+# Versiones mínimas de paquetes críticos
+MIN_FASTAPI_VERSION=0.115.0
+MIN_PYDANTIC_VERSION=2.10.0
+MIN_SQLALCHEMY_VERSION=2.0.30
+MIN_PYTEST_VERSION=8.3.0
+
+# Configuraciones específicas para Python 3.13
+export SETUPTOOLS_USE_DISTUTILS=stdlib
+export PYTHONPATH="${PYTHONPATH}:."
+
+# Flags de compilación para dependencias nativas
+export CFLAGS="-std=c++17"
+export CXXFLAGS="-std=c++17"
+
+# Configuración de pip para Python 3.13
+PIP_ARGS="--no-cache-dir --force-reinstall --upgrade"
+
+echo "✅ Configuración de compatibilidad Python 3.13 cargada"

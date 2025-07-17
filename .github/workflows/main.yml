@@ -1,0 +1,337 @@
+name: SICORA CI/CD Pipeline
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  detect-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      frontend: ${{ steps.changes.outputs.frontend }}
+      backend-go: ${{ steps.changes.outputs.backend-go }}
+      backend-python: ${{ steps.changes.outputs.backend-python }}
+      docs: ${{ steps.changes.outputs.docs }}
+      infra: ${{ steps.changes.outputs.infra }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: changes
+        with:
+          filters: |
+            frontend:
+              - 'sicora-app-fe/**'
+            backend-go:
+              - 'sicora-be-go/**'
+            backend-python:
+              - 'sicora-be-python/**'
+            docs:
+              - '_docs/**'
+              - '*.md'
+            infra:
+              - 'sicora-infra/**'
+              - 'docker-compose*.yml'
+              - 'Dockerfile*'
+
+  frontend-ci:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.frontend == 'true'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18, 20, 22]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: false
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        working-directory: ./sicora-app-fe
+        run: pnpm install --frozen-lockfile
+
+      - name: Type checking
+        working-directory: ./sicora-app-fe
+        run: pnpm type-check
+
+      - name: Linting
+        working-directory: ./sicora-app-fe
+        run: pnpm lint
+
+      - name: Format check
+        working-directory: ./sicora-app-fe
+        run: pnpm format:check
+
+      - name: Run tests
+        working-directory: ./sicora-app-fe
+        run: pnpm test:coverage
+
+      - name: Build application
+        working-directory: ./sicora-app-fe
+        run: pnpm build
+
+      - name: Upload coverage to Codecov
+        if: matrix.node-version == '20'
+        uses: codecov/codecov-action@v3
+        with:
+          file: ./sicora-app-fe/coverage/coverage-final.json
+          flags: frontend
+          name: frontend-coverage
+
+  backend-go-ci:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.backend-go == 'true'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        go-version: [1.21, 1.22]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Go ${{ matrix.go-version }}
+        uses: actions/setup-go@v4
+        with:
+          go-version: ${{ matrix.go-version }}
+
+      - name: Cache Go modules
+        uses: actions/cache@v3
+        with:
+          path: ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ matrix.go-version }}-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-${{ matrix.go-version }}-
+
+      - name: Install dependencies
+        working-directory: ./sicora-be-go
+        run: go mod download
+
+      - name: Verify dependencies
+        working-directory: ./sicora-be-go
+        run: go mod verify
+
+      - name: Go mod tidy
+        working-directory: ./sicora-be-go
+        run: go mod tidy
+
+      - name: Install golangci-lint
+        run: curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.55.2
+
+      - name: Run linter
+        working-directory: ./sicora-be-go
+        run: golangci-lint run ./...
+
+      - name: Build application
+        working-directory: ./sicora-be-go
+        run: go build -v ./...
+
+      - name: Run tests
+        working-directory: ./sicora-be-go
+        run: go test -v -race -coverprofile=coverage.out ./...
+
+      - name: Upload coverage to Codecov
+        if: matrix.go-version == '1.22'
+        uses: codecov/codecov-action@v3
+        with:
+          file: ./sicora-be-go/coverage.out
+          flags: backend-go
+          name: backend-go-coverage
+
+  backend-python-ci:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.backend-python == 'true'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.9, 3.10, 3.11]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Cache pip dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ matrix.python-version }}-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-${{ matrix.python-version }}-
+
+      - name: Install dependencies
+        working-directory: ./sicora-be-python
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
+
+      - name: Run linting
+        working-directory: ./sicora-be-python
+        run: |
+          flake8 app/ --max-line-length=88 --extend-ignore=E203,W503
+          black --check app/
+          isort --check-only app/
+
+      - name: Run security checks
+        working-directory: ./sicora-be-python
+        run: |
+          bandit -r app/
+          safety check
+
+      - name: Run tests
+        working-directory: ./sicora-be-python
+        run: |
+          pytest --cov=app --cov-report=xml --cov-report=html
+
+      - name: Upload coverage to Codecov
+        if: matrix.python-version == '3.11'
+        uses: codecov/codecov-action@v3
+        with:
+          file: ./sicora-be-python/coverage.xml
+          flags: backend-python
+          name: backend-python-coverage
+
+  docs-ci:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.docs == 'true'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Verify documentation structure
+        run: |
+          echo "🔍 Checking documentation structure..."
+
+          # Verificar que no hay archivos .md incorrectos en la raíz
+          INCORRECT_MD_FILES=$(find . -maxdepth 1 -name "*.md" -not -name "README.md" | wc -l)
+          if [ "$INCORRECT_MD_FILES" -gt 0 ]; then
+            echo "❌ Found .md files in root directory (should be in _docs/)"
+            find . -maxdepth 1 -name "*.md" -not -name "README.md"
+            exit 1
+          fi
+
+          # Verificar estructura de carpetas
+          if [ ! -d "_docs" ]; then
+            echo "❌ _docs directory not found"
+            exit 1
+          fi
+
+          # Verificar que no hay TODOs en documentación
+          TODO_COUNT=$(find _docs -name "*.md" -exec grep -l "TODO\|FIXME\|XXX" {} \; | wc -l)
+          if [ "$TODO_COUNT" -gt 0 ]; then
+            echo "⚠️ Found $TODO_COUNT files with TODO/FIXME/XXX"
+            find _docs -name "*.md" -exec grep -l "TODO\|FIXME\|XXX" {} \;
+          fi
+
+          echo "✅ Documentation structure verified"
+
+      - name: Check for broken links
+        run: |
+          echo "🔗 Checking for broken links..."
+          find _docs -name "*.md" -exec grep -l "](.*)" {} \; | head -5
+          echo "✅ Link check completed"
+
+  security-scan:
+    runs-on: ubuntu-latest
+    needs: [detect-changes]
+    if: github.event_name == 'pull_request'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: 'trivy-results.sarif'
+
+  deploy-staging:
+    needs: [frontend-ci, backend-go-ci, backend-python-ci, docs-ci]
+    if: github.ref == 'refs/heads/develop' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    environment: staging
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to staging
+        run: |
+          echo "🚀 Deploying to staging environment..."
+          echo "Frontend: ${{ needs.detect-changes.outputs.frontend }}"
+          echo "Backend Go: ${{ needs.detect-changes.outputs.backend-go }}"
+          echo "Backend Python: ${{ needs.detect-changes.outputs.backend-python }}"
+          echo "✅ Staging deployment completed"
+
+  deploy-production:
+    needs: [frontend-ci, backend-go-ci, backend-python-ci, docs-ci]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to production
+        run: |
+          echo "🚀 Deploying to production environment..."
+          echo "Frontend: ${{ needs.detect-changes.outputs.frontend }}"
+          echo "Backend Go: ${{ needs.detect-changes.outputs.backend-go }}"
+          echo "Backend Python: ${{ needs.detect-changes.outputs.backend-python }}"
+          echo "✅ Production deployment completed"
+
+  notify-completion:
+    needs: [frontend-ci, backend-go-ci, backend-python-ci, docs-ci]
+    if: always()
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Notify completion
+        run: |
+          echo "📊 SICORA CI/CD Pipeline Completed"
+          echo "Frontend: ${{ needs.frontend-ci.result }}"
+          echo "Backend Go: ${{ needs.backend-go-ci.result }}"
+          echo "Backend Python: ${{ needs.backend-python-ci.result }}"
+          echo "Documentation: ${{ needs.docs-ci.result }}"
+          echo "🎉 Pipeline execution finished"

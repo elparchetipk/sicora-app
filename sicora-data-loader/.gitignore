@@ -1,0 +1,41 @@
+# Desarrollado con Python 3.8+
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Entorno virtual
+venv/
+env/
+ENV/
+
+# Variables de entorno
+.env
+
+# Logs
+*.log
+logs/
+
+# Datos temporales
+temp_pdf.pdf
+*.tmp
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Streamlit
+.streamlit/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Archivos de prueba
+test_files/
+samples/

@@ -1,0 +1,4 @@
+# Contratos de API para operaciones bulk
+# CONTENIDO: OpenAPI specs, JSON Schema para endpoints bulk
+# PÚBLICO: Puede ser versionado en git
+# PROPÓSITO: Consistencia de APIs entre stacks para bulk operations

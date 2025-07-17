@@ -1,0 +1,21 @@
+# Guias - Frontend SICORA
+
+## Documentación de Guias
+
+Esta carpeta contiene la documentación relacionada con guias del frontend SICORA.
+
+## Archivos
+
+- APLICACION_ESQUEMA_ENTORNO_DEMO_COMPLETADA.md
+- CORRECCION_DEGRADE_COMPLETADA.md
+- CORRECCION_FONDO_BLANCO_COMPLETADA.md
+- CORRECCION_TEXTOS_Y_DEMOS_COMPLETADA.md
+- GUIA_COLORES_NO_DEGRADE.md
+- GUIAS_UX_UI_INSTITUCIONAL_SENA.md
+- IMPLEMENTACION_CONTACTO_SEGURO_COMPLETADA.md
+- IMPLEMENTACION_LEGAL_COMPLETADA.md
+- PROYECTO-COMPLETADO.md
+
+---
+
+_Generado automáticamente por el script de organización_

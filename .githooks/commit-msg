@@ -1,0 +1,178 @@
+#!/bin/bash
+# Commit-msg hook para validar mensajes de commit
+# Verifica que sigan las convenciones de Conventional Commits
+
+set -e
+
+# Colores para output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+NC='\033[0m'
+
+# Funciones
+log() {
+    echo -e "${BLUE}[COMMIT-MSG]${NC} $1"
+}
+
+error() {
+    echo -e "${RED}❌ $1${NC}"
+}
+
+success() {
+    echo -e "${GREEN}✅ $1${NC}"
+}
+
+warning() {
+    echo -e "${YELLOW}⚠️  $1${NC}"
+}
+
+# Obtener mensaje de commit
+COMMIT_MSG_FILE="$1"
+COMMIT_MSG=$(cat "$COMMIT_MSG_FILE")
+
+# Ignorar commits de merge
+if echo "$COMMIT_MSG" | grep -q "^Merge"; then
+    log "Merge commit detected, skipping validation"
+    exit 0
+fi
+
+# Ignorar commits de revert
+if echo "$COMMIT_MSG" | grep -q "^Revert"; then
+    log "Revert commit detected, skipping validation"
+    exit 0
+fi
+
+# Patrón de Conventional Commits
+CONVENTIONAL_PATTERN="^(feat|fix|docs|style|refactor|test|chore|ci|perf|build)(\(.+\))?: .+$"
+
+# Validar formato básico
+if ! echo "$COMMIT_MSG" | grep -qE "$CONVENTIONAL_PATTERN"; then
+    error "Invalid commit message format"
+    echo ""
+    echo "Expected format: <type>(<scope>): <description>"
+    echo ""
+    echo "Valid types:"
+    echo "  feat:     New feature"
+    echo "  fix:      Bug fix"
+    echo "  docs:     Documentation changes"
+    echo "  style:    Code style changes (no logic changes)"
+    echo "  refactor: Code refactoring"
+    echo "  test:     Add or update tests"
+    echo "  chore:    Maintenance tasks"
+    echo "  ci:       CI/CD changes"
+    echo "  perf:     Performance improvements"
+    echo "  build:    Build system or dependencies"
+    echo ""
+    echo "Examples:"
+    echo "  feat(auth): add user authentication"
+    echo "  fix(api): resolve endpoint timeout issue"
+    echo "  docs: update installation guide"
+    echo "  style(frontend): format code with prettier"
+    echo ""
+    exit 1
+fi
+
+# Extraer componentes del mensaje
+COMMIT_TYPE=$(echo "$COMMIT_MSG" | sed -n 's/^\([^(]*\).*/\1/p')
+COMMIT_SCOPE=$(echo "$COMMIT_MSG" | sed -n 's/^[^(]*(\([^)]*\)).*/\1/p')
+COMMIT_DESCRIPTION=$(echo "$COMMIT_MSG" | sed -n 's/^[^:]*: \(.*\)/\1/p')
+
+# Validar tipo de commit
+VALID_TYPES="feat|fix|docs|style|refactor|test|chore|ci|perf|build"
+if ! echo "$COMMIT_TYPE" | grep -qE "^($VALID_TYPES)$"; then
+    error "Invalid commit type: $COMMIT_TYPE"
+    echo "Valid types: $VALID_TYPES"
+    exit 1
+fi
+
+# Validar scope si existe
+if [ -n "$COMMIT_SCOPE" ]; then
+    # Scopes válidos para el proyecto SICORA
+    VALID_SCOPES="frontend|backend-go|backend-python|api|auth|ui|database|config|docker|ci|docs|test"
+    if ! echo "$COMMIT_SCOPE" | grep -qE "^($VALID_SCOPES)$"; then
+        warning "Scope '$COMMIT_SCOPE' is not in the recommended list"
+        echo "Recommended scopes: $VALID_SCOPES"
+        echo "Continuing anyway..."
+    fi
+fi
+
+# Validar descripción
+if [ -z "$COMMIT_DESCRIPTION" ]; then
+    error "Commit description is required"
+    exit 1
+fi
+
+# Validar longitud de la descripción
+if [ ${#COMMIT_DESCRIPTION} -lt 5 ]; then
+    error "Commit description too short (minimum 5 characters)"
+    exit 1
+fi
+
+if [ ${#COMMIT_DESCRIPTION} -gt 100 ]; then
+    error "Commit description too long (maximum 100 characters)"
+    exit 1
+fi
+
+# Validar que la descripción no termine con punto
+if echo "$COMMIT_DESCRIPTION" | grep -q '\.$'; then
+    error "Commit description should not end with a period"
+    exit 1
+fi
+
+# Validar que la descripción esté en minúsculas
+if echo "$COMMIT_DESCRIPTION" | grep -q '^[A-Z]'; then
+    warning "Commit description should start with lowercase"
+    echo "Consider: $(echo "$COMMIT_DESCRIPTION" | sed 's/^./\L&/')"
+fi
+
+# Validar palabras prohibidas
+PROHIBITED_WORDS="WIP|TODO|FIXME|XXX|HACK|TEMP"
+if echo "$COMMIT_MSG" | grep -qiE "$PROHIBITED_WORDS"; then
+    error "Commit message contains prohibited words: $PROHIBITED_WORDS"
+    exit 1
+fi
+
+# Validar que no hay trailing whitespace
+if echo "$COMMIT_MSG" | grep -q ' $'; then
+    error "Commit message has trailing whitespace"
+    exit 1
+fi
+
+# Validaciones específicas por tipo
+case "$COMMIT_TYPE" in
+    "feat")
+        if echo "$COMMIT_DESCRIPTION" | grep -qE "^(add|implement|create)"; then
+            success "Good feature commit description"
+        else
+            warning "Feature commits should describe what is being added/implemented"
+        fi
+        ;;
+    "fix")
+        if echo "$COMMIT_DESCRIPTION" | grep -qE "^(fix|resolve|correct|repair)"; then
+            success "Good fix commit description"
+        else
+            warning "Fix commits should describe what is being fixed/resolved"
+        fi
+        ;;
+    "docs")
+        if echo "$COMMIT_DESCRIPTION" | grep -qE "^(update|add|fix|improve)"; then
+            success "Good documentation commit description"
+        else
+            warning "Documentation commits should describe what is being updated/added"
+        fi
+        ;;
+esac
+
+# Mostrar resumen de validación
+echo ""
+log "📋 Commit validation summary:"
+echo "  Type: $COMMIT_TYPE"
+if [ -n "$COMMIT_SCOPE" ]; then
+    echo "  Scope: $COMMIT_SCOPE"
+fi
+echo "  Description: $COMMIT_DESCRIPTION"
+echo "  Length: ${#COMMIT_DESCRIPTION} characters"
+echo ""
+success "Commit message validation passed! 🎉"

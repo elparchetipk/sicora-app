@@ -1,0 +1,144 @@
+package routes
+
+import (
+	"net/http"
+	"time"
+
+	"scheduleservice/configs"
+	"scheduleservice/internal/presentation/handlers"
+	"scheduleservice/internal/presentation/middleware"
+
+	"github.com/gin-gonic/gin"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
+)
+
+// SetupRoutes configures all application routes
+func SetupRoutes(config *configs.Config, scheduleHandler *handlers.ScheduleHandler, masterDataHandler *handlers.MasterDataHandler) *gin.Engine {
+	router := gin.New()
+
+	// Middleware
+	router.Use(gin.Logger())
+	router.Use(gin.Recovery())
+	router.Use(corsMiddleware())
+
+	// Health check endpoint
+	router.GET("/health", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{
+			"status":    "ok",
+			"service":   "scheduleservice",
+			"timestamp": time.Now(),
+		})
+	})
+
+	// Swagger documentation
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+
+	// Configure auth middleware
+	authConfig := &middleware.AuthConfig{
+		SecretKey: config.JWT.SecretKey,
+		SkipPaths: []string{"/health", "/swagger"},
+		CacheTTL:  time.Minute * 5,
+	}
+
+	// API routes with authentication
+	api := router.Group("/api/v1")
+	api.Use(middleware.AuthMiddleware(authConfig))
+	{
+		// Schedule routes
+		schedules := api.Group("/schedules")
+		{
+			schedules.GET("",
+				middleware.RequirePermissions(middleware.PermScheduleRead),
+				scheduleHandler.ListSchedules)
+			schedules.POST("",
+				middleware.RequirePermissions(middleware.PermScheduleCreate),
+				scheduleHandler.CreateSchedule)
+			schedules.GET("/:id",
+				middleware.RequirePermissions(middleware.PermScheduleRead),
+				scheduleHandler.GetSchedule)
+			schedules.PUT("/:id",
+				middleware.RequirePermissions(middleware.PermScheduleUpdate),
+				scheduleHandler.UpdateSchedule)
+			schedules.DELETE("/:id",
+				middleware.RequirePermissions(middleware.PermScheduleDelete),
+				scheduleHandler.DeleteSchedule)
+		}
+
+		// Master entities routes
+		master := api.Group("/master")
+		{
+			// Academic Programs
+			programs := master.Group("/programs")
+			{
+				programs.GET("",
+					middleware.RequirePermissions(middleware.PermMasterDataRead),
+					masterDataHandler.ListAcademicPrograms)
+				programs.POST("",
+					middleware.RequirePermissions(middleware.PermMasterDataManage),
+					masterDataHandler.CreateAcademicProgram)
+			}
+
+			// Academic Groups
+			groups := master.Group("/groups")
+			{
+				groups.GET("",
+					middleware.RequirePermissions(middleware.PermMasterDataRead),
+					masterDataHandler.ListAcademicGroups)
+				groups.POST("",
+					middleware.RequirePermissions(middleware.PermMasterDataManage),
+					masterDataHandler.CreateAcademicGroup)
+			}
+
+			// Venues
+			venues := master.Group("/venues")
+			{
+				venues.GET("",
+					middleware.RequirePermissions(middleware.PermMasterDataRead),
+					masterDataHandler.ListVenues)
+				venues.POST("",
+					middleware.RequirePermissions(middleware.PermMasterDataManage),
+					masterDataHandler.CreateVenue)
+			}
+
+			// Campuses
+			campuses := master.Group("/campuses")
+			{
+				campuses.GET("",
+					middleware.RequirePermissions(middleware.PermMasterDataRead),
+					masterDataHandler.ListCampuses)
+				campuses.POST("",
+					middleware.RequirePermissions(middleware.PermMasterDataManage),
+					masterDataHandler.CreateCampus)
+			}
+		}
+
+		// Admin routes
+		admin := api.Group("/admin")
+		admin.Use(middleware.RequirePermissions(middleware.PermSystemAdmin))
+		{
+			admin.POST("/schedules/upload", func(c *gin.Context) {
+				c.JSON(http.StatusOK, gin.H{"message": "Bulk upload schedules - TODO"})
+			})
+		}
+	}
+
+	return router
+}
+
+// corsMiddleware sets up CORS middleware
+func corsMiddleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.Header("Access-Control-Allow-Origin", "*")
+		c.Header("Access-Control-Allow-Credentials", "true")
+		c.Header("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With")
+		c.Header("Access-Control-Allow-Methods", "POST, OPTIONS, GET, PUT, DELETE")
+
+		if c.Request.Method == "OPTIONS" {
+			c.AbortWithStatus(204)
+			return
+		}
+
+		c.Next()
+	}
+}

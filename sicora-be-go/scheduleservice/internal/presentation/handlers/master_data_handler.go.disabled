@@ -1,0 +1,542 @@
+package handlers
+
+import (
+	"net/http"
+	"strconv"
+
+	"scheduleservice/internal/application/dtos"
+	"scheduleservice/internal/application/usecases"
+	"scheduleservice/internal/domain/repositories"
+	"scheduleservice/internal/presentation/middleware"
+
+	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
+)
+
+// MasterDataHandler maneja las operaciones HTTP para entidades maestras
+type MasterDataHandler struct {
+	academicProgramUseCase *usecases.AcademicProgramUseCase
+	academicGroupUseCase   *usecases.AcademicGroupUseCase
+	venueUseCase           *usecases.VenueUseCase
+	campusUseCase          *usecases.CampusUseCase
+}
+
+// NewMasterDataHandler crea una nueva instancia del handler
+func NewMasterDataHandler(
+	academicProgramUseCase *usecases.AcademicProgramUseCase,
+	academicGroupUseCase *usecases.AcademicGroupUseCase,
+	venueUseCase *usecases.VenueUseCase,
+	campusUseCase *usecases.CampusUseCase,
+) *MasterDataHandler {
+	return &MasterDataHandler{
+		academicProgramUseCase: academicProgramUseCase,
+		academicGroupUseCase:   academicGroupUseCase,
+		venueUseCase:           venueUseCase,
+		campusUseCase:          campusUseCase,
+	}
+}
+
+// Academic Programs
+
+// CreateAcademicProgram crea un programa académico
+// @Summary Crear programa académico
+// @Description Crea un nuevo programa académico
+// @Tags master-data
+// @Accept json
+// @Produce json
+// @Param program body dtos.CreateAcademicProgramDTO true "Datos del programa"
+// @Success 201 {object} dtos.AcademicProgramResponseDTO
+// @Failure 400 {object} map[string]interface{}
+// @Failure 401 {object} map[string]interface{}
+// @Failure 403 {object} map[string]interface{}
+// @Failure 500 {object} map[string]interface{}
+// @Security BearerAuth
+// @Router /master/programs [post]
+func (h *MasterDataHandler) CreateAcademicProgram(c *gin.Context) {
+	var dto dtos.CreateAcademicProgramDTO
+
+	if err := c.ShouldBindJSON(&dto); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error":   "Invalid request data",
+			"message": err.Error(),
+		})
+		return
+	}
+
+	userID, err := middleware.GetUserID(c)
+	if err != nil {
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"error":   "Authentication required",
+			"message": err.Error(),
+		})
+		return
+	}
+
+	program, err := h.academicProgramUseCase.CreateAcademicProgram(c.Request.Context(), &dto, userID)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error":   "Failed to create academic program",
+			"message": err.Error(),
+		})
+		return
+	}
+
+	c.JSON(http.StatusCreated, gin.H{
+		"data":    program,
+		"message": "Academic program created successfully",
+	})
+}
+
+// ListAcademicPrograms lista programas académicos
+// @Summary Listar programas académicos
+// @Description Lista programas académicos con filtros opcionales
+// @Tags master-data
+// @Accept json
+// @Produce json
+// @Param page query int false "Número de página" default(1)
+// @Param page_size query int false "Tamaño de página" default(20)
+// @Param search query string false "Búsqueda por nombre o código"
+// @Param is_active query bool false "Programas activos"
+// @Success 200 {object} dtos.PaginatedAcademicProgramResponseDTO
+// @Failure 400 {object} map[string]interface{}
+// @Failure 401 {object} map[string]interface{}
+// @Failure 500 {object} map[string]interface{}
+// @Security BearerAuth
+// @Router /master/programs [get]
+func (h *MasterDataHandler) ListAcademicPrograms(c *gin.Context) {
+	filter, err := h.parseBaseFilter(c)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error":   "Invalid query parameters",
+			"message": err.Error(),
+		})
+		return
+	}
+
+	programs, total, err := h.academicProgramUseCase.ListAcademicPrograms(c.Request.Context(), filter)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error":   "Failed to list academic programs",
+			"message": err.Error(),
+		})
+		return
+	}
+
+	response := &dtos.PaginatedAcademicProgramResponseDTO{
+		Data: programs,
+		Pagination: dtos.PaginationDTO{
+			Page:       filter.Page,
+			PageSize:   filter.PageSize,
+			Total:      total,
+			TotalPages: (total + int64(filter.PageSize) - 1) / int64(filter.PageSize),
+		},
+	}
+
+	c.JSON(http.StatusOK, response)
+}
+
+// Academic Groups
+
+// CreateAcademicGroup crea un grupo académico
+// @Summary Crear grupo académico
+// @Description Crea un nuevo grupo académico (ficha)
+// @Tags master-data
+// @Accept json
+// @Produce json
+// @Param group body dtos.CreateAcademicGroupDTO true "Datos del grupo"
+// @Success 201 {object} dtos.AcademicGroupResponseDTO
+// @Failure 400 {object} map[string]interface{}
+// @Failure 401 {object} map[string]interface{}
+// @Failure 403 {object} map[string]interface{}
+// @Failure 500 {object} map[string]interface{}
+// @Security BearerAuth
+// @Router /master/groups [post]
+func (h *MasterDataHandler) CreateAcademicGroup(c *gin.Context) {
+	var dto dtos.CreateAcademicGroupDTO
+
+	if err := c.ShouldBindJSON(&dto); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error":   "Invalid request data",
+			"message": err.Error(),
+		})
+		return
+	}
+
+	userID, err := middleware.GetUserID(c)
+	if err != nil {
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"error":   "Authentication required",
+			"message": err.Error(),
+		})
+		return
+	}
+
+	group, err := h.academicGroupUseCase.CreateAcademicGroup(c.Request.Context(), &dto, userID)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error":   "Failed to create academic group",
+			"message": err.Error(),
+		})
+		return
+	}
+
+	c.JSON(http.StatusCreated, gin.H{
+		"data":    group,
+		"message": "Academic group created successfully",
+	})
+}
+
+// ListAcademicGroups lista grupos académicos
+// @Summary Listar grupos académicos
+// @Description Lista grupos académicos con filtros opcionales
+// @Tags master-data
+// @Accept json
+// @Produce json
+// @Param page query int false "Número de página" default(1)
+// @Param page_size query int false "Tamaño de página" default(20)
+// @Param search query string false "Búsqueda por número"
+// @Param academic_program_id query string false "ID del programa académico"
+// @Param quarter query int false "Trimestre"
+// @Param year query int false "Año"
+// @Param shift query string false "Jornada (MANANA, TARDE, NOCHE)"
+// @Param is_active query bool false "Grupos activos"
+// @Success 200 {object} dtos.PaginatedAcademicGroupResponseDTO
+// @Failure 400 {object} map[string]interface{}
+// @Failure 401 {object} map[string]interface{}
+// @Failure 500 {object} map[string]interface{}
+// @Security BearerAuth
+// @Router /master/groups [get]
+func (h *MasterDataHandler) ListAcademicGroups(c *gin.Context) {
+	filter, err := h.parseAcademicGroupFilter(c)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error":   "Invalid query parameters",
+			"message": err.Error(),
+		})
+		return
+	}
+
+	groups, total, err := h.academicGroupUseCase.ListAcademicGroups(c.Request.Context(), filter)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error":   "Failed to list academic groups",
+			"message": err.Error(),
+		})
+		return
+	}
+
+	response := &dtos.PaginatedAcademicGroupResponseDTO{
+		Data: groups,
+		Pagination: dtos.PaginationDTO{
+			Page:       filter.Page,
+			PageSize:   filter.PageSize,
+			Total:      total,
+			TotalPages: (total + int64(filter.PageSize) - 1) / int64(filter.PageSize),
+		},
+	}
+
+	c.JSON(http.StatusOK, response)
+}
+
+// Venues
+
+// CreateVenue crea un ambiente
+// @Summary Crear ambiente
+// @Description Crea un nuevo ambiente/aula
+// @Tags master-data
+// @Accept json
+// @Produce json
+// @Param venue body dtos.CreateVenueDTO true "Datos del ambiente"
+// @Success 201 {object} dtos.VenueResponseDTO
+// @Failure 400 {object} map[string]interface{}
+// @Failure 401 {object} map[string]interface{}
+// @Failure 403 {object} map[string]interface{}
+// @Failure 500 {object} map[string]interface{}
+// @Security BearerAuth
+// @Router /master/venues [post]
+func (h *MasterDataHandler) CreateVenue(c *gin.Context) {
+	var dto dtos.CreateVenueDTO
+
+	if err := c.ShouldBindJSON(&dto); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error":   "Invalid request data",
+			"message": err.Error(),
+		})
+		return
+	}
+
+	userID, err := middleware.GetUserID(c)
+	if err != nil {
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"error":   "Authentication required",
+			"message": err.Error(),
+		})
+		return
+	}
+
+	venue, err := h.venueUseCase.CreateVenue(c.Request.Context(), &dto, userID)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error":   "Failed to create venue",
+			"message": err.Error(),
+		})
+		return
+	}
+
+	c.JSON(http.StatusCreated, gin.H{
+		"data":    venue,
+		"message": "Venue created successfully",
+	})
+}
+
+// ListVenues lista ambientes
+// @Summary Listar ambientes
+// @Description Lista ambientes con filtros opcionales
+// @Tags master-data
+// @Accept json
+// @Produce json
+// @Param page query int false "Número de página" default(1)
+// @Param page_size query int false "Tamaño de página" default(20)
+// @Param search query string false "Búsqueda por nombre o código"
+// @Param campus_id query string false "ID de la sede"
+// @Param type query string false "Tipo de ambiente"
+// @Param floor query string false "Piso"
+// @Param is_active query bool false "Ambientes activos"
+// @Success 200 {object} dtos.PaginatedVenueResponseDTO
+// @Failure 400 {object} map[string]interface{}
+// @Failure 401 {object} map[string]interface{}
+// @Failure 500 {object} map[string]interface{}
+// @Security BearerAuth
+// @Router /master/venues [get]
+func (h *MasterDataHandler) ListVenues(c *gin.Context) {
+	filter, err := h.parseVenueFilter(c)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error":   "Invalid query parameters",
+			"message": err.Error(),
+		})
+		return
+	}
+
+	venues, total, err := h.venueUseCase.ListVenues(c.Request.Context(), filter)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error":   "Failed to list venues",
+			"message": err.Error(),
+		})
+		return
+	}
+
+	response := &dtos.PaginatedVenueResponseDTO{
+		Data: venues,
+		Pagination: dtos.PaginationDTO{
+			Page:       filter.Page,
+			PageSize:   filter.PageSize,
+			Total:      total,
+			TotalPages: (total + int64(filter.PageSize) - 1) / int64(filter.PageSize),
+		},
+	}
+
+	c.JSON(http.StatusOK, response)
+}
+
+// Campuses
+
+// CreateCampus crea una sede
+// @Summary Crear sede
+// @Description Crea una nueva sede
+// @Tags master-data
+// @Accept json
+// @Produce json
+// @Param campus body dtos.CreateCampusDTO true "Datos de la sede"
+// @Success 201 {object} dtos.CampusResponseDTO
+// @Failure 400 {object} map[string]interface{}
+// @Failure 401 {object} map[string]interface{}
+// @Failure 403 {object} map[string]interface{}
+// @Failure 500 {object} map[string]interface{}
+// @Security BearerAuth
+// @Router /master/campuses [post]
+func (h *MasterDataHandler) CreateCampus(c *gin.Context) {
+	var dto dtos.CreateCampusDTO
+
+	if err := c.ShouldBindJSON(&dto); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error":   "Invalid request data",
+			"message": err.Error(),
+		})
+		return
+	}
+
+	userID, err := middleware.GetUserID(c)
+	if err != nil {
+		c.JSON(http.StatusUnauthorized, gin.H{
+			"error":   "Authentication required",
+			"message": err.Error(),
+		})
+		return
+	}
+
+	campus, err := h.campusUseCase.CreateCampus(c.Request.Context(), &dto, userID)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error":   "Failed to create campus",
+			"message": err.Error(),
+		})
+		return
+	}
+
+	c.JSON(http.StatusCreated, gin.H{
+		"data":    campus,
+		"message": "Campus created successfully",
+	})
+}
+
+// ListCampuses lista sedes
+// @Summary Listar sedes
+// @Description Lista sedes con filtros opcionales
+// @Tags master-data
+// @Accept json
+// @Produce json
+// @Param page query int false "Número de página" default(1)
+// @Param page_size query int false "Tamaño de página" default(20)
+// @Param search query string false "Búsqueda por nombre o código"
+// @Param is_active query bool false "Sedes activas"
+// @Success 200 {object} dtos.PaginatedCampusResponseDTO
+// @Failure 400 {object} map[string]interface{}
+// @Failure 401 {object} map[string]interface{}
+// @Failure 500 {object} map[string]interface{}
+// @Security BearerAuth
+// @Router /master/campuses [get]
+func (h *MasterDataHandler) ListCampuses(c *gin.Context) {
+	filter, err := h.parseBaseFilter(c)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error":   "Invalid query parameters",
+			"message": err.Error(),
+		})
+		return
+	}
+
+	campuses, total, err := h.campusUseCase.ListCampuses(c.Request.Context(), filter)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error":   "Failed to list campuses",
+			"message": err.Error(),
+		})
+		return
+	}
+
+	response := &dtos.PaginatedCampusResponseDTO{
+		Data: campuses,
+		Pagination: dtos.PaginationDTO{
+			Page:       filter.Page,
+			PageSize:   filter.PageSize,
+			Total:      total,
+			TotalPages: (total + int64(filter.PageSize) - 1) / int64(filter.PageSize),
+		},
+	}
+
+	c.JSON(http.StatusOK, response)
+}
+
+// Helper methods
+
+func (h *MasterDataHandler) parseBaseFilter(c *gin.Context) (*repositories.BaseFilter, error) {
+	filter := &repositories.BaseFilter{}
+
+	// Pagination
+	if page := c.Query("page"); page != "" {
+		if p, err := strconv.Atoi(page); err == nil && p > 0 {
+			filter.Page = p
+		} else {
+			filter.Page = 1
+		}
+	} else {
+		filter.Page = 1
+	}
+
+	if pageSize := c.Query("page_size"); pageSize != "" {
+		if ps, err := strconv.Atoi(pageSize); err == nil && ps > 0 && ps <= 100 {
+			filter.PageSize = ps
+		} else {
+			filter.PageSize = 20
+		}
+	} else {
+		filter.PageSize = 20
+	}
+
+	// Search
+	filter.Search = c.Query("search")
+
+	// Active filter
+	if isActive := c.Query("is_active"); isActive != "" {
+		if active, err := strconv.ParseBool(isActive); err == nil {
+			filter.IsActive = &active
+		}
+	}
+
+	return filter, nil
+}
+
+func (h *MasterDataHandler) parseAcademicGroupFilter(c *gin.Context) (*repositories.AcademicGroupFilter, error) {
+	baseFilter, err := h.parseBaseFilter(c)
+	if err != nil {
+		return nil, err
+	}
+
+	filter := &repositories.AcademicGroupFilter{
+		BaseFilter: *baseFilter,
+	}
+
+	// Academic Program ID
+	if programID := c.Query("academic_program_id"); programID != "" {
+		if id, err := uuid.Parse(programID); err == nil {
+			filter.AcademicProgramID = &id
+		}
+	}
+
+	// Quarter
+	if quarter := c.Query("quarter"); quarter != "" {
+		if q, err := strconv.Atoi(quarter); err == nil && q >= 1 && q <= 10 {
+			filter.Quarter = &q
+		}
+	}
+
+	// Year
+	if year := c.Query("year"); year != "" {
+		if y, err := strconv.Atoi(year); err == nil && y >= 2020 && y <= 2030 {
+			filter.Year = &y
+		}
+	}
+
+	// Shift
+	filter.Shift = c.Query("shift")
+
+	return filter, nil
+}
+
+func (h *MasterDataHandler) parseVenueFilter(c *gin.Context) (*repositories.VenueFilter, error) {
+	baseFilter, err := h.parseBaseFilter(c)
+	if err != nil {
+		return nil, err
+	}
+
+	filter := &repositories.VenueFilter{
+		BaseFilter: *baseFilter,
+	}
+
+	// Campus ID
+	if campusID := c.Query("campus_id"); campusID != "" {
+		if id, err := uuid.Parse(campusID); err == nil {
+			filter.CampusID = &id
+		}
+	}
+
+	// Type
+	filter.Type = c.Query("type")
+
+	// Floor
+	filter.Floor = c.Query("floor")
+
+	return filter, nil
+}

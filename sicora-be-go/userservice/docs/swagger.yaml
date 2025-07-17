@@ -1,0 +1,689 @@
+basePath: /api/v1
+definitions:
+  dtos.AuthResponseDTO:
+    properties:
+      access_token:
+        type: string
+      expires_in:
+        type: integer
+      refresh_token:
+        type: string
+      token_type:
+        type: string
+      user:
+        $ref: '#/definitions/dtos.UserDTO'
+    type: object
+  dtos.AuthenticateUserRequest:
+    properties:
+      email:
+        type: string
+      password:
+        minLength: 1
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  dtos.ChangePasswordRequestDTO:
+    properties:
+      current_password:
+        minLength: 1
+        type: string
+      new_password:
+        maxLength: 128
+        minLength: 10
+        type: string
+    required:
+    - current_password
+    - new_password
+    type: object
+  dtos.CreateUserRequestDTO:
+    properties:
+      apellido:
+        maxLength: 50
+        minLength: 2
+        type: string
+      documento:
+        maxLength: 15
+        minLength: 7
+        type: string
+      email:
+        type: string
+      ficha_id:
+        type: string
+      nombre:
+        maxLength: 50
+        minLength: 2
+        type: string
+      password:
+        minLength: 10
+        type: string
+      programa_formacion:
+        maxLength: 100
+        type: string
+      rol:
+        enum:
+        - aprendiz
+        - instructor
+        - admin
+        - coordinador
+        type: string
+    required:
+    - apellido
+    - documento
+    - email
+    - nombre
+    - password
+    - programa_formacion
+    - rol
+    type: object
+  dtos.UpdateProfileRequestDTO:
+    properties:
+      apellido:
+        maxLength: 50
+        minLength: 2
+        type: string
+      email:
+        type: string
+      nombre:
+        maxLength: 50
+        minLength: 2
+        type: string
+      programa_formacion:
+        maxLength: 100
+        type: string
+    type: object
+  dtos.UpdateUserRequestDTO:
+    properties:
+      apellido:
+        maxLength: 50
+        minLength: 2
+        type: string
+      documento:
+        maxLength: 15
+        minLength: 8
+        type: string
+      email:
+        type: string
+      ficha_id:
+        type: string
+      is_active:
+        type: boolean
+      nombre:
+        maxLength: 50
+        minLength: 2
+        type: string
+      programa_formacion:
+        maxLength: 100
+        minLength: 5
+        type: string
+      rol:
+        enum:
+        - aprendiz
+        - instructor
+        - admin
+        - coordinador
+        type: string
+    type: object
+  dtos.UserDTO:
+    properties:
+      apellido:
+        type: string
+      created_at:
+        type: string
+      documento:
+        type: string
+      email:
+        type: string
+      ficha_id:
+        type: string
+      full_name:
+        type: string
+      id:
+        type: string
+      is_active:
+        type: boolean
+      last_login:
+        type: string
+      nombre:
+        type: string
+      programa_formacion:
+        type: string
+      rol:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  errors.ErrorCode:
+    enum:
+    - INVALID_CREDENTIALS
+    - TOKEN_EXPIRED
+    - INSUFFICIENT_PERMISSIONS
+    - USER_NOT_FOUND
+    - EMAIL_ALREADY_EXISTS
+    - WEAK_PASSWORD
+    - USER_INACTIVE
+    - INVALID_INPUT
+    - REQUIRED_FIELD_MISSING
+    - INVALID_EMAIL_FORMAT
+    - INVALID_UUID_FORMAT
+    - INTERNAL_SERVER_ERROR
+    - SERVICE_UNAVAILABLE
+    - DATABASE_ERROR
+    type: string
+    x-enum-varnames:
+    - InvalidCredentials
+    - TokenExpired
+    - InsufficientPermissions
+    - UserNotFound
+    - EmailAlreadyExists
+    - WeakPassword
+    - UserInactive
+    - InvalidInput
+    - RequiredFieldMissing
+    - InvalidEmailFormat
+    - InvalidUUIDFormat
+    - InternalServerError
+    - ServiceUnavailable
+    - DatabaseError
+  errors.ErrorDetails:
+    properties:
+      code:
+        $ref: '#/definitions/errors.ErrorCode'
+      correlationId:
+        type: string
+      details:
+        type: string
+      message:
+        type: string
+      path:
+        type: string
+      timestamp:
+        type: string
+    type: object
+  errors.ErrorResponse:
+    properties:
+      error:
+        $ref: '#/definitions/errors.ErrorDetails'
+    type: object
+host: localhost:8002
+info:
+  contact:
+    email: dev@sicora.sena.edu.co
+    name: Equipo de Desarrollo SICORA
+  description: Sistema de Información para Control de Registros Académicos - UserService
+    implementado con Go, Gin y Clean Architecture
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  termsOfService: http://swagger.io/terms/
+  title: SICORA UserService API - Go
+  version: 1.0.0
+paths:
+  /auth/force-change-password:
+    post:
+      consumes:
+      - application/json
+      description: Change password for users with must_change_password flag
+      parameters:
+      - description: New password data
+        in: body
+        name: password_data
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Password changed successfully
+          schema:
+            $ref: '#/definitions/dtos.AuthResponseDTO'
+        "400":
+          description: Invalid input data
+          schema:
+            $ref: '#/definitions/errors.ErrorResponse'
+        "401":
+          description: User doesn't need to change password
+          schema:
+            $ref: '#/definitions/errors.ErrorResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/errors.ErrorResponse'
+      summary: Force change password
+      tags:
+      - Auth
+  /auth/forgot-password:
+    post:
+      consumes:
+      - application/json
+      description: Request a password reset link to be sent to the user's email
+      parameters:
+      - description: User email
+        in: body
+        name: email
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Reset link sent
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Invalid input data
+          schema:
+            $ref: '#/definitions/errors.ErrorResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/errors.ErrorResponse'
+      summary: Request password reset
+      tags:
+      - Auth
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Authenticate a user with email and password
+      parameters:
+      - description: User credentials
+        in: body
+        name: credentials
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.AuthenticateUserRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Authentication successful
+          schema:
+            $ref: '#/definitions/dtos.AuthResponseDTO'
+        "400":
+          description: Invalid input data
+          schema:
+            $ref: '#/definitions/errors.ErrorResponse'
+        "401":
+          description: Invalid credentials
+          schema:
+            $ref: '#/definitions/errors.ErrorResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/errors.ErrorResponse'
+      summary: Authenticate user
+      tags:
+      - Auth
+  /auth/logout:
+    post:
+      consumes:
+      - application/json
+      description: Invalidate a refresh token
+      parameters:
+      - description: Refresh token
+        in: body
+        name: refresh_token
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Logout successful
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Invalid input data
+          schema:
+            $ref: '#/definitions/errors.ErrorResponse'
+        "401":
+          description: Invalid refresh token
+          schema:
+            $ref: '#/definitions/errors.ErrorResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/errors.ErrorResponse'
+      summary: Logout user
+      tags:
+      - Auth
+  /auth/refresh:
+    post:
+      consumes:
+      - application/json
+      description: Refresh an access token using a refresh token
+      parameters:
+      - description: Refresh token
+        in: body
+        name: refresh_token
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Token refreshed successfully
+          schema:
+            $ref: '#/definitions/dtos.AuthResponseDTO'
+        "400":
+          description: Invalid input data
+          schema:
+            $ref: '#/definitions/errors.ErrorResponse'
+        "401":
+          description: Invalid refresh token
+          schema:
+            $ref: '#/definitions/errors.ErrorResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/errors.ErrorResponse'
+      summary: Refresh token
+      tags:
+      - Auth
+  /auth/reset-password:
+    post:
+      consumes:
+      - application/json
+      description: Reset a user's password using a valid reset token
+      parameters:
+      - description: Reset token and new password
+        in: body
+        name: reset_data
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Password reset successful
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Invalid input data
+          schema:
+            $ref: '#/definitions/errors.ErrorResponse'
+        "401":
+          description: Invalid or expired token
+          schema:
+            $ref: '#/definitions/errors.ErrorResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/errors.ErrorResponse'
+      summary: Reset password
+      tags:
+      - Auth
+  /users:
+    post:
+      consumes:
+      - application/json
+      description: Create a new user with the provided information
+      parameters:
+      - description: User creation data
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.CreateUserRequestDTO'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: User created successfully
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Invalid input data
+          schema:
+            $ref: '#/definitions/errors.ErrorResponse'
+        "409":
+          description: Email already exists
+          schema:
+            $ref: '#/definitions/errors.ErrorResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/errors.ErrorResponse'
+      summary: Create new user
+      tags:
+      - Users
+  /users/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Soft delete a user by admin
+      parameters:
+      - description: User ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: User deleted successfully
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Invalid UUID format
+          schema:
+            $ref: '#/definitions/errors.ErrorResponse'
+        "404":
+          description: User not found
+          schema:
+            $ref: '#/definitions/errors.ErrorResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/errors.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Delete user (Admin)
+      tags:
+      - Admin
+    get:
+      consumes:
+      - application/json
+      description: Retrieve a specific user by their unique identifier
+      parameters:
+      - description: User ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: User retrieved successfully
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Invalid UUID format
+          schema:
+            $ref: '#/definitions/errors.ErrorResponse'
+        "404":
+          description: User not found
+          schema:
+            $ref: '#/definitions/errors.ErrorResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/errors.ErrorResponse'
+      summary: Get user by ID
+      tags:
+      - Users
+    put:
+      consumes:
+      - application/json
+      description: Update user data by admin
+      parameters:
+      - description: User ID (UUID)
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: User update data
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.UpdateUserRequestDTO'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: User updated successfully
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Invalid input data
+          schema:
+            $ref: '#/definitions/errors.ErrorResponse'
+        "404":
+          description: User not found
+          schema:
+            $ref: '#/definitions/errors.ErrorResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/errors.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Update user (Admin)
+      tags:
+      - Admin
+  /users/change-password:
+    put:
+      consumes:
+      - application/json
+      description: Change password for authenticated user
+      parameters:
+      - description: Current and new password
+        in: body
+        name: passwords
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.ChangePasswordRequestDTO'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Password changed successfully
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Invalid input data
+          schema:
+            $ref: '#/definitions/errors.ErrorResponse'
+        "401":
+          description: Invalid current password
+          schema:
+            $ref: '#/definitions/errors.ErrorResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/errors.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Change password
+      tags:
+      - Users
+  /users/profile:
+    get:
+      consumes:
+      - application/json
+      description: Retrieve the profile of the authenticated user
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: User profile retrieved successfully
+          schema:
+            $ref: '#/definitions/dtos.UserDTO'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/errors.ErrorResponse'
+        "404":
+          description: User not found
+          schema:
+            $ref: '#/definitions/errors.ErrorResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/errors.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Get user profile
+      tags:
+      - Users
+    put:
+      consumes:
+      - application/json
+      description: Update the profile of the authenticated user
+      parameters:
+      - description: User profile data to update
+        in: body
+        name: profile
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.UpdateProfileRequestDTO'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: User profile updated successfully
+          schema:
+            $ref: '#/definitions/dtos.UserDTO'
+        "400":
+          description: Invalid input data
+          schema:
+            $ref: '#/definitions/errors.ErrorResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/errors.ErrorResponse'
+        "404":
+          description: User not found
+          schema:
+            $ref: '#/definitions/errors.ErrorResponse'
+        "409":
+          description: Email already exists
+          schema:
+            $ref: '#/definitions/errors.ErrorResponse'
+        "500":
+          description: Internal server error
+          schema:
+            $ref: '#/definitions/errors.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Update user profile
+      tags:
+      - Users
+securityDefinitions:
+  BearerAuth:
+    description: Type "Bearer" followed by a space and JWT token.
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

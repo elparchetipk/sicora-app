@@ -1,0 +1,309 @@
+{
+  "info": {
+    "name": "SICORA - NotificationService (Python) - Educativo",
+    "description": "Sistema de notificaciones\n\n📚 **Para Aprendices SENA**\n\n**Objetivos de Aprendizaje:**\n- Comprender API REST NotificationService\n- Practicar requests HTTP (GET, POST, PUT, DELETE)\n- Implementar tests básicos\n- Manejar autenticación JWT\n\n**Prerrequisitos:**\n- Environment configurado (development/staging/production)\n- Servicios SICORA ejecutándose\n- Conocimientos básicos de HTTP\n\n**Endpoints incluidos:** 12\n**Stack:** Python Backend\n**Nivel:** Intermedio",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_postman_id": "sicora-notificationservice-python",
+    "_exporter_id": "sicora-educational-generator"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{auth_token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// 🎓 Script educativo para aprendices SENA",
+          "console.log('🚀 Iniciando request para NotificationService...');",
+          "console.log('📍 Environment:', pm.environment.get('environment_name'));",
+          "console.log('🔗 Base URL:', pm.environment.get('base_url_python'));",
+          "",
+          "// Verificar configuración básica",
+          "if (!pm.environment.get('base_url_python')) {",
+          "    console.error('❌ Variable base_url_python no configurada');",
+          "    throw new Error('Configurar environment primero');",
+          "}",
+          "",
+          "// Auto-login si no hay token",
+          "if (!pm.environment.get('auth_token')) {",
+          "    console.log('🔐 Token no encontrado, intentando auto-login...');",
+          "    // Aquí se puede implementar auto-login",
+          "}"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// 🎓 Tests educativos estándar",
+          "pm.test('✅ Status code es exitoso (200-299)', function () {",
+          "    pm.response.to.have.status.oneOf([200, 201, 202, 204]);",
+          "});",
+          "",
+          "pm.test('⚡ Response time < 2000ms', function () {",
+          "    pm.expect(pm.response.responseTime).to.be.below(2000);",
+          "});",
+          "",
+          "pm.test('📦 Response es JSON válido', function () {",
+          "    pm.response.to.be.json;",
+          "});",
+          "",
+          "// Logging educativo",
+          "console.log('📊 Status:', pm.response.status);",
+          "console.log('⏱️  Response time:', pm.response.responseTime + 'ms');",
+          "console.log('📏 Response size:', pm.response.responseSize + ' bytes');"
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "service_name",
+      "value": "NotificationService",
+      "type": "string",
+      "description": "Nombre del servicio"
+    },
+    {
+      "key": "backend_type",
+      "value": "python",
+      "type": "string", 
+      "description": "Tipo de backend (go/python)"
+    }
+  ],
+  "item": [
+    {
+      "name": "📚 Documentación",
+      "description": "Información importante sobre este servicio",
+      "item": [
+        {
+          "name": "ℹ️ Información del Servicio",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url_python}}/health",
+              "host": ["{{base_url_python}}"],
+              "path": ["health"]
+            },
+            "description": "Health check del servicio NotificationService\n\n**Aprenderás:**\n- Verificar estado del servicio\n- Interpretar responses JSON\n- Usar variables de environment"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "🔐 Autenticación",
+      "description": "Endpoints de autenticación y autorización",
+      "item": [
+        {
+          "name": "🔑 Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "// Guardar token automáticamente",
+                  "if (pm.response.code === 200) {",
+                  "    const response = pm.response.json();",
+                  "    if (response.token) {",
+                  "        pm.environment.set('auth_token', response.token);",
+                  "        console.log('🔐 Token guardado exitosamente');",
+                  "    }",
+                  "    if (response.user && response.user.id) {",
+                  "        pm.environment.set('user_id', response.user.id);",
+                  "        console.log('👤 User ID guardado:', response.user.id);",
+                  "    }",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"password\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url_python}}/auth/login",
+              "host": ["{{base_url_python}}"],
+              "path": ["auth", "login"]
+            },
+            "description": "Autenticación de usuario\n\n**Aprenderás:**\n- Enviar datos POST en JSON\n- Manejar respuestas de autenticación\n- Guardar tokens automáticamente\n- Usar variables de environment\n\n**Credenciales de prueba:**\n- Usuario: admin\n- Contraseña: password"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "👥 Usuarios",
+      "description": "Gestión de usuarios (CRUD básico)",
+      "item": [
+        {
+          "name": "📋 Listar Usuarios",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url_python}}/users",
+              "host": ["{{base_url_python}}"],
+              "path": ["users"]
+            },
+            "description": "Obtener lista de usuarios\n\n**Aprenderás:**\n- Requests GET básicos\n- Autenticación Bearer Token\n- Interpretar arrays JSON\n- Paginación básica"
+          },
+          "response": []
+        },
+        {
+          "name": "👤 Obtener Usuario por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url_python}}/users/{{user_id}}",
+              "host": ["{{base_url_python}}"],
+              "path": ["users", "{{user_id}}"]
+            },
+            "description": "Obtener un usuario específico\n\n**Aprenderás:**\n- Path parameters\n- Variables dinámicas\n- Respuestas de objetos únicos\n- Manejo de errores 404"
+          },
+          "response": []
+        },
+        {
+          "name": "➕ Crear Usuario",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Nuevo Usuario\",\n  \"email\": \"nuevo@ejemplo.com\",\n  \"role\": \"user\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url_python}}/users",
+              "host": ["{{base_url_python}}"],
+              "path": ["users"]
+            },
+            "description": "Crear nuevo usuario\n\n**Aprenderás:**\n- Requests POST con datos\n- Estructura JSON correcta\n- Validación de datos\n- Códigos de respuesta 201"
+          },
+          "response": []
+        },
+        {
+          "name": "✏️ Actualizar Usuario",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Usuario Actualizado\",\n  \"email\": \"actualizado@ejemplo.com\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url_python}}/users/{{user_id}}",
+              "host": ["{{base_url_python}}"],
+              "path": ["users", "{{user_id}}"]
+            },
+            "description": "Actualizar usuario existente\n\n**Aprenderás:**\n- Requests PUT vs POST\n- Actualización parcial vs completa\n- Idempotencia\n- Códigos de respuesta 200"
+          },
+          "response": []
+        },
+        {
+          "name": "🗑️ Eliminar Usuario",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url_python}}/users/{{user_id}}",
+              "host": ["{{base_url_python}}"],
+              "path": ["users", "{{user_id}}"]
+            },
+            "description": "Eliminar usuario\n\n**Aprenderás:**\n- Requests DELETE\n- Códigos de respuesta 204\n- Operaciones irreversibles\n- Confirmaciones"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "🔬 Testing Avanzado",
+      "description": "Ejemplos de testing automático",
+      "item": [
+        {
+          "name": "🧪 Flujo Completo CRUD",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "// 🎓 Test educativo de flujo completo",
+                  "pm.test('🔄 Flujo CRUD completo', function () {",
+                  "    // Este test demuestra un flujo completo",
+                  "    console.log('🚀 Iniciando flujo CRUD...');",
+                  "    ",
+                  "    // 1. Crear usuario",
+                  "    pm.sendRequest({",
+                  "        url: pm.environment.get('base_url_python') + '/users',",
+                  "        method: 'POST',",
+                  "        header: {",
+                  "            'Content-Type': 'application/json',",
+                  "            'Authorization': 'Bearer ' + pm.environment.get('auth_token')",
+                  "        },",
+                  "        body: {",
+                  "            mode: 'raw',",
+                  "            raw: JSON.stringify({",
+                  "                name: 'Usuario Test',",
+                  "                email: 'test@ejemplo.com'",
+                  "            })",
+                  "        }",
+                  "    }, function (err, response) {",
+                  "        if (response.code === 201) {",
+                  "            console.log('✅ Usuario creado');",
+                  "            const userId = response.json().id;",
+                  "            pm.environment.set('test_user_id', userId);",
+                  "        }",
+                  "    });",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url_python}}/health",
+              "host": ["{{base_url_python}}"],
+              "path": ["health"]
+            },
+            "description": "Ejemplo de testing automático con flujo completo\n\n**Aprenderás:**\n- Chaining de requests\n- Tests programáticos\n- Flujos de datos\n- Automatización avanzada"
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

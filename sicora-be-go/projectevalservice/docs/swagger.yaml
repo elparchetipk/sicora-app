@@ -1,0 +1,838 @@
+basePath: /api/v1
+definitions:
+  entities.Evaluation:
+    properties:
+      architecture_comments:
+        type: string
+      architecture_score:
+        maximum: 100
+        minimum: 0
+        type: number
+      code_quality_comments:
+        type: string
+      code_quality_score:
+        maximum: 100
+        minimum: 0
+        type: number
+      created_at:
+        type: string
+      deployment_comments:
+        type: string
+      deployment_score:
+        maximum: 100
+        minimum: 0
+        type: number
+      documentation_comments:
+        type: string
+      documentation_score:
+        maximum: 100
+        minimum: 0
+        type: number
+      evaluated_at:
+        type: string
+      evaluator_id:
+        type: string
+      functionality_comments:
+        type: string
+      functionality_score:
+        description: Technical Criteria Scores
+        maximum: 100
+        minimum: 0
+        type: number
+      general_comments:
+        description: Comments and Feedback
+        type: string
+      grade:
+        type: string
+      id:
+        type: string
+      performance_comments:
+        type: string
+      performance_score:
+        maximum: 100
+        minimum: 0
+        type: number
+      recommendations:
+        description: Recommendations
+        type: string
+      security_comments:
+        type: string
+      security_score:
+        maximum: 100
+        minimum: 0
+        type: number
+      status:
+        allOf:
+        - $ref: '#/definitions/entities.EvaluationStatus'
+        description: Status and Timestamps
+      submission:
+        allOf:
+        - $ref: '#/definitions/entities.Submission'
+        description: Relationships
+      submission_id:
+        type: string
+      testing_comments:
+        type: string
+      testing_score:
+        maximum: 100
+        minimum: 0
+        type: number
+      total_score:
+        description: Calculated Fields
+        type: number
+      updated_at:
+        type: string
+    required:
+    - evaluator_id
+    - status
+    - submission_id
+    type: object
+  entities.EvaluationStatus:
+    enum:
+    - draft
+    - completed
+    - published
+    type: string
+    x-enum-varnames:
+    - EvaluationStatusDraft
+    - EvaluationStatusCompleted
+    - EvaluationStatusPublished
+  entities.Project:
+    properties:
+      created_at:
+        type: string
+      delivery_date:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      instructor_id:
+        type: string
+      max_score:
+        minimum: 0
+        type: number
+      name:
+        maxLength: 200
+        minLength: 3
+        type: string
+      requirements:
+        type: string
+      status:
+        $ref: '#/definitions/entities.ProjectStatus'
+      submissions:
+        description: Relationships
+        items:
+          $ref: '#/definitions/entities.Submission'
+        type: array
+      technology_stack:
+        type: string
+      updated_at:
+        type: string
+    required:
+    - delivery_date
+    - instructor_id
+    - max_score
+    - name
+    - status
+    - technology_stack
+    type: object
+  entities.ProjectStatus:
+    enum:
+    - active
+    - inactive
+    - archived
+    type: string
+    x-enum-varnames:
+    - ProjectStatusActive
+    - ProjectStatusInactive
+    - ProjectStatusArchived
+  entities.Submission:
+    properties:
+      deployment_url:
+        type: string
+      description:
+        type: string
+      evaluations:
+        items:
+          $ref: '#/definitions/entities.Evaluation'
+        type: array
+      id:
+        type: string
+      project:
+        allOf:
+        - $ref: '#/definitions/entities.Project'
+        description: Relationships
+      project_id:
+        type: string
+      repository_url:
+        type: string
+      status:
+        $ref: '#/definitions/entities.SubmissionStatus'
+      student_id:
+        type: string
+      submitted_at:
+        type: string
+      technical_documentation:
+        type: string
+      updated_at:
+        type: string
+    required:
+    - project_id
+    - repository_url
+    - status
+    - student_id
+    type: object
+  entities.SubmissionStatus:
+    enum:
+    - submitted
+    - evaluating
+    - evaluated
+    - rejected
+    type: string
+    x-enum-varnames:
+    - SubmissionStatusSubmitted
+    - SubmissionStatusEvaluating
+    - SubmissionStatusEvaluated
+    - SubmissionStatusRejected
+  handlers.CreateEvaluationRequest:
+    properties:
+      architecture_comments:
+        type: string
+      architecture_score:
+        maximum: 100
+        minimum: 0
+        type: number
+      code_quality_comments:
+        type: string
+      code_quality_score:
+        maximum: 100
+        minimum: 0
+        type: number
+      deployment_comments:
+        type: string
+      deployment_score:
+        maximum: 100
+        minimum: 0
+        type: number
+      documentation_comments:
+        type: string
+      documentation_score:
+        maximum: 100
+        minimum: 0
+        type: number
+      evaluator_id:
+        type: string
+      functionality_comments:
+        type: string
+      functionality_score:
+        maximum: 100
+        minimum: 0
+        type: number
+      general_comments:
+        type: string
+      performance_comments:
+        type: string
+      performance_score:
+        maximum: 100
+        minimum: 0
+        type: number
+      recommendations:
+        type: string
+      security_comments:
+        type: string
+      security_score:
+        maximum: 100
+        minimum: 0
+        type: number
+      submission_id:
+        type: string
+      testing_comments:
+        type: string
+      testing_score:
+        maximum: 100
+        minimum: 0
+        type: number
+    required:
+    - evaluator_id
+    - submission_id
+    type: object
+  handlers.CreateProjectRequest:
+    properties:
+      delivery_date:
+        type: string
+      description:
+        type: string
+      instructor_id:
+        type: string
+      max_score:
+        minimum: 0
+        type: number
+      name:
+        maxLength: 200
+        minLength: 3
+        type: string
+      requirements:
+        type: string
+      technology_stack:
+        type: string
+    required:
+    - delivery_date
+    - instructor_id
+    - name
+    - technology_stack
+    type: object
+  handlers.CreateSubmissionRequest:
+    properties:
+      deployment_url:
+        type: string
+      description:
+        type: string
+      project_id:
+        type: string
+      repository_url:
+        type: string
+      student_id:
+        type: string
+      technical_documentation:
+        type: string
+    required:
+    - project_id
+    - repository_url
+    - student_id
+    type: object
+  handlers.UpdateProjectRequest:
+    properties:
+      delivery_date:
+        type: string
+      description:
+        type: string
+      max_score:
+        minimum: 0
+        type: number
+      name:
+        maxLength: 200
+        minLength: 3
+        type: string
+      requirements:
+        type: string
+      status:
+        $ref: '#/definitions/entities.ProjectStatus'
+      technology_stack:
+        type: string
+    required:
+    - delivery_date
+    - name
+    - status
+    - technology_stack
+    type: object
+host: localhost:8007
+info:
+  contact:
+    email: dev@sicora.sena.edu.co
+    name: Equipo de Desarrollo SICORA
+  description: Sistema de Información para Control de Registros Académicos - ProjectEvalService
+    implementado con Go, Gin y Clean Architecture
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  termsOfService: http://swagger.io/terms/
+  title: SICORA ProjectEvalService API - Go
+  version: 1.0.0
+paths:
+  /evaluations:
+    get:
+      description: Get evaluations filtered by submission or evaluator
+      parameters:
+      - description: Filter by submission ID
+        in: query
+        name: submission_id
+        type: string
+      - description: Filter by evaluator ID
+        in: query
+        name: evaluator_id
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entities.Evaluation'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get evaluations
+      tags:
+      - evaluations
+    post:
+      consumes:
+      - application/json
+      description: Create an evaluation for a submission
+      parameters:
+      - description: Evaluation data
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.CreateEvaluationRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/entities.Evaluation'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Create a new evaluation
+      tags:
+      - evaluations
+  /evaluations/{id}:
+    get:
+      description: Get a specific evaluation by its ID
+      parameters:
+      - description: Evaluation ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entities.Evaluation'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get evaluation by ID
+      tags:
+      - evaluations
+  /evaluations/{id}/complete:
+    patch:
+      description: Complete and calculate final scores for an evaluation
+      parameters:
+      - description: Evaluation ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entities.Evaluation'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Complete evaluation
+      tags:
+      - evaluations
+  /evaluations/{id}/publish:
+    patch:
+      description: Publish a completed evaluation to make it visible to students
+      parameters:
+      - description: Evaluation ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entities.Evaluation'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Publish evaluation
+      tags:
+      - evaluations
+  /projects:
+    get:
+      description: Get all projects with optional filtering
+      parameters:
+      - description: Filter by instructor ID
+        in: query
+        name: instructor_id
+        type: string
+      - description: Filter by status
+        in: query
+        name: status
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entities.Project'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get all projects
+      tags:
+      - projects
+    post:
+      consumes:
+      - application/json
+      description: Create a new software development project for evaluation
+      parameters:
+      - description: Project creation data
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.CreateProjectRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/entities.Project'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Create a new project
+      tags:
+      - projects
+  /projects/{id}:
+    delete:
+      description: Delete a project by ID
+      parameters:
+      - description: Project ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Delete project
+      tags:
+      - projects
+    get:
+      description: Get a specific project by its ID
+      parameters:
+      - description: Project ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entities.Project'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get project by ID
+      tags:
+      - projects
+    put:
+      consumes:
+      - application/json
+      description: Update an existing project
+      parameters:
+      - description: Project ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Project update data
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.UpdateProjectRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entities.Project'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Update project
+      tags:
+      - projects
+  /submissions:
+    get:
+      description: Get all submissions for a specific project
+      parameters:
+      - description: Filter by project ID
+        in: query
+        name: project_id
+        type: string
+      - description: Filter by student ID
+        in: query
+        name: student_id
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entities.Submission'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get submissions by project
+      tags:
+      - submissions
+    post:
+      consumes:
+      - application/json
+      description: Submit a project for evaluation
+      parameters:
+      - description: Submission data
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.CreateSubmissionRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/entities.Submission'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Create a new submission
+      tags:
+      - submissions
+  /submissions/{id}:
+    get:
+      description: Get a specific submission by its ID
+      parameters:
+      - description: Submission ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entities.Submission'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get submission by ID
+      tags:
+      - submissions
+  /submissions/pending:
+    get:
+      description: Get all submissions pending evaluation
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entities.Submission'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get pending evaluations
+      tags:
+      - submissions
+securityDefinitions:
+  BearerAuth:
+    description: Type "Bearer" followed by a space and JWT token.
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

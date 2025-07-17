@@ -1,0 +1,230 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: sicora_postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-sicora_db} # Permite override desde .env, con fallback
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-your_local_postgres_password} # Fallback debe ser el mismo que en .env.example
+    ports:
+      - '5433:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init:/docker-entrypoint-initdb.d # Scripts SQL se ejecutan aquí
+    networks:
+      - sicora_network
+    # Agregamos env_file para cargar .env por defecto si existe
+    env_file:
+      - .env
+
+  redis:
+    image: redis:7-alpine
+    container_name: sicora_redis
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis_data:/data
+    networks:
+      - sicora_network
+    env_file:
+      - .env
+
+  userservice:
+    build:
+      context: ./01-fastapi/userservice
+      dockerfile: Dockerfile
+    container_name: sicora_userservice
+    environment:
+      # DATABASE_URL se construye usando las variables específicas del servicio
+      - DATABASE_URL=postgresql+asyncpg://${USERSERVICE_DB_USER}:${USERSERVICE_DB_PASSWORD}@postgres:5432/${POSTGRES_DB:-sicora_db}
+      - DB_SCHEMA=${USERSERVICE_DB_SCHEMA}
+      - REDIS_URL=redis://redis:6379
+      - SECRET_KEY=${SECRET_KEY}
+      - PYTHONPATH=/app
+    depends_on:
+      - postgres
+      - redis
+    ports:
+      - '8001:8000'
+    volumes:
+      - ./01-fastapi/userservice:/app
+    networks:
+      - sicora_network
+    restart: unless-stopped
+    env_file:
+      - .env
+
+  scheduleservice:
+    build:
+      context: ./01-fastapi/scheduleservice
+      dockerfile: Dockerfile
+    container_name: sicora_scheduleservice
+    environment:
+      - DATABASE_URL=postgresql://${SCHEDULESERVICE_DB_USER}:${SCHEDULESERVICE_DB_PASSWORD}@postgres:5432/${POSTGRES_DB:-sicora_db}
+      - DB_SCHEMA=${SCHEDULESERVICE_DB_SCHEMA}
+      - REDIS_URL=redis://redis:6379
+      - SECRET_KEY=${SECRET_KEY}
+      - PYTHONPATH=/app
+    depends_on:
+      - postgres
+      - redis
+    ports:
+      - '8002:8000'
+    volumes:
+      - ./01-fastapi/scheduleservice:/app
+    networks:
+      - sicora_network
+    restart: unless-stopped
+    env_file:
+      - .env
+
+  attendanceservice:
+    build:
+      context: ./01-fastapi/attendanceservice
+      dockerfile: Dockerfile
+    container_name: sicora_attendanceservice
+    environment:
+      - DATABASE_URL=postgresql://${ATTENDANCESERVICE_DB_USER}:${ATTENDANCESERVICE_DB_PASSWORD}@postgres:5432/${POSTGRES_DB:-sicora_db}
+      - DB_SCHEMA=${ATTENDANCESERVICE_DB_SCHEMA}
+      - REDIS_URL=redis://redis:6379
+      - SECRET_KEY=${SECRET_KEY}
+      - PYTHONPATH=/app
+    depends_on:
+      - postgres
+      - redis
+    ports:
+      - '8003:8000'
+    volumes:
+      - ./01-fastapi/attendanceservice:/app
+    networks:
+      - sicora_network
+    restart: unless-stopped
+    env_file:
+      - .env
+
+  evalinservice:
+    build:
+      context: ./01-fastapi/evalinservice
+      dockerfile: Dockerfile
+    container_name: sicora_evalinservice
+    environment:
+      - DATABASE_URL=postgresql://${EVALINSERVICE_DB_USER}:${EVALINSERVICE_DB_PASSWORD}@postgres:5432/${POSTGRES_DB:-sicora_db}
+      - DB_SCHEMA=${EVALINSERVICE_DB_SCHEMA}
+      - REDIS_URL=redis://redis:6379
+      - SECRET_KEY=${SECRET_KEY}
+      - PYTHONPATH=/app
+    depends_on:
+      - postgres
+      - redis
+    ports:
+      - '8030:8030'
+    volumes:
+      - ./01-fastapi/evalinservice:/app
+    networks:
+      - sicora_network
+    restart: unless-stopped
+    env_file:
+      - .env
+
+  kbservice:
+    build:
+      context: ./01-fastapi/kbservice
+      dockerfile: Dockerfile
+    container_name: sicora_kbservice
+    environment:
+      - DATABASE_URL=postgresql://${KBSERVICE_DB_USER}:${KBSERVICE_DB_PASSWORD}@postgres:5432/${POSTGRES_DB:-sicora_db}
+      - DB_SCHEMA=${KBSERVICE_DB_SCHEMA}
+      - REDIS_URL=redis://redis:6379
+      - SECRET_KEY=${SECRET_KEY}
+      - PYTHONPATH=/app
+    depends_on:
+      - postgres
+      - redis
+    ports:
+      - '8005:8000'
+    volumes:
+      - ./01-fastapi/kbservice:/app
+    networks:
+      - sicora_network
+    restart: unless-stopped
+    env_file:
+      - .env
+
+  aiservice:
+    build:
+      context: ./01-fastapi/aiservice
+      dockerfile: Dockerfile
+    container_name: sicora_aiservice
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://${AISERVICE_DB_USER}:${AISERVICE_DB_PASSWORD}@postgres:5432/${POSTGRES_DB:-sicora_db}
+      - DB_SCHEMA=${AISERVICE_DB_SCHEMA}
+      - REDIS_URL=redis://redis:6379
+      - SECRET_KEY=${SECRET_KEY}
+      - PYTHONPATH=/app
+    depends_on:
+      - postgres
+      - redis
+    ports:
+      - '8006:8004' # Corregido para coincidir con el puerto interno de Uvicorn (8004)
+    volumes:
+      - ./01-fastapi/aiservice:/app
+    networks:
+      - sicora_network
+    restart: unless-stopped
+    env_file:
+      - .env
+
+  apigateway:
+    build:
+      context: ./01-fastapi/apigateway
+      dockerfile: Dockerfile
+    container_name: sicora_apigateway
+    environment:
+      - USERSERVICE_URL=http://userservice:8000
+      - SCHEDULESERVICE_URL=http://scheduleservice:8000
+      - ATTENDANCESERVICE_URL=http://attendanceservice:8000
+      - EVALINSERVICE_URL=http://evalinservice:8000
+      - KBSERVICE_URL=http://kbservice:8000
+      - AISERVICE_URL=http://aiservice:8000
+      - SECRET_KEY=${SECRET_KEY}
+      - PYTHONPATH=/app
+    depends_on:
+      - userservice
+      - scheduleservice
+      - attendanceservice
+      - evalinservice
+      - kbservice
+      - aiservice
+    ports:
+      - '8000:8000' # Puerto del API Gateway
+    volumes:
+      - ./01-fastapi/apigateway:/app
+    networks:
+      - sicora_network
+    restart: unless-stopped
+    env_file:
+      - .env
+
+  nginx:
+    image: nginx:alpine
+    container_name: sicora_nginx
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - apigateway
+    networks:
+      - sicora_network
+    restart: unless-stopped
+    # Nginx no necesita acceso directo a .env usualmente, a menos que se use para generar configs dinámicas (no es el caso aquí)
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  sicora_network:
+    driver: bridge

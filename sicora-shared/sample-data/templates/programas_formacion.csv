@@ -1,0 +1,8 @@
+id,name,code,type,duration,description,is_active,created_at
+550e8400-e29b-41d4-a716-446655440001,"Análisis y Desarrollo de Software",ADSO,TECNOLOGO,24,"Programa de formación integral en desarrollo de software con enfoque en metodologías ágiles, bases de datos, desarrollo web y móvil. Incluye etapa lectiva y productiva.",true,2025-07-03T10:30:00Z
+550e8400-e29b-41d4-a716-446655440002,"Gestión de Redes de Datos",GRD,TECNOLOGO,24,"Programa enfocado en administración, configuración y mantenimiento de infraestructura de redes de datos y telecomunicaciones.",true,2025-07-03T10:30:00Z
+550e8400-e29b-41d4-a716-446655440003,"Sistemas",SIS,TECNICO,18,"Programa técnico en mantenimiento, soporte y administración de sistemas informáticos.",true,2025-07-03T10:30:00Z
+550e8400-e29b-41d4-a716-446655440004,"Programación de Software",PROGSOFT,TECNICO,18,"Programa técnico en programación de aplicaciones usando diferentes lenguajes y tecnologías.",true,2025-07-03T10:30:00Z
+550e8400-e29b-41d4-a716-446655440005,"Ciberseguridad",CYBER,ESPECIALIZACION,12,"Especialización técnica en seguridad informática y protección de activos digitales.",true,2025-07-03T10:30:00Z
+550e8400-e29b-41d4-a716-446655440006,"Inglés Técnico",ENGTECH,COMPLEMENTARIO,6,"Curso complementario de inglés técnico para el área de sistemas y telecomunicaciones.",true,2025-07-03T10:30:00Z
+550e8400-e29b-41d4-a716-446655440007,"Scrum Master",SCRUM,COMPLEMENTARIO,3,"Curso complementario en metodologías ágiles y gestión de proyectos con Scrum.",true,2025-07-03T10:30:00Z
