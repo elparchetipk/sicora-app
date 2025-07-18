@@ -101,14 +101,13 @@ BACKUP_BASE="/backup/sicora"
 MIRRORS_DIR="$BACKUP_BASE/mirrors"
 PROJECT_ROOT="/home/epti/Documentos/epti-dev/sicora-app"
 
-# Repositorios a respaldar
+# Repositorios a respaldar (excluimos sicora-docs por ser de solo lectura)
 REPOS=(
     "sicora-app-fe"
     "sicora-be-go"
     "sicora-be-python"
     "sicora-mcp-server"
     "sicora-infra"
-    "sicora-docs"
     "sicora-shared"
     "sicora-data-loader"
 )

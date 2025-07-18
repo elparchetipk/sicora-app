@@ -48,8 +48,8 @@ fi
 log "🚀 Iniciando autocommit universal para SICORA"
 log "📁 Branch: $BRANCH"
 
-# Detectar qué stack fue modificado
-CHANGED_FILES=$(git diff --name-only --staged 2>/dev/null || git diff --name-only)
+# Detectar qué stack fue modificado, excluyendo sicora-docs
+CHANGED_FILES=$(git diff --name-only --staged -- . ':!sicora-docs/*' 2>/dev/null || git diff --name-only -- . ':!sicora-docs/*')
 FRONTEND_CHANGED=$(echo "$CHANGED_FILES" | grep -E "sicora-app-fe/" || true)
 BACKEND_GO_CHANGED=$(echo "$CHANGED_FILES" | grep -E "sicora-be-go/" || true)
 BACKEND_PYTHON_CHANGED=$(echo "$CHANGED_FILES" | grep -E "sicora-be-python/" || true)

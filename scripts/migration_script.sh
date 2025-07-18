@@ -146,7 +146,7 @@ done
 
 # Commit de la migración
 echo -e "${BLUE}💾 Creando commit de migración...${NC}"
-git add .
+git add . -- ':!sicora-docs/*'
 git commit -m "feat: migrate existing project documentation
 
 - Import all critical documentation from source project

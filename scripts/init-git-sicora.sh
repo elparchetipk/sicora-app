@@ -228,7 +228,7 @@ git config --get-regexp alias | sed 's/^alias\./  /'
 # Crear primer commit si no hay commits
 if ! git rev-parse --verify HEAD >/dev/null 2>&1; then
     log "Creating initial commit..."
-    git add .
+    git add . -- ':!sicora-docs/*'
     git commit -m "chore: initial setup of SICORA project
 
 - Configure Git repository with best practices

@@ -126,3 +126,7 @@ target/
 # Test coverage
 coverage/
 *.coverprofile
+
+# SICORA specific exclusions
+# sicora-docs es de solo lectura por seguridad
+sicora-docs/

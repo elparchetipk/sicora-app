@@ -27,8 +27,8 @@ auto_commit() {
     
     echo -e "${BLUE}📝 Preparando commit automático...${NC}"
     
-    # Agregar todos los archivos
-    git add .
+    # Agregar todos los archivos (excluyendo sicora-docs)
+    git add . -- ':!sicora-docs/*'
     
     # Crear mensaje de commit descriptivo
     local commit_message
