@@ -6,3 +6,21 @@ python-multipart==0.0.6
 pydantic==2.5.0
 pydantic-settings==2.1.0
 python-dotenv==1.0.0
+
+# Nuevas dependencias para completitud 100%
+aioredis==2.0.1
+circuitbreaker==1.4.0
+prometheus-client==0.16.0
+structlog==23.1.0
+asyncpg==0.28.0
+alembic==1.11.1
+sqlalchemy[asyncio]==2.0.19
+
+# Nuevas dependencias para completitud 100%
+aioredis==2.0.1
+circuitbreaker==1.4.0
+prometheus-client==0.16.0
+structlog==23.1.0
+asyncpg==0.28.0
+alembic==1.11.1
+sqlalchemy[asyncio]==2.0.19
