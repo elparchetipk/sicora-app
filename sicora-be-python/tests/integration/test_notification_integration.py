@@ -19,45 +19,43 @@ async def notification_service_url():
     """
     Fixture que inicia el NotificationService en un puerto separado.
     """
-    notification_dir = os.path.join(
-        os.path.dirname(__file__), "..", "..", "notificationservice-template"
-    )
+    notification_dir = os.path.join(os.path.dirname(__file__), "..", "..", "notificationservice-template")
 
     # Configurar environment para el proceso
     env = os.environ.copy()
     env["PYTHONPATH"] = notification_dir
     env["PORT"] = "8999"
 
-    # Iniciar el servicio
+    # Cambiar al directorio correcto antes de iniciar
+    original_cwd = os.getcwd()
+    os.chdir(notification_dir)
+
+    # Iniciar el servicio con más configuración
     process = subprocess.Popen(
-        [
-            "python",
-            "-m",
-            "uvicorn",
-            "main:app",
-            "--host",
-            "127.0.0.1",
-            "--port",
-            "8999",
-        ],
-        cwd=notification_dir,
+        ["python", "-m", "uvicorn", "main:app", "--host", "127.0.0.1", "--port", "8999", "--log-level", "warning"],
         env=env,
-        stdout=subprocess.DEVNULL,
-        stderr=subprocess.DEVNULL,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
     )
 
-    # Esperar a que se inicie
-    await asyncio.sleep(3)
+    # Restaurar directorio original
+    os.chdir(original_cwd)
 
-    # Verificar que está ejecutándose
-    try:
-        async with AsyncClient() as client:
-            response = await client.get("http://127.0.0.1:8999/health")
-            if response.status_code != 200:
-                raise Exception("Service not responding")
-    except Exception:
+    # Esperar más tiempo y verificar múltiples veces
+    for attempt in range(10):  # 10 intentos, 1 segundo cada uno
+        await asyncio.sleep(1)
+        try:
+            async with AsyncClient(timeout=5.0) as client:
+                response = await client.get("http://127.0.0.1:8999/health")
+                if response.status_code == 200:
+                    break
+        except Exception:
+            continue
+    else:
+        # Si llegamos aquí, no se pudo conectar
+        stdout, stderr = process.communicate(timeout=5)
         process.terminate()
-        raise Exception("Failed to start NotificationService")
+        raise Exception(f"Failed to start NotificationService. stdout: {stdout.decode()}, stderr: {stderr.decode()}")
 
     yield "http://127.0.0.1:8999"
 
@@ -74,9 +72,7 @@ async def notification_service_url():
 class TestNotificationServiceHealthSimple:
     """Tests simplificados para health check del NotificationService."""
 
-    async def test_health_endpoint_returns_healthy_status(
-        self, notification_service_url
-    ):
+    async def test_health_endpoint_returns_healthy_status(self, notification_service_url):
         """Test que el endpoint de health devuelve estado saludable."""
         async with AsyncClient() as client:
             response = await client.get(f"{notification_service_url}/health")
@@ -94,9 +90,7 @@ class TestNotificationServiceHealthSimple:
 class TestNotificationServiceMetricsSimple:
     """Tests simplificados para métricas del NotificationService."""
 
-    async def test_metrics_endpoint_returns_operational_status(
-        self, notification_service_url
-    ):
+    async def test_metrics_endpoint_returns_operational_status(self, notification_service_url):
         """Test que el endpoint de métricas devuelve información operacional."""
         async with AsyncClient() as client:
             response = await client.get(f"{notification_service_url}/metrics")
@@ -176,9 +170,7 @@ class TestNotificationServiceDatabaseDirect:
             )
             tables = [row[0] for row in result.fetchall()]
 
-            assert (
-                "notifications" in tables
-            ), "Table 'notifications' not found in database"
+            assert "notifications" in tables, "Table 'notifications' not found in database"
 
         await engine.dispose()
 
@@ -211,9 +203,7 @@ class TestNotificationServiceDatabaseDirect:
                 "created_at",
             ]
             for col_name in essential_columns:
-                assert (
-                    col_name in columns
-                ), f"Column '{col_name}' not found in notifications table"
+                assert col_name in columns, f"Column '{col_name}' not found in notifications table"
 
         await engine.dispose()
 
@@ -243,9 +233,7 @@ class TestNotificationServiceDatabaseDirect:
             )
 
             # Verificar que se insertó
-            result = await conn.execute(
-                text("SELECT COUNT(*) FROM notifications WHERE user_id = 999")
-            )
+            result = await conn.execute(text("SELECT COUNT(*) FROM notifications WHERE user_id = 999"))
             count = result.scalar()
             assert count == 1, "Failed to insert test notification"
 
