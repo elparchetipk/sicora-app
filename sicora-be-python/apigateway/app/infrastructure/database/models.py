@@ -3,13 +3,13 @@ Modelos SQLAlchemy para APIGateway
 """
 
 from sqlalchemy import Column, Integer, String, DateTime, Float, Boolean, Text, JSON
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.sql import func
+from .database import Base
 
-Base = declarative_base()
 
 class RequestLogModel(Base):
     """Modelo para logging de requests."""
+
     __tablename__ = "request_logs"
 
     id = Column(Integer, primary_key=True, index=True)
@@ -27,8 +27,10 @@ class RequestLogModel(Base):
     status = Column(String(20), nullable=False)
     error_message = Column(Text, nullable=True)
 
+
 class ServiceHealthModel(Base):
     """Modelo para health status de servicios."""
+
     __tablename__ = "service_health"
 
     id = Column(Integer, primary_key=True, index=True)
@@ -37,4 +39,4 @@ class ServiceHealthModel(Base):
     last_check = Column(DateTime, default=func.now(), nullable=False)
     response_time_ms = Column(Float, nullable=True)
     error_message = Column(Text, nullable=True)
-    metadata = Column(JSON, nullable=True)
+    service_metadata = Column(JSON, nullable=True)

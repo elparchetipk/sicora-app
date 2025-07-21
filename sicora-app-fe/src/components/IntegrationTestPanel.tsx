@@ -36,8 +36,9 @@ const IntegrationTestPanel: React.FC = () => {
         password: 'password123',
       });
       addResult('✅ Login exitoso');
-    } catch (error: any) {
-      addResult(`❌ Error en login: ${error.message}`);
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Error desconocido';
+      addResult(`❌ Error en login: ${errorMessage}`);
     }
   };
 
@@ -52,8 +53,9 @@ const IntegrationTestPanel: React.FC = () => {
         role: 'aprendiz',
       });
       addResult('✅ Registro exitoso');
-    } catch (error: any) {
-      addResult(`❌ Error en registro: ${error.message}`);
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Error desconocido';
+      addResult(`❌ Error en registro: ${errorMessage}`);
     }
   };
 
@@ -62,8 +64,9 @@ const IntegrationTestPanel: React.FC = () => {
       addResult('🔍 Probando logout...');
       await logout();
       addResult('✅ Logout exitoso');
-    } catch (error: any) {
-      addResult(`❌ Error en logout: ${error.message}`);
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Error desconocido';
+      addResult(`❌ Error en logout: ${errorMessage}`);
     }
   };
 

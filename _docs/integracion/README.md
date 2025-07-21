@@ -4,6 +4,7 @@
 
 ### Reportes de Integración
 
+- [Reporte de Integración Base de Datos Backend Python](./REPORTE_INTEGRACION_BD_BACKEND_PYTHON.md) ⭐ **NUEVO**
 - [Reporte de Integración UserService](./REPORTE_INTEGRACION_USERSERVICE.md)
 - [Integración Completada Final](./INTEGRACION_COMPLETADA_FINAL.md)
 

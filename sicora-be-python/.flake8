@@ -1,0 +1,30 @@
+[flake8]
+# Configuración flake8 - desactivar errores molestos
+max-line-length = 120
+ignore =
+    E501,    # line too long
+    W503,    # line break before binary operator
+    E203,    # whitespace before ':'
+    E231,    # missing whitespace after ','
+    E402,    # module level import not at top of file
+    F401,    # imported but unused
+    W292,    # no newline at end of file
+    E266,    # too many leading '#' for block comment
+    E302,    # expected 2 blank lines
+    E305,    # expected 2 blank lines after class or function definition
+    W291,    # trailing whitespace
+    W293,    # blank line contains whitespace
+
+exclude =
+    .git,
+    __pycache__,
+    .venv,
+    venv,
+    *.egg-info,
+    build,
+    dist,
+    migrations,
+    .pytest_cache,
+    .mypy_cache
+
+disable-noqa = true

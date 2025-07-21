@@ -8,6 +8,7 @@
 - **NUNCA** crear documentación fuera de la estructura `_docs/`
 - **NUNCA** duplicar documentos entre la raíz y `_docs/`
 - **NUNCA** ignorar la estructura de carpetas establecida
+- **NUNCA** tratar errores como problemas menores(testing, ci/cd), no hay problemas menores, hay PROBLEMAS, los test no se eluden, todos los problemas se deben resolver. La calidad NO es un fino detalle de coquetería, la calidad es TOTAL.
 
 ### ✅ OBLIGATORIO ANTES DE CREAR DOCUMENTACIÓN:
 

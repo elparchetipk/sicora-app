@@ -1,15 +1,15 @@
-import { post, get, put } from './api-client-new';
 import type {
-  LoginCredentials,
-  AuthResponse,
-  User,
   ApiResponse,
-  RefreshTokenResponse,
-  ProfileUpdateRequest,
+  AuthResponse,
   ChangePasswordRequest,
   ForgotPasswordRequest,
+  LoginCredentials,
+  ProfileUpdateRequest,
+  RefreshTokenResponse,
   ResetPasswordRequest,
+  User,
 } from '../types/auth.types';
+import { get, post, put } from './api-client-new';
 
 /**
  * Servicio de autenticación para SICORA
@@ -35,7 +35,7 @@ class AuthService {
   /**
    * Registrar nuevo usuario
    */
-  async register(userData: any): Promise<any> {
+  async register(userData: Record<string, unknown>): Promise<Record<string, unknown>> {
     const response = await post('/api/v1/users', userData);
     return response.data ?? response;
   }
@@ -65,7 +65,7 @@ class AuthService {
   /**
    * Actualizar perfil de usuario
    */
-  async updateProfile(userData: ProfileUpdateRequest): Promise<any> {
+  async updateProfile(userData: ProfileUpdateRequest): Promise<Record<string, unknown> | object> {
     const response = await put('/api/v1/users/profile', userData);
     return response.data ?? response;
   }

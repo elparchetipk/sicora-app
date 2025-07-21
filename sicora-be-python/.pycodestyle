@@ -1,0 +1,4 @@
+[pycodestyle]
+max-line-length = 120
+ignore = E501,E701,E702,E703,W503,E203
+exclude = .git,__pycache__,.venv,venv,*.egg-info,build,dist,migrations

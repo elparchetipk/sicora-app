@@ -1,0 +1,15 @@
+[MESSAGES CONTROL]
+disable=C0301,C0330,R0903,R0913,W0212,C0103,R0801,R0902
+
+[FORMAT]
+max-line-length=120
+ignore-long-lines=^\s*(# )?<?https?://\S+>?$
+
+[BASIC]
+good-names=i,j,k,ex,Run,_,db,id,pk,app
+
+[DESIGN]
+max-args=10
+max-locals=25
+max-branches=15
+max-statements=60

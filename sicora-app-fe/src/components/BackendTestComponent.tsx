@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAuthStore } from '../stores/auth-store';
-import AuthService from '../lib/auth-api';
+// import AuthService from '../lib/auth-api';
 import { API_CONFIG } from '../lib/api-client';
 
 interface LoginData {
@@ -43,14 +43,19 @@ const BackendTestComponent: React.FC = () => {
       endpoint: string;
       method: string;
       status: number;
-      data: any;
+      data: Record<string, unknown>;
       timestamp: string;
     }>
   >([]);
 
   const [loading, setLoading] = React.useState(false);
 
-  const addResponse = (endpoint: string, method: string, status: number, data: any) => {
+  const addResponse = (
+    endpoint: string,
+    method: string,
+    status: number,
+    data: Record<string, unknown>
+  ) => {
     setResponses((prev) => [
       {
         endpoint,
@@ -290,7 +295,7 @@ const BackendTestComponent: React.FC = () => {
                     <select
                       value={createUserData.rol}
                       onChange={(e) =>
-                        setCreateUserData((prev) => ({ ...prev, rol: e.target.value as any }))
+                        setCreateUserData((prev) => ({ ...prev, rol: e.target.value }))
                       }
                       className='w-full px-3 py-2 border rounded focus:ring-2 focus:ring-blue-500'
                     >
