@@ -2,6 +2,10 @@
 
 ## 📋 Documentos en esta Sección
 
+### Arquitectura Multi-Stack
+
+- [Coordinación Multi-Stack Base de Datos](./COORDINACION_MULTISTACK_BASE_DATOS.md) ⭐ **NUEVO**
+
 ### Reportes de Integración
 
 - [Reporte de Integración Base de Datos Backend Python](./REPORTE_INTEGRACION_BD_BACKEND_PYTHON.md) ⭐ **NUEVO**
@@ -22,18 +26,24 @@
 
 Esta sección contiene toda la documentación relacionada con la integración entre los diferentes componentes del sistema SICORA, incluyendo:
 
+- **Coordinación multi-stack** (Python FastAPI + Go)
 - Integración frontend-backend
 - Comunicación entre microservicios
 - Verificaciones de conectividad
 - Resolución de problemas de integración
 - Reportes de estado de integración
 
-## 📖 Documentos Relacionados
+## � Arquitectura Integrada
 
+SICORA implementa una **arquitectura multistack híbrida** donde Python (FastAPI) y Go comparten la misma base de datos PostgreSQL con esquemas separados por servicio. Esta documentación garantiza la coordinación correcta entre ambos stacks.
+
+## �📖 Documentos Relacionados
+
+- [Datos de Prueba VPS](../data-vps/)
 - [Configuración de Servicios](../configuracion/)
 - [Desarrollo](../desarrollo/)
 - [Reportes](../reportes/)
 
 ---
 
-**Última actualización**: 3 de julio de 2025
+**Última actualización**: 15 de enero de 2025

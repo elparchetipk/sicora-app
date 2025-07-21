@@ -1,7 +1,5 @@
-# Dockerfile para APIGateway
 FROM python:3.11-slim
 
-# Configurar directorio de trabajo
 WORKDIR /app
 
 # Instalar dependencias del sistema
@@ -9,23 +7,27 @@ RUN apt-get update && apt-get install -y \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Copiar requirements
-COPY requirements.txt .
-COPY requirements-dev.txt .
+# Copiar archivos de dependencias
+COPY pyproject.toml requirements-dev.txt ./
 
 # Instalar dependencias Python
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements-dev.txt
 
 # Copiar código fuente
 COPY shared/ ./shared/
 COPY apigateway/ ./apigateway/
 
-# Configurar variables de entorno
-ENV PYTHONPATH=/app
-ENV ENVIRONMENT=production
+# Crear usuario no-root
+RUN useradd --create-home --shell /bin/bash sicora
+RUN chown -R sicora:sicora /app
+USER sicora
 
 # Exponer puerto
 EXPOSE 8000
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:8000/health || exit 1
 
 # Comando de inicio
 CMD ["uvicorn", "apigateway.main:app", "--host", "0.0.0.0", "--port", "8000"]

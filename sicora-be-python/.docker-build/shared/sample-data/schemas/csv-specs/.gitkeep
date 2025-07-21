@@ -1,0 +1,4 @@
+# Especificaciones de archivos CSV
+# CONTENIDO: Definiciones de estructura, tipos, validaciones para CSV
+# PÚBLICO: Puede ser versionado en git
+# PROPÓSITO: Validación automática de archivos CSV antes de importar

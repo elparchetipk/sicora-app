@@ -2,7 +2,8 @@
 
 .PHONY: help install clean test test-coverage run-all run-userservice run-scheduleservice run-attendanceservice run-evalinservice run-evalproyservice run-kbservice run-aiservice run-apigateway
 .PHONY: docker-build docker-up docker-down dev-setup format lint db-migrate db-seed db-reset coverage
-.PHONY: lint test-quick test-coverage security-scan commit-check pre-commit ci-local format-check
+.PHONY: lint test-quick test-integration test-coverage security-scan commit-check pre-commit ci-local format-check
+.PHONY: prepare-deployment validate-endpoints deploy-staging deploy-production
 
 # Variables
 SERVICES = userservice scheduleservice attendanceservice evalinservice evalproyservice kbservice aiservice apigateway
@@ -20,7 +21,20 @@ NC = \033[0m # No Color
 help: ## Mostrar ayuda
 	@echo "$(BLUE)SICORA Backend Python Stack - Comandos Disponibles$(NC)"
 	@echo ""
-	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "$(GREEN)%-20s$(NC) %s\n", $$1, $$2}'
+	@echo "$(YELLOW)=== DESARROLLO ====$(NC)"
+	@grep -E '^(dev-|install|clean):.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "$(GREEN)%-20s$(NC) %s\n", $$1, $$2}'
+	@echo ""
+	@echo "$(YELLOW)=== TESTING ====$(NC)"
+	@grep -E '^(test|coverage):.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "$(GREEN)%-20s$(NC) %s\n", $$1, $$2}'
+	@echo ""
+	@echo "$(YELLOW)=== DEPLOYMENT ====$(NC)"
+	@grep -E '^(prepare-|validate-|deploy-):.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "$(GREEN)%-20s$(NC) %s\n", $$1, $$2}'
+	@echo ""
+	@echo "$(YELLOW)=== DOCKER ====$(NC)"
+	@grep -E '^(docker-):.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "$(GREEN)%-20s$(NC) %s\n", $$1, $$2}'
+	@echo ""
+	@echo "$(YELLOW)=== OTROS ====$(NC)"
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | grep -v -E '^(dev-|install|clean|test|coverage|prepare-|validate-|deploy-|docker-)' | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "$(GREEN)%-20s$(NC) %s\n", $$1, $$2}'
 
 # Desarrollo
 dev-setup: ## Configuración inicial de desarrollo
@@ -69,6 +83,16 @@ test-quick: ## Tests rápidos para CI
 	@echo "$(YELLOW)Running quick tests...$(NC)"
 	@$(VENV)/bin/pytest tests/ -v --tb=short --maxfail=5 || echo "$(YELLOW)⚠️  Some tests failed but continuing...$(NC)"
 	@echo "$(GREEN)✓ Quick tests completed$(NC)"
+
+test-integration: ## Tests de integración
+	@echo "$(YELLOW)Running integration tests...$(NC)"
+	@if [ -d "tests/integration" ]; then \
+		python scripts/config_manager.py validate testing; \
+		pytest tests/integration/ -v --tb=short; \
+	else \
+		echo "$(YELLOW)⚠️  No integration tests directory found$(NC)"; \
+	fi
+	@echo "$(GREEN)✓ Integration tests completed$(NC)"
 
 test-coverage: ## Tests con cobertura
 	@echo "$(YELLOW)Running tests with coverage...$(NC)"
@@ -225,16 +249,65 @@ update-submodules: ## Actualizar submódulos
 	@git submodule update --remote
 	@echo "$(GREEN)✓ Submódulos actualizados$(NC)"
 
-# Entorno virtual
-venv: ## Crear entorno virtual
-	@echo "$(YELLOW)Creando entorno virtual...$(NC)"
-	@$(PYTHON) -m venv $(VENV)
-	@$(VENV)/bin/pip install --upgrade pip
-	@echo "$(GREEN)✓ Entorno virtual creado. Activa con: source $(VENV)/bin/activate$(NC)"
+# ================================
+# COMANDOS DE DEPLOYMENT
+# ================================
 
-activate: ## Mostrar comando para activar entorno virtual
-	@echo "$(BLUE)Para activar el entorno virtual, ejecuta:$(NC)"
-	@echo "source $(VENV)/bin/activate"
+prepare-deployment: ## Preparar paquete de deployment para VPS
+	@echo "$(BLUE)Preparando deployment para VPS Hostinger...$(NC)"
+	@./scripts/prepare-vps-deployment.sh
+	@echo "$(GREEN)✓ Paquete de deployment preparado$(NC)"
 
-commit: ## Commit automatizado con conventional commits
-	@../scripts/universal-autocommit.sh
+validate-endpoints: ## Validar endpoints después del deployment
+	@echo "$(BLUE)Validando endpoints en localhost...$(NC)"
+	@./scripts/validate-vps-endpoints.sh localhost http
+	@echo "$(GREEN)✓ Validación completada$(NC)"
+
+validate-endpoints-remote: ## Validar endpoints en servidor remoto
+	@if [ -z "$(DOMAIN)" ]; then \
+		echo "$(RED)❌ Especifica el dominio: make validate-endpoints-remote DOMAIN=tu-servidor.com$(NC)"; \
+		exit 1; \
+	fi
+	@echo "$(BLUE)Validando endpoints en $(DOMAIN)...$(NC)"
+	@./scripts/validate-vps-endpoints.sh $(DOMAIN) $(PROTOCOL)
+	@echo "$(GREEN)✓ Validación remota completada$(NC)"
+
+deploy-staging: ## Desplegar en entorno staging
+	@echo "$(BLUE)Desplegando en staging...$(NC)"
+	@./deployment/deploy.sh staging
+	@echo "$(GREEN)✓ Deployment en staging completado$(NC)"
+
+deploy-production: ## Desplegar en entorno producción
+	@echo "$(YELLOW)⚠️  DEPLOYMENT EN PRODUCCIÓN ⚠️$(NC)"
+	@read -p "¿Estás seguro de continuar? [y/N]: " confirm && [ "$$confirm" = "y" ]
+	@echo "$(BLUE)Desplegando en producción...$(NC)"
+	@./deployment/deploy.sh production
+	@echo "$(GREEN)✓ Deployment en producción completado$(NC)"
+
+deployment-help: ## Mostrar ayuda de deployment
+	@echo "$(BLUE)Guía de Deployment SICORA Backend$(NC)"
+	@echo ""
+	@echo "$(YELLOW)1. Preparar deployment:$(NC)"
+	@echo "   make prepare-deployment"
+	@echo ""
+	@echo "$(YELLOW)2. Transferir al VPS:$(NC)"
+	@echo "   scp sicora-backend-deployment-*.tar.gz usuario@VPS_IP:~/"
+	@echo ""
+	@echo "$(YELLOW)3. En el VPS, extraer y desplegar:$(NC)"
+	@echo "   mkdir -p ~/sicora-backend"
+	@echo "   cd ~/sicora-backend"
+	@echo "   tar -xzf ~/sicora-backend-deployment-*.tar.gz"
+	@echo "   nano .env.production  # Editar variables"
+	@echo "   ./deployment/deploy.sh production"
+	@echo ""
+	@echo "$(YELLOW)4. Validar endpoints:$(NC)"
+	@echo "   make validate-endpoints-remote DOMAIN=tu-servidor.com"
+	@echo ""
+	@echo "$(GREEN)📚 Documentación completa en:$(NC)"
+	@echo "   _docs/desarrollo/GUIA_DESPLIEGUE_VPS_HOSTINGER.md"
+
+deployment-demo: ## Mostrar demo completo paso a paso
+	@./scripts/deployment-demo.sh
+
+deployment-fedora: ## Mostrar comandos específicos para Fedora Cloud 42
+	@./scripts/deployment-fedora.sh

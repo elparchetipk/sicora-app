@@ -1,0 +1,146 @@
+openapi: 3.0.3
+info:
+  title: SICORA User Registration API
+  version: 1.0.0
+paths:
+  /api/v1/auth/register:
+    post:
+      summary: Registro individual de usuario (excepcional)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRegisterRequest'
+      responses:
+        '201':
+          description: Usuario registrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserRegisterResponse'
+        '400':
+          description: Error de validación
+        '409':
+          description: Usuario ya existe
+  /api/v1/auth/bulk-register:
+    post:
+      summary: Carga masiva de usuarios (aprendices/instructores)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkUserRegisterRequest'
+      responses:
+        '201':
+          description: Usuarios registrados
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkUserRegisterResponse'
+        '400':
+          description: Error de validación
+components:
+  schemas:
+    UserRegisterRequest:
+      type: object
+      required:
+        - first_name
+        - last_name
+        - email
+        - document_number
+        - document_type
+        - password
+      properties:
+        first_name:
+          type: string
+          minLength: 2
+          maxLength: 100
+        last_name:
+          type: string
+          minLength: 2
+          maxLength: 100
+        email:
+          type: string
+          format: email
+        document_number:
+          type: string
+          minLength: 5
+          maxLength: 15
+          pattern: "^\\d+$"
+        document_type:
+          type: string
+          minLength: 1
+          maxLength: 2
+        password:
+          type: string
+          minLength: 10
+    BulkUserRegisterRequest:
+      type: object
+      required:
+        - users
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/BulkUserItem'
+    BulkUserItem:
+      type: object
+      required:
+        - first_name
+        - last_name
+        - email
+        - document_number
+        - document_type
+        - role
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+        document_number:
+          type: string
+        document_type:
+          type: string
+        role:
+          type: string
+    UserRegisterResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+        document_number:
+          type: string
+        document_type:
+          type: string
+        role:
+          type: string
+        is_active:
+          type: boolean
+        must_change_password:
+          type: boolean
+    BulkUserRegisterResponse:
+      type: object
+      properties:
+        created:
+          type: integer
+        errors:
+          type: array
+          items:
+            type: string
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserRegisterResponse'

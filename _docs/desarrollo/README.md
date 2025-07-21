@@ -8,6 +8,13 @@
 - [Guía de Desarrollo Backend](./GUIA_DESARROLLO_BACKEND.md)
 - [Estándares de Código](./ESTANDARES_CODIGO.md)
 
+### Deployment y Producción
+
+- [🚀 Guía de Despliegue VPS Hostinger](./GUIA_DESPLIEGUE_VPS_HOSTINGER.md) - **COMPLETA**
+- [📋 Plan de Despliegue - Resumen Ejecutivo](./PLAN_DESPLIEGUE_VPS_RESUMEN.md) - **NUEVO**
+- [Configuración de Entorno de Producción](./CONFIGURACION_ENTORNO_PRODUCCION.md)
+- [Monitoreo y Mantenimiento](./MONITOREO_MANTENIMIENTO.md)
+
 ### Flujos de Trabajo
 
 - [Flujo de Trabajo Git](./FLUJO_TRABAJO_GIT.md)
@@ -28,6 +35,7 @@ Esta sección contiene toda la documentación relacionada con el desarrollo del 
 
 - Guías y estándares de desarrollo
 - Flujos de trabajo y metodologías
+- **Documentación de deployment y producción**
 - Herramientas y scripts de desarrollo
 - Configuración de entorno de desarrollo
 - Mejores prácticas de programación
