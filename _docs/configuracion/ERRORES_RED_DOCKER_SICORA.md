@@ -1,3 +1,9 @@
+<div align="center">
+
+![SICORA Logo](../../assets/logo-sicora-small.svg)
+
+</div>
+
 # 🚨 Errores de Red Comunes en Docker - SICORA
 
 ## 📋 Resumen Ejecutivo

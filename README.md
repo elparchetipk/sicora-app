@@ -1,4 +1,15 @@
-# SICORA - Sistema de Información para Control de Registros Académicos
+<div align="center">
+
+![SICORA Logo](./assets/logo-sicora.svg)
+
+# SICORA
+## Sistema de Información para Control de Registros Académicos
+
+*OneVision Open Source - Gestión Académica Integral*
+
+---
+
+</div>
 
 ## 📊 Backend API Statistics
 
@@ -23,9 +34,9 @@
 
 📋 [Ver conteo completo](./_docs/reportes/CONTEO_ENDPOINTS_BACKEND_SICORA.md)
 
-## 🏛️ OneVision Open Source - Gestión Académica Integral
+## � Descripción del Proyecto
 
-Este es el repositorio principal del proyecto SICORA, desarrollado como una solución integral open source para la gestión de registros académicos y coordinación de programas formativos en instituciones educativas.
+SICORA es una solución integral open source para la gestión de registros académicos y coordinación de programas formativos en instituciones educativas, desarrollado por OneVision.
 
 ## 📊 Backend API Statistics
 
