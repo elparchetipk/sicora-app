@@ -74,10 +74,10 @@
   </text>
 
   <!-- Subtítulo -->
-  <text x="110" y="65" font-family="monospace" font-size="14" fill="#a0aec0">
+  <text x="110" y="65" font-family="monospace" font-size="10" fill="#a0aec0">
     Sistema Integral de Control Operacional y
   </text>
-  <text x="110" y="82" font-family="monospace" font-size="14" fill="#a0aec0">
+  <text x="110" y="82" font-family="monospace" font-size="10" fill="#a0aec0">
     Registro Académico
   </text>
 
