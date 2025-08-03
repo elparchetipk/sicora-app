@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 🎓 SICORA Postman Collections Generator - Educativo
-# Genera collections educativas para aprendices SENA
+# Genera collections educativas para estudiantes OneVision
 # Contexto: 389 endpoints, 16 servicios, formación técnica
 
 set -euo pipefail
@@ -42,7 +42,7 @@ error() {
 echo -e "${PURPLE}"
 echo "╔═══════════════════════════════════════════════════════════════════════════════════╗"
 echo "║                    🎓 SICORA POSTMAN COLLECTIONS GENERATOR                       ║"
-echo "║                         Educativo para Aprendices SENA                           ║"
+echo "║                         Educativo para Estudiantes OneVision                    ║"
 echo "╚═══════════════════════════════════════════════════════════════════════════════════╝"
 echo -e "${NC}"
 
@@ -72,9 +72,9 @@ generate_environment() {
     local go_port=$2
     local python_port=$3
     local description=$4
-    
+
     log "Generando environment: $env_name"
-    
+
     cat > "$OUTPUT_DIR/environments/sicora-${env_name}.postman_environment.json" <<EOF
 {
   "id": "sicora-${env_name}-env",
@@ -87,7 +87,7 @@ generate_environment() {
       "enabled": true
     },
     {
-      "key": "base_url_python", 
+      "key": "base_url_python",
       "value": "http://localhost:${python_port}",
       "description": "URL base para servicios Python",
       "enabled": true
@@ -138,17 +138,17 @@ generate_basic_collection() {
     local description=$2
     local backend_type=$3
     local endpoints_count=$4
-    
+
     log "Generando collection: $service_name ($backend_type)"
-    
+
     local collection_id="sicora-${service_name,,}-${backend_type}"
     local base_url_var="base_url_${backend_type}"
-    
+
     cat > "$OUTPUT_DIR/collections/${service_name}_${backend_type^}.postman_collection.json" <<EOF
 {
   "info": {
     "name": "SICORA - ${service_name} (${backend_type^}) - Educativo",
-    "description": "${description}\\n\\n📚 **Para Aprendices SENA**\\n\\n**Objetivos de Aprendizaje:**\\n- Comprender API REST ${service_name}\\n- Practicar requests HTTP (GET, POST, PUT, DELETE)\\n- Implementar tests básicos\\n- Manejar autenticación JWT\\n\\n**Prerrequisitos:**\\n- Environment configurado (development/staging/production)\\n- Servicios SICORA ejecutándose\\n- Conocimientos básicos de HTTP\\n\\n**Endpoints incluidos:** ${endpoints_count}\\n**Stack:** ${backend_type^} Backend\\n**Nivel:** Intermedio",
+    "description": "${description}\\n\\n📚 **Para Estudiantes OneVision**\\n\\n**Objetivos de Aprendizaje:**\\n- Comprender API REST ${service_name}\\n- Practicar requests HTTP (GET, POST, PUT, DELETE)\\n- Implementar tests básicos\\n- Manejar autenticación JWT\\n\\n**Prerrequisitos:**\\n- Environment configurado (development/staging/production)\\n- Servicios SICORA ejecutándose\\n- Conocimientos básicos de HTTP\\n\\n**Endpoints incluidos:** ${endpoints_count}\\n**Stack:** ${backend_type^} Backend\\n**Nivel:** Intermedio",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_postman_id": "${collection_id}",
     "_exporter_id": "sicora-educational-generator"
@@ -169,7 +169,7 @@ generate_basic_collection() {
       "script": {
         "type": "text/javascript",
         "exec": [
-          "// 🎓 Script educativo para aprendices SENA",
+          "// 🎓 Script educativo para estudiantes OneVision",
           "console.log('🚀 Iniciando request para ${service_name}...');",
           "console.log('📍 Environment:', pm.environment.get('environment_name'));",
           "console.log('🔗 Base URL:', pm.environment.get('${base_url_var}'));",
@@ -224,7 +224,7 @@ generate_basic_collection() {
     {
       "key": "backend_type",
       "value": "${backend_type}",
-      "type": "string", 
+      "type": "string",
       "description": "Tipo de backend (go/python)"
     }
   ],
@@ -477,8 +477,8 @@ success "Collections generadas: 8 servicios principales"
 # Generar documentación educativa
 log "Generando documentación educativa..."
 
-cat > "$OUTPUT_DIR/documentation/GUIA_APRENDICES_SENA.md" <<'EOF'
-# 🎓 Guía para Aprendices SENA - SICORA API Testing
+cat > "$OUTPUT_DIR/documentation/GUIA_ESTUDIANTES_ONEVISION.md" <<'EOF'
+# 🎓 Guía para Estudiantes OneVision - SICORA API Testing
 
 ## 📚 Objetivos de Aprendizaje
 
@@ -501,7 +501,7 @@ Al completar esta guía, los aprendices podrán:
 
 ### 2. Importar Collections
 1. Abrir Postman
-2. Click en "Import" 
+2. Click en "Import"
 3. Arrastrar archivos `.json` de `collections/`
 4. Verificar que se importaron correctamente
 
@@ -637,9 +637,9 @@ EOF
 cat > "$OUTPUT_DIR/README.md" <<'EOF'
 # 🎓 SICORA Postman Collections - Educativo
 
-> Collections educativas para aprendices SENA  
-> **Endpoints**: 389 distribuidos en 16 servicios  
-> **Nivel**: Intermedio a Avanzado  
+> Collections educativas para estudiantes OneVision
+> **Endpoints**: 389 distribuidos en 16 servicios
+> **Nivel**: Intermedio a Avanzado
 > **Duración**: 4-8 semanas
 
 ## 📦 Contenido
@@ -668,7 +668,7 @@ environments/
 ### 📚 Documentation
 ```
 documentation/
-├── GUIA_APRENDICES_SENA.md     # Guía principal para estudiantes
+├── GUIA_ESTUDIANTES_ONEVISION.md  # Guía principal para estudiantes
 ├── ACTIVIDADES_PRACTICAS.md    # Actividades paso a paso
 ├── TROUBLESHOOTING.md          # Solución de problemas
 └── EVALUACION.md               # Criterios de evaluación
@@ -779,7 +779,7 @@ cd sicora-app
 - 📞 Ext: 1234
 - 💬 Slack: #sicora-instructores
 
-### Para Aprendices  
+### Para Aprendices
 - 📧 Email: soporte@sicora.edu.co
 - 📞 Ext: 5678
 - 💬 Slack: #sicora-aprendices
@@ -787,7 +787,7 @@ cd sicora-app
 
 ---
 
-**Generado automáticamente por SICORA Educational Tools**  
+**Generado automáticamente por SICORA Educational Tools**
 **Última actualización**: $(date)
 EOF
 
@@ -896,7 +896,7 @@ graph TD
     D --> E[CI/CD Integration]
     E --> F[Automated Testing]
     F --> G[Monitoring & Alerts]
-    
+
     B --> H[Enseñanza Aprendices]
     H --> I[Hands-on Learning]
 ```
@@ -944,7 +944,7 @@ NEWMAN_REPORTS_DIR="./newman-reports"
 # Exportar y ejecutar todas las collections
 for collection in $COLLECTIONS_DIR/*.json; do
     service_name=$(basename "$collection" .json)
-    
+
     newman run "$collection" \
         --environment "./environments/sicora-dev.json" \
         --reporters cli,htmlextra,json \
@@ -963,10 +963,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Setup Newman
         run: npm install -g newman newman-reporter-htmlextra
-        
+
       - name: Run Postman Collections
         run: |
           for collection in ./postman-collections/*.json; do
@@ -975,7 +975,7 @@ jobs:
               --reporters cli,junit \
               --reporter-junit-export results.xml
           done
-          
+
       - name: Publish Test Results
         uses: dorny/test-reporter@v1
         with:
@@ -1041,7 +1041,7 @@ declare -A PYTHON_SERVICES=(
 # Create directories
 setup_directories() {
     log "📁 Setting up Postman workspace..." "$BLUE"
-    
+
     mkdir -p "$COLLECTIONS_DIR"/{go-services,python-services}
     mkdir -p "$ENVIRONMENTS_DIR"
     mkdir -p "$PROJECT_ROOT/newman-reports"
@@ -1051,7 +1051,7 @@ setup_directories() {
 # Generate environment files
 generate_environments() {
     log "🌍 Generating Postman environments..." "$BLUE"
-    
+
     # Development environment
     cat > "$ENVIRONMENTS_DIR/sicora-development.json" << 'EOF'
 {
@@ -1064,7 +1064,7 @@ generate_environments() {
       "enabled": true
     },
     {
-      "key": "base_url_python", 
+      "key": "base_url_python",
       "value": "http://localhost:9000",
       "enabled": true
     },
@@ -1100,7 +1100,7 @@ EOF
     },
     {
       "key": "base_url_python",
-      "value": "https://api-python.sicora.com", 
+      "value": "https://api-python.sicora.com",
       "enabled": true
     },
     {
@@ -1130,11 +1130,11 @@ generate_service_collection() {
     local service_name="$1"
     local base_url="$2"
     local stack="$3"
-    
+
     log "📋 Generating collection for $stack/$service_name..." "$BLUE"
-    
+
     local collection_file="$COLLECTIONS_DIR/${stack}-services/${service_name}.postman_collection.json"
-    
+
     # Try to get OpenAPI spec
     local swagger_url="$base_url/swagger/doc.json"
     if curl -s -f "$swagger_url" > /dev/null 2>&1; then
@@ -1145,7 +1145,7 @@ generate_service_collection() {
             return 0
         fi
     fi
-    
+
     # Fallback: Generate basic collection manually
     generate_basic_collection "$service_name" "$base_url" "$stack" "$collection_file"
 }
@@ -1156,7 +1156,7 @@ generate_basic_collection() {
     local base_url="$2"
     local stack="$3"
     local output_file="$4"
-    
+
     cat > "$output_file" << EOF
 {
   "info": {
@@ -1215,13 +1215,13 @@ EOF
 # Generate collections for all services
 generate_all_collections() {
     log "🏗️ Generating collections for all services..." "$BLUE"
-    
+
     # Go services
     for service in "${!GO_SERVICES[@]}"; do
         generate_service_collection "$service" "${GO_SERVICES[$service]}" "go"
     done
-    
-    # Python services  
+
+    # Python services
     for service in "${!PYTHON_SERVICES[@]}"; do
         generate_service_collection "$service" "${PYTHON_SERVICES[$service]}" "python"
     done
@@ -1230,7 +1230,7 @@ generate_all_collections() {
 # Generate Newman automation script
 generate_newman_script() {
     log "🤖 Generating Newman automation script..." "$BLUE"
-    
+
     cat > "$PROJECT_ROOT/scripts/run-newman-tests.sh" << 'EOF'
 #!/bin/bash
 
@@ -1268,27 +1268,27 @@ check_newman() {
 run_tests() {
     local env_name="${1:-development}"
     local env_file="$ENVIRONMENTS_DIR/sicora-${env_name}.json"
-    
+
     if [[ ! -f "$env_file" ]]; then
         log "❌ Environment file not found: $env_file" "$RED"
         exit 1
     fi
-    
+
     log "🧪 Running tests for environment: $env_name" "$BLUE"
-    
+
     local timestamp=$(date +%Y%m%d-%H%M%S)
     local report_dir="$REPORTS_DIR/$env_name-$timestamp"
     mkdir -p "$report_dir"
-    
+
     local total_tests=0
     local passed_tests=0
-    
+
     # Run Go services collections
     for collection in "$COLLECTIONS_DIR/go-services"/*.json; do
         if [[ -f "$collection" ]]; then
             local service_name=$(basename "$collection" .postman_collection.json)
             log "🔍 Testing Go service: $service_name" "$BLUE"
-            
+
             if newman run "$collection" \
                 --environment "$env_file" \
                 --reporters cli,htmlextra,json \
@@ -1303,13 +1303,13 @@ run_tests() {
             ((total_tests++))
         fi
     done
-    
+
     # Run Python services collections
     for collection in "$COLLECTIONS_DIR/python-services"/*.json; do
         if [[ -f "$collection" ]]; then
             local service_name=$(basename "$collection" .postman_collection.json)
             log "🔍 Testing Python service: $service_name" "$BLUE"
-            
+
             if newman run "$collection" \
                 --environment "$env_file" \
                 --reporters cli,htmlextra,json \
@@ -1324,13 +1324,13 @@ run_tests() {
             ((total_tests++))
         fi
     done
-    
+
     # Generate summary report
     generate_summary_report "$report_dir" "$env_name" "$passed_tests" "$total_tests"
-    
+
     log "📊 Test Summary: $passed_tests/$total_tests services passed" "$BLUE"
     log "📄 Reports generated in: $report_dir" "$BLUE"
-    
+
     if [[ $passed_tests -eq $total_tests ]]; then
         exit 0
     else
@@ -1341,10 +1341,10 @@ run_tests() {
 # Generate summary report
 generate_summary_report() {
     local report_dir="$1"
-    local env_name="$2" 
+    local env_name="$2"
     local passed="$3"
     local total="$4"
-    
+
     cat > "$report_dir/summary.html" << EOF
 <!DOCTYPE html>
 <html>
@@ -1367,7 +1367,7 @@ generate_summary_report() {
         <p><strong>Environment:</strong> $env_name</p>
         <p><strong>Executed:</strong> $(date)</p>
     </div>
-    
+
     <div class="stats">
         <div class="stat-card passed">
             <h3>✅ Passed</h3>
@@ -1382,7 +1382,7 @@ generate_summary_report() {
             <p style="font-size: 2em; margin: 0;">$((passed * 100 / total))%</p>
         </div>
     </div>
-    
+
     <div class="reports-list">
         <h3>📄 Detailed Reports</h3>
 EOF
@@ -1403,7 +1403,7 @@ EOF
 # Main execution
 main() {
     check_newman
-    
+
     case "${1:-development}" in
         "development"|"dev")
             run_tests "development"
@@ -1429,7 +1429,7 @@ EOF
 # Generate educational documentation
 generate_educational_docs() {
     log "📚 Generating educational documentation..." "$BLUE"
-    
+
     cat > "$PROJECT_ROOT/postman-workspace/GUIA_APRENDICES.md" << 'EOF'
 # 🎓 Guía de Postman para Aprendices SICORA
 
@@ -1480,7 +1480,7 @@ POST {{base_url_go}}/api/v1/auth/login
 
 // Body (JSON):
 {
-  "email": "estudiante@sena.edu.co",
+  "email": "estudiante@onevision.edu.co",
   "password": "password123"
 }
 
@@ -1502,7 +1502,7 @@ Authorization: Bearer {{auth_token}}
 #### Paso 3: Testing con Datos Dinámicos
 ```javascript
 // Pre-request Script para generar datos:
-pm.environment.set("random_email", `test${Date.now()}@sena.edu.co`);
+pm.environment.set("random_email", `test${Date.now()}@onevision.edu.co`);
 
 // En el Body:
 {
@@ -1600,13 +1600,13 @@ EOF
 # Main execution
 main() {
     log "🚀 SICORA Postman Collection Generator Started" "$GREEN"
-    
+
     setup_directories
     generate_environments
     generate_all_collections
     generate_newman_script
     generate_educational_docs
-    
+
     log "✅ Postman workspace setup complete!" "$GREEN"
     log "📁 Collections: $COLLECTIONS_DIR" "$BLUE"
     log "🌍 Environments: $ENVIRONMENTS_DIR" "$BLUE"

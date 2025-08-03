@@ -99,9 +99,9 @@ func validateEmail(email string) error {
 		return NewDomainError("formato de email inválido")
 	}
 
-	// Validación específica para SENA
-	if !strings.HasSuffix(email, "@sena.edu.co") && !strings.HasSuffix(email, "@misena.edu.co") {
-		return NewDomainError("el email debe ser del dominio SENA (@sena.edu.co o @misena.edu.co)")
+	// Validación específica para OneVision
+	if !strings.HasSuffix(email, "@onevision.com") && !strings.HasSuffix(email, "@students.onevision.com") {
+		return NewDomainError("el email debe ser del dominio OneVision (@onevision.com o @students.onevision.com)")
 	}
 
 	return nil
@@ -142,7 +142,7 @@ func ValidateFichaID(fichaID string) error {
 		return NewDomainError("el ID de ficha es obligatorio")
 	}
 
-	// Las fichas en SENA tienen formato numérico de 7 dígitos
+	// Las fichas en OneVision tienen formato numérico de 7 dígitos
 	matched, _ := regexp.MatchString(`^[0-9]{7}$`, fichaID)
 	if !matched {
 		return NewDomainError("el ID de ficha debe tener exactamente 7 dígitos numéricos")

@@ -1,28 +1,28 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "description": "Microservicio kbservice del Sistema de Información de Coordinación Académica (SICORA) - SENA",
-        "title": "SICORA kbservice API",
-        "termsOfService": "http://swagger.io/terms/",
-        "contact": {
-            "name": "Equipo de Desarrollo SICORA",
-            "email": "dev@sicora.sena.edu.co"
-        },
-        "license": {
-            "name": "MIT",
-            "url": "https://opensource.org/licenses/MIT"
-        },
-        "version": "1.0"
+  "swagger": "2.0",
+  "info": {
+    "description": "Microservicio kbservice del Sistema de Información de Coordinación Académica (SICORA) - OneVision",
+    "title": "SICORA kbservice API",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "name": "Equipo de Desarrollo SICORA",
+      "email": "dev@sicora.onevision.edu.co"
     },
-    "host": "localhost:8000",
-    "basePath": "/api/v1",
-    "paths": {},
-    "securityDefinitions": {
-        "BearerAuth": {
-            "description": "Type \"Bearer\" followed by a space and JWT token.",
-            "type": "apiKey",
-            "name": "Authorization",
-            "in": "header"
-        }
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    },
+    "version": "1.0"
+  },
+  "host": "localhost:8000",
+  "basePath": "/api/v1",
+  "paths": {},
+  "securityDefinitions": {
+    "BearerAuth": {
+      "description": "Type \"Bearer\" followed by a space and JWT token.",
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
     }
+  }
 }

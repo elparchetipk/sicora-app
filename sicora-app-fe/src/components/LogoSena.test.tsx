@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, it, expect, vi } from 'vitest';
-import { LogoSena, LogoSenaNav, LogoSenaFooter } from './LogoSena';
+import { describe, expect, it, vi } from 'vitest';
+import { LogoSena, LogoSenaFooter, LogoSenaNav } from './LogoSena';
 
 // Mock de los assets
 vi.mock('../constants/assets', () => ({
@@ -20,7 +20,7 @@ describe('LogoSena', () => {
     render(<LogoSena />);
     const logo = screen.getByRole('img');
     expect(logo).toBeInTheDocument();
-    expect(logo).toHaveAttribute('alt', 'SENA - Servicio Nacional de Aprendizaje');
+    expect(logo).toHaveAttribute('alt', 'OneVision - OneVision Open Source');
   });
 
   it('aplica el tamaño medium por defecto', () => {
@@ -165,7 +165,7 @@ describe('LogoSenaFooter', () => {
     const logo = screen.getByRole('img');
     expect(logo).toHaveClass('h-8'); // tamaño sm
     expect(logo).toHaveClass('opacity-90');
-    expect(logo).toHaveAttribute('alt', 'SENA - Servicio Nacional de Aprendizaje');
+    expect(logo).toHaveAttribute('alt', 'OneVision - OneVision Open Source');
   });
 
   it('usa variante primary por defecto', () => {

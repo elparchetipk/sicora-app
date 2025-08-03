@@ -73,7 +73,7 @@ fi
 if [ -n "$FRONTEND_CHANGED" ]; then
     log "📱 Verificando frontend..."
     cd "$PROJECT_ROOT/sicora-app-fe"
-    
+
     # Verificar si pnpm está disponible
     if command -v pnpm &> /dev/null; then
         if pnpm lint && pnpm type-check; then
@@ -91,7 +91,7 @@ fi
 if [ -n "$BACKEND_GO_CHANGED" ]; then
     log "🐹 Verificando backend Go..."
     cd "$PROJECT_ROOT/sicora-be-go"
-    
+
     # Verificar si Go está disponible
     if command -v go &> /dev/null; then
         # Verificar si el Makefile existe
@@ -120,7 +120,7 @@ fi
 if [ -n "$BACKEND_PYTHON_CHANGED" ]; then
     log "🐍 Verificando backend Python..."
     cd "$PROJECT_ROOT/sicora-be-python"
-    
+
     # Verificar si Python está disponible
     if command -v python3 &> /dev/null; then
         # Verificar si el Makefile existe
@@ -217,7 +217,7 @@ Branch: $BRANCH
 Stacks affected: $(echo "$FRONTEND_CHANGED $BACKEND_GO_CHANGED $BACKEND_PYTHON_CHANGED $DOCS_CHANGED" | tr ' ' '\n' | grep -v '^$' | wc -l)
 Auto-generated commit with quality checks
 
-Co-authored-by: SICORA Development Team <desarrollo@sicora.sena.edu.co>"
+Co-authored-by: SICORA Development Team <desarrollo@sicora.onevision.edu.co>"
 
 # Staging si no hay nada staged
 if git diff --staged --quiet; then
@@ -235,11 +235,11 @@ if git commit -m "$FULL_MESSAGE"; then
     # Mostrar información del commit
     COMMIT_HASH=$(git rev-parse --short HEAD)
     success "Commit exitoso: $COMMIT_HASH"
-    
+
     # Mostrar commits recientes
     log "📜 Recent commits:"
     git log --oneline -5
-    
+
     # Preguntar si hacer push
     echo ""
     read -p "¿Hacer push al remote? [y/N]: " -n 1 -r

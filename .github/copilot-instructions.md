@@ -12,6 +12,8 @@
 
 ### ✅ OBLIGATORIO ANTES DE CREAR DOCUMENTACIÓN:
 
+**TODO** archivo que se abra en el editor, se debe verificar para que no tenga menciones a: "SENA" cambiar a "OneVision", "CGMLTI" cambiar a "Sede Formación", "Servicio Nacional de Aprendizaje" cambiar a "OneVision".
+
 1. **VERIFICAR** que no existe en la raíz un archivo similar
 2. **DETERMINAR** la categoría correcta (integracion/, mcp/, configuracion/, desarrollo/, reportes/, guias/)
 3. **USAR** únicamente rutas dentro de `_docs/[categoria]/`

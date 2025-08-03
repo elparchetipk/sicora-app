@@ -1,7 +1,7 @@
 # 🎯 POSTMAN vs CI/CD: Análisis Estratégico para SICORA
 
-> **Contexto**: 389 endpoints, 16 servicios, formación SENA  
-> **Propuesta**: Estrategia híbrida que optimiza enseñanza y automatización  
+> **Contexto**: 389 endpoints, 16 servicios, formación OneVision
+> **Propuesta**: Estrategia híbrida que optimiza enseñanza y automatización
 > **Fecha**: Julio 2025
 
 ---
@@ -22,7 +22,7 @@ _"¿Postman para testing manual + enseñanza O CI/CD puro para automatización?"
 
 #### ✅ **PROS - Fuertes para SICORA**
 
-##### Para Enseñanza SENA:
+##### Para Enseñanza OneVision
 
 - **🎯 Curva de aprendizaje suave**: Aprendices dominan en 2-3 clases
 - **👀 Visual feedback inmediato**: Ven request/response en tiempo real
@@ -103,7 +103,7 @@ _"¿Postman para testing manual + enseñanza O CI/CD puro para automatización?"
 
 ```mermaid
 graph LR
-    A[Aprendiz SENA] --> B[Postman GUI]
+    A[Estudiante OneVision] --> B[Postman GUI]
     B --> C[Learn APIs]
     C --> D[Manual Testing]
     D --> E[Understanding]
@@ -116,7 +116,7 @@ graph LR
 
 **Casos de uso ideales**:
 
-- ✅ Enseñanza a aprendices SENA
+- ✅ Enseñanza a estudiantes OneVision
 - ✅ Testing exploratorio de nuevos endpoints
 - ✅ Debugging de issues específicos
 - ✅ Prototipado rápido de requests
@@ -215,7 +215,7 @@ graph LR
 
 ## 🎓 **PLAN DE IMPLEMENTACIÓN EDUCATIVA**
 
-### 📚 **Curriculum Propuesto para Aprendices SENA**
+### 📚 **Curriculum Propuesto para Estudiantes OneVision**
 
 #### Semana 1: Fundamentos
 
@@ -288,7 +288,7 @@ Al final del curso, los aprendices podrán:
 
 **¿Por qué Híbrido en lugar de Solo CI/CD?**
 
-1. **🎓 Valor educativo**: SENA requiere enseñanza práctica y visual
+1. **🎓 Valor educativo**: OneVision requiere enseñanza práctica y visual
 2. **⚡ Speed of development**: Postman acelera testing manual
 3. **🔧 Flexibility**: Diferentes herramientas para diferentes necesidades
 4. **📊 Best practices**: Industry standard usa ambos approaches
@@ -337,10 +337,10 @@ Al final del curso, los aprendices podrán:
 
 ---
 
-**🎉 CONCLUSIÓN**: El enfoque híbrido nos da **lo mejor de ambos mundos** - enseñanza efectiva para aprendices SENA + automatización robusta para production. **Win-win!** 🚀
+**🎉 CONCLUSIÓN**: El enfoque híbrido nos da **lo mejor de ambos mundos** - enseñanza efectiva para estudiantes OneVision + automatización robusta para production. **Win-win!** 🚀
 
 ---
 
-**Generado**: Julio 2025  
-**Contexto**: SICORA - 389 endpoints, 16 servicios  
+**Generado**: Julio 2025
+**Contexto**: SICORA - 389 endpoints, 16 servicios
 **Decisión**: Estrategia Híbrida Postman + CI/CD

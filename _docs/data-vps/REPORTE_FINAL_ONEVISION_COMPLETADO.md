@@ -25,8 +25,8 @@
 ### 👥 Usuarios (userservice_schema.users)
 
 - **1 Coordinador**: María Elena Rodríguez (Teleinformática e Industrias Creativas)
-- **100 Instructores**: Datos realistas con emails @sena.edu.co
-- **~2,750 Aprendices**: 25-30 por ficha, emails @misena.edu.co
+- **100 Instructores**: Datos realistas con emails @onevision.edu.co
+- **~2,750 Estudiantes**: 25-30 por ficha, emails @students.onevision.edu.co
 
 ### 🏢 Infraestructura (scheduleservice_schema)
 

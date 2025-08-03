@@ -10,7 +10,7 @@ tags_metadata = [
         "description": "Endpoints de estado y salud del servicio",
     },
     {
-        "name": "Authentication", 
+        "name": "Authentication",
         "description": "Endpoints de autenticación y autorización",
     },
     {
@@ -24,30 +24,17 @@ tags_metadata = [
     {
         "name": "API",
         "description": "Endpoints principales del servicio",
-    }
+    },
 ]
 
 # Configuración de servidor para documentación
 servers = [
-    {
-        "url": "http://localhost:9000",
-        "description": "Servidor de desarrollo local"
-    },
-    {
-        "url": "http://localhost:9000/api/v1", 
-        "description": "API v1"
-    }
+    {"url": "http://localhost:9000", "description": "Servidor de desarrollo local"},
+    {"url": "http://localhost:9000/api/v1", "description": "API v1"},
 ]
 
 # Configuración de contacto
-contact = {
-    "name": "Equipo SICORA",
-    "email": "dev@sicora.sena.edu.co",
-    "url": "https://github.com/sicora-dev"
-}
+contact = {"name": "Equipo SICORA", "email": "dev@sicora.onevision.edu.co", "url": "https://github.com/sicora-dev"}
 
 # Configuración de licencia
-license_info = {
-    "name": "MIT",
-    "url": "https://opensource.org/licenses/MIT"
-}
+license_info = {"name": "MIT", "url": "https://opensource.org/licenses/MIT"}

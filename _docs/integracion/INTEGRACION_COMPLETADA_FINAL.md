@@ -10,10 +10,10 @@ La integración completa entre el frontend React/TypeScript y el backend Go User
 
 ### 🎯 **OBJETIVO ALCANZADO**
 
-✅ **Integración Frontend-Backend Completada**  
-✅ **Sistema de Autenticación Funcional**  
-✅ **CRUD de Usuarios Operativo**  
-✅ **Documentación Completa**  
+✅ **Integración Frontend-Backend Completada**
+✅ **Sistema de Autenticación Funcional**
+✅ **CRUD de Usuarios Operativo**
+✅ **Documentación Completa**
 ✅ **Commits Automáticos Activados**
 
 ### 🏗️ **ARQUITECTURA IMPLEMENTADA**
@@ -314,11 +314,11 @@ La integración frontend-backend de SICORA está **COMPLETAMENTE LISTA** para se
 
 ---
 
-**🏛️ SICORA - Sistema de Información para Control de Registros Académicos**  
-_Desarrollado para el SENA por el equipo EPTI_  
+**🏛️ SICORA - Sistema de Información para Control de Registros Académicos**
+_Desarrollado para OneVision Open Source por el equipo EPTI_
 _Integración Frontend-Backend: ✅ COMPLETADA_
 
 ---
 
-_Fecha de finalización: 2 de julio de 2025_  
+_Fecha de finalización: 2 de julio de 2025_
 _Estado: INTEGRACIÓN 100% OPERATIVA_ 🎉

@@ -85,7 +85,7 @@ INSERT INTO userservice_schema.users (
     gen_random_uuid(),
     'María Elena',
     'Rodríguez Gómez',
-    'coordinacion.teleinformatica@sena.edu.co',
+    'coordinacion.teleinformatica@onevision.edu.co',
     '$2b$12$LQv3c1yqBwEHxPiLNPAl2.PjDthHZ7QRwm6EHNM3GyJNuQhGwkqG2', -- password123
     'COORDINATOR',
     '52147896',
@@ -454,7 +454,7 @@ BEGIN
         last_name := last_names[((i * 11) % array_length(last_names, 1)) + 1];
 
         -- Generar email único
-        email := lower(first_name) || '.' || lower(last_name) || '.' || LPAD(i::text, 3, '0') || '@sena.edu.co';
+        email := lower(first_name) || '.' || lower(last_name) || '.' || LPAD(i::text, 3, '0') || '@onevision.edu.co';
 
         -- Generar identificación única
         identification := (25000000 + i)::text;
@@ -548,7 +548,7 @@ BEGIN
             last_name := last_names[((counter * 5 + i) % array_length(last_names, 1)) + 1];
 
             -- Generar email único para aprendiz
-            email := lower(first_name) || '.' || lower(last_name) || '.' || counter::text || '.' || i::text || '@misena.edu.co';
+            email := lower(first_name) || '.' || lower(last_name) || '.' || counter::text || '.' || i::text || '@students.onevision.edu.co';
 
             -- Generar identificación única para aprendices (1M+)
             identification := (1000000000 + counter * 100 + i)::text;

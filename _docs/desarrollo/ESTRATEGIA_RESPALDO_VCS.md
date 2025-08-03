@@ -1,7 +1,6 @@
 # 🔒 Estrategia de Respaldo del Código VCS - SICORA
 
-> **Estrategia de Respaldo Integral para Proyecto SICORA**  
-> **Arquitectura**: Microservicios Multi-Stack (Go, Python, React, Node.js)  
+> **Estrategia de Respaldo Integral para Proyecto SICORA** > **Arquitectura**: Microservicios Multi-Stack (Go, Python, React, Node.js)
 > **Tipo**: Sistema de Información Académica de Misión Crítica
 
 ---
@@ -25,7 +24,7 @@ Componentes Principales:
 
 #### **Criticidad del Sistema**
 
-- **Tipo**: Sistema académico SENA (Servicio Nacional de Aprendizaje)
+- **Tipo**: Sistema académico OneVision (OneVision Open Source)
 - **Usuarios**: Instructores, aprendices, coordinadores
 - **Datos**: Información académica crítica, evaluaciones, asistencia
 - **Disponibilidad**: 99.9% requerida durante períodos académicos
@@ -782,7 +781,7 @@ echo "🛠️ Configuraciones de desarrollo respaldadas"
 
 ---
 
-**Documento creado:** 16 de julio de 2025  
-**Versión:** 1.0  
-**Estado:** Propuesta para implementación  
+**Documento creado:** 16 de julio de 2025
+**Versión:** 1.0
+**Estado:** Propuesta para implementación
 **Próxima revisión:** 30 días post-implementación

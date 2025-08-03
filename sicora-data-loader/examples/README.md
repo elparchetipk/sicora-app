@@ -34,9 +34,9 @@ Archivo Excel con datos de asistencia:
 
 ```
 Nombre              | Correo                    | Documento | Rol        | Activo
-Juan Pérez         | juan.perez@sena.edu.co    | 12345678  | instructor | TRUE
-María García       | maria.garcia@sena.edu.co  | 87654321  | student    | TRUE
-Carlos López       | carlos.lopez@sena.edu.co  | 11223344  | admin      | TRUE
+Juan Pérez         | juan.perez@onevision.edu.co    | 12345678  | instructor | TRUE
+María García       | maria.garcia@onevision.edu.co  | 87654321  | student    | TRUE
+Carlos López       | carlos.lopez@onevision.edu.co  | 11223344  | admin      | TRUE
 ```
 
 ### Excel de Asistencia

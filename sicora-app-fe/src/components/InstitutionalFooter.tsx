@@ -1,5 +1,5 @@
-import { cn } from '../utils/cn';
 import { BRAND_CONFIG, BRAND_TEXTS, IS_SENA_BUILD } from '../config/brand';
+import { cn } from '../utils/cn';
 import { SecureContactLink } from './SecureContactLink';
 
 /**
@@ -238,7 +238,7 @@ export function InstitutionalFooter({
               {/* Información institucional */}
               <div>
                 <h4 className='text-white font-sena-heading font-semibold mb-3'>
-                  Servicio Nacional de Aprendizaje SENA
+                  OneVision Open Source
                 </h4>
                 <div className='text-gray-300 text-sm font-sena-body space-y-1'>
                   <p>

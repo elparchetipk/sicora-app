@@ -9,8 +9,9 @@
 - **Python Backend**: 152 endpoints (7 services + API Gateway)
 
 ### Service Distribution:
+
 - **SoftwareFactoryService (Go)**: 58 endpoints
-- **EvalInService (Go)**: 42 endpoints  
+- **EvalInService (Go)**: 42 endpoints
 - **KbService (Go)**: 32 endpoints
 - **UserService (Go)**: 31 endpoints
 - **ScheduleService (Go)**: 28 endpoints
@@ -22,10 +23,9 @@
 
 📋 [Ver conteo completo](./_docs/reportes/CONTEO_ENDPOINTS_BACKEND_SICORA.md)
 
+## 🏛️ OneVision Open Source - Gestión Académica Integral
 
-## 🏛️ Proyecto SENA - Gestión Académica Integral
-
-Este es el repositorio principal del proyecto SICORA, desarrollado para el SENA (Servicio Nacional de Aprendizaje) como una solución integral para la gestión de registros académicos y coordinación de programas formativos.
+Este es el repositorio principal del proyecto SICORA, desarrollado como una solución integral open source para la gestión de registros académicos y coordinación de programas formativos en instituciones educativas.
 
 ## 📊 Backend API Statistics
 
@@ -258,7 +258,7 @@ La aplicación incluye un panel de pruebas integrado que permite verificar:
 - Estados de carga
 - Manejo de errores
 - Feedback visual
-- Sistema de branding dual (SENA/EPTI)
+- Sistema de branding adaptable para cualquier institución educativa
 
 ## 🔧 Configuración
 
@@ -320,7 +320,7 @@ PORT=8002
 
 ### Contacto Técnico
 
-- **Email**: dev@sicora.sena.edu.co
+- **Email**: dev@onevision.education
 - **Documentación**: ./sicora-docs/
 - **Issues**: GitHub Issues
 
@@ -332,5 +332,5 @@ PORT=8002
 
 ---
 
-**SICORA** - Desarrollado con ❤️ para el SENA por el equipo EPTI  
-_Sistema de Información para Control de Registros Académicos_
+**SICORA** - Desarrollado con ❤️ por OneVision Open Source
+_Sistema de Información para Control de Registros Académicos - Open Source Educational Platform_

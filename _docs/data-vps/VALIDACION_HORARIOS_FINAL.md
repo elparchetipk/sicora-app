@@ -123,7 +123,7 @@ HAVING COUNT(*) > 1;
 1. **Testing de microservicios** FastAPI
 2. **Validación de algoritmos** de programación de horarios
 3. **Pruebas de detección** de conflictos
-4. **Simulación realista** de operación SENA
+4. **Simulación realista** de operación OneVision
 
 ---
 

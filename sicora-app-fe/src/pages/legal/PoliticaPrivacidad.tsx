@@ -1,5 +1,5 @@
+import { AlertTriangle, ArrowLeft, FileText, Shield, Users } from 'lucide-react';
 import React from 'react';
-import { ArrowLeft, Shield, Users, FileText, AlertTriangle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const PoliticaPrivacidad: React.FC = () => {
@@ -48,7 +48,7 @@ const PoliticaPrivacidad: React.FC = () => {
             </h2>
             <div className='bg-gray-50 p-4 rounded-lg'>
               <p>
-                <strong>Entidad:</strong> Servicio Nacional de Aprendizaje - SENA
+                <strong>Entidad:</strong> OneVision Open Source - Educational Platform
               </p>
               <p>
                 <strong>Equipo:</strong> EPTI - Equipo de Proyectos de Tecnología e Innovación

@@ -1,6 +1,6 @@
 # 📊 CONTEO COMPLETO DE ENDPOINTS BACKEND SICORA
 
-> **Análisis realizado**: Diciembre 2024  
+> **Análisis realizado**: Diciembre 2024
 > **Propósito**: Documentar y cuantificar todos los endpoints implementados en ambos backends para definir estrategias de gestión/automatización
 
 ## 📋 RESUMEN EJECUTIVO
@@ -581,7 +581,7 @@ GO SERVICES PROXY (8 endpoints adicionales)
 
 #### Ventajas para Enseñanza:
 
-- ✅ **Visual e intuitivo** - perfecto para aprendices SENA
+- ✅ **Visual e intuitivo** - perfecto para estudiantes OneVision
 - ✅ **Collections organizadas** por servicio (16 collections total)
 - ✅ **Environments** para dev/test/prod
 - ✅ **Documentation automática** desde collections
@@ -714,6 +714,6 @@ Newman CLI → Same collections → Automated reports
 
 ---
 
-**Generado**: Diciembre 2024  
-**Última actualización**: \_docs/reportes/CONTEO_ENDPOINTS_BACKEND_SICORA.md  
+**Generado**: Diciembre 2024
+**Última actualización**: \_docs/reportes/CONTEO_ENDPOINTS_BACKEND_SICORA.md
 **Contacto**: Equipo SICORA Development

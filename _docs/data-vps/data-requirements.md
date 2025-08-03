@@ -452,7 +452,7 @@ BEGIN
         last_name := instructor_lastnames[((i-1) % array_length(instructor_lastnames, 1)) + 1];
         email := lower(regexp_replace(first_name, ' ', '.', 'g')) || '.' ||
                 lower(regexp_replace(split_part(last_name, ' ', 1), ' ', '.', 'g')) ||
-                '@misena.edu.co';
+                '@students.onevision.edu.co';
         document_number := (20000000 + i)::TEXT;
         phone := '31' || (40000000 + i)::TEXT;
 
@@ -493,20 +493,20 @@ INSERT INTO userservice_schema.users (
     created_at, updated_at, phone
 ) VALUES
 -- Coordinadores (2)
-(gen_random_uuid(), 'Pedro Antonio', 'Suárez Molina', 'pedro.suarez@misena.edu.co', '79123456', 'CC', '$2b$12$LQv3c1yqBwEHxPuNUjjQYOGdg1yqTX8VSvB7C1wESTJRFJQqJhDZC', 'ADMINISTRATIVE', true, false, NOW(), NOW(), '3101234567'),
-(gen_random_uuid(), 'Carmen Sofía', 'Rincón Ospina', 'carmen.rincon@misena.edu.co', '79123457', 'CC', '$2b$12$LQv3c1yqBwEHxPuNUjjQYOGdg1yqTX8VSvB7C1wESTJRFJQqJhDZC', 'ADMINISTRATIVE', true, false, NOW(), NOW(), '3101234568'),
+(gen_random_uuid(), 'Pedro Antonio', 'Suárez Molina', 'pedro.suarez@students.onevision.edu.co', '79123456', 'CC', '$2b$12$LQv3c1yqBwEHxPuNUjjQYOGdg1yqTX8VSvB7C1wESTJRFJQqJhDZC', 'ADMINISTRATIVE', true, false, NOW(), NOW(), '3101234567'),
+(gen_random_uuid(), 'Carmen Sofía', 'Rincón Ospina', 'carmen.rincon@students.onevision.edu.co', '79123457', 'CC', '$2b$12$LQv3c1yqBwEHxPuNUjjQYOGdg1yqTX8VSvB7C1wESTJRFJQqJhDZC', 'ADMINISTRATIVE', true, false, NOW(), NOW(), '3101234568'),
 
 -- Secretarias (4)
-(gen_random_uuid(), 'Diana Patricia', 'Moreno Castillo', 'diana.moreno@misena.edu.co', '79123458', 'CC', '$2b$12$LQv3c1yqBwEHxPuNUjjQYOGdg1yqTX8VSvB7C1wESTJRFJQqJhDZC', 'ADMINISTRATIVE', true, false, NOW(), NOW(), '3101234569'),
-(gen_random_uuid(), 'Gladys Elena', 'Torres Mejía', 'gladys.torres@misena.edu.co', '79123459', 'CC', '$2b$12$LQv3c1yqBwEHxPuNUjjQYOGdg1yqTX8VSvB7C1wESTJRFJQqJhDZC', 'ADMINISTRATIVE', true, false, NOW(), NOW(), '3101234570'),
-(gen_random_uuid(), 'Ruth María', 'Vásquez Peña', 'ruth.vasquez@misena.edu.co', '79123460', 'CC', '$2b$12$LQv3c1yqBwEHxPuNUjjQYOGdg1yqTX8VSvB7C1wESTJRFJQqJhDZC', 'ADMINISTRATIVE', true, false, NOW(), NOW(), '3101234571'),
-(gen_random_uuid(), 'Rocío del Carmen', 'Acosta Franco', 'rocio.acosta@misena.edu.co', '79123461', 'CC', '$2b$12$LQv3c1yqBwEHxPuNUjjQYOGdg1yqTX8VSvB7C1wESTJRFJQqJhDZC', 'ADMINISTRATIVE', true, false, NOW(), NOW(), '3101234572'),
+(gen_random_uuid(), 'Diana Patricia', 'Moreno Castillo', 'diana.moreno@students.onevision.edu.co', '79123458', 'CC', '$2b$12$LQv3c1yqBwEHxPuNUjjQYOGdg1yqTX8VSvB7C1wESTJRFJQqJhDZC', 'ADMINISTRATIVE', true, false, NOW(), NOW(), '3101234569'),
+(gen_random_uuid(), 'Gladys Elena', 'Torres Mejía', 'gladys.torres@students.onevision.edu.co', '79123459', 'CC', '$2b$12$LQv3c1yqBwEHxPuNUjjQYOGdg1yqTX8VSvB7C1wESTJRFJQqJhDZC', 'ADMINISTRATIVE', true, false, NOW(), NOW(), '3101234570'),
+(gen_random_uuid(), 'Ruth María', 'Vásquez Peña', 'ruth.vasquez@students.onevision.edu.co', '79123460', 'CC', '$2b$12$LQv3c1yqBwEHxPuNUjjQYOGdg1yqTX8VSvB7C1wESTJRFJQqJhDZC', 'ADMINISTRATIVE', true, false, NOW(), NOW(), '3101234571'),
+(gen_random_uuid(), 'Rocío del Carmen', 'Acosta Franco', 'rocio.acosta@students.onevision.edu.co', '79123461', 'CC', '$2b$12$LQv3c1yqBwEHxPuNUjjQYOGdg1yqTX8VSvB7C1wESTJRFJQqJhDZC', 'ADMINISTRATIVE', true, false, NOW(), NOW(), '3101234572'),
 
 -- Administradores del Sistema (4)
-(gen_random_uuid(), 'Jorge Iván', 'Rodríguez Peláez', 'jorge.rodriguez@misena.edu.co', '79123462', 'CC', '$2b$12$LQv3c1yqBwEHxPuNUjjQYOGdg1yqTX8VSvB7C1wESTJRFJQqJhDZC', 'ADMIN', true, false, NOW(), NOW(), '3101234573'),
-(gen_random_uuid(), 'María Fernanda', 'Gómez Restrepo', 'maria.gomez@misena.edu.co', '79123463', 'CC', '$2b$12$LQv3c1yqBwEHxPuNUjjQYOGdg1yqTX8VSvB7C1wESTJRFJQqJhDZC', 'ADMIN', true, false, NOW(), NOW(), '3101234574'),
-(gen_random_uuid(), 'Andrés Mauricio', 'López Vargas', 'andres.lopez@misena.edu.co', '79123464', 'CC', '$2b$12$LQv3c1yqBwEHxPuNUjjQYOGdg1yqTX8VSvB7C1wESTJRFJQqJhDZC', 'ADMIN', true, false, NOW(), NOW(), '3101234575'),
-(gen_random_uuid(), 'Claudia Marcela', 'Henao Valencia', 'claudia.henao@misena.edu.co', '79123465', 'CC', '$2b$12$LQv3c1yqBwEHxPuNUjjQYOGdg1yqTX8VSvB7C1wESTJRFJQqJhDZC', 'ADMIN', true, false, NOW(), NOW(), '3101234576');
+(gen_random_uuid(), 'Jorge Iván', 'Rodríguez Peláez', 'jorge.rodriguez@students.onevision.edu.co', '79123462', 'CC', '$2b$12$LQv3c1yqBwEHxPuNUjjQYOGdg1yqTX8VSvB7C1wESTJRFJQqJhDZC', 'ADMIN', true, false, NOW(), NOW(), '3101234573'),
+(gen_random_uuid(), 'María Fernanda', 'Gómez Restrepo', 'maria.gomez@students.onevision.edu.co', '79123463', 'CC', '$2b$12$LQv3c1yqBwEHxPuNUjjQYOGdg1yqTX8VSvB7C1wESTJRFJQqJhDZC', 'ADMIN', true, false, NOW(), NOW(), '3101234574'),
+(gen_random_uuid(), 'Andrés Mauricio', 'López Vargas', 'andres.lopez@students.onevision.edu.co', '79123464', 'CC', '$2b$12$LQv3c1yqBwEHxPuNUjjQYOGdg1yqTX8VSvB7C1wESTJRFJQqJhDZC', 'ADMIN', true, false, NOW(), NOW(), '3101234575'),
+(gen_random_uuid(), 'Claudia Marcela', 'Henao Valencia', 'claudia.henao@students.onevision.edu.co', '79123465', 'CC', '$2b$12$LQv3c1yqBwEHxPuNUjjQYOGdg1yqTX8VSvB7C1wESTJRFJQqJhDZC', 'ADMIN', true, false, NOW(), NOW(), '3101234576');
 ```
 
 ### Script 6: Fichas (Academic Groups)
@@ -634,7 +634,7 @@ BEGIN
             last_name := apprentice_lastnames[((apprentice_counter-1) % array_length(apprentice_lastnames, 1)) + 1];
             email := lower(regexp_replace(first_name, ' ', '.', 'g')) || '.' ||
                     lower(regexp_replace(split_part(last_name, ' ', 1), ' ', '.', 'g')) ||
-                    apprentice_counter || '@misena.edu.co';
+                    apprentice_counter || '@students.onevision.edu.co';
             document_number := (base_document + apprentice_counter)::TEXT;
             phone := '32' || (10000000 + apprentice_counter)::TEXT;
 
@@ -1033,7 +1033,7 @@ SELECT schema_name FROM information_schema.schemata WHERE schema_name LIKE '%ser
 - **Tablas Pobladas:**
 
   - `venues` - 100 registros (aulas y laboratorios)
-  - `academic_programs` - 20 registros (programas SENA)
+  - `academic_programs` - 20 registros (programas OneVision)
   - `academic_groups` - 100 registros (fichas)
   - `schedules` - 340 registros (horarios únicos)
 
@@ -1080,13 +1080,13 @@ SELECT schema_name FROM information_schema.schemata WHERE schema_name LIKE '%ser
   - `evaluations` - Evaluaciones académicas
   - `evaluation_criteria` - Criterios de evaluación
   - `student_evaluations` - Calificaciones de aprendices
-  - `competencies` - Competencias SENA
+  - `competencies` - Competencias OneVision
   - `learning_outcomes` - Resultados de aprendizaje
 
 - **Funcionalidades Pendientes:**
   - 🔴 Evaluaciones por competencias
   - 🔴 Calificaciones de aprendices
-  - 🔴 Criterios de evaluación SENA
+  - 🔴 Criterios de evaluación OneVision
   - 🔴 Seguimiento académico
 
 #### 5. 🏗️ ProjectEvalService - **COBERTURA: 15%**
@@ -1141,7 +1141,7 @@ SELECT schema_name FROM information_schema.schemata WHERE schema_name LIKE '%ser
   - `content_ratings` - Valoraciones de contenido
 
 - **Funcionalidades Pendientes:**
-  - 🔴 Base de conocimiento SENA
+  - 🔴 Base de conocimiento OneVision
   - 🔴 Contenido educativo organizado
   - 🔴 Sistema de búsqueda
   - 🔴 Interacciones y feedback

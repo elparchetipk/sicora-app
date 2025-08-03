@@ -49,12 +49,12 @@ ON CONFLICT (id) DO NOTHING;
 echo "✅ Preguntas creadas: 17 preguntas de evaluación"
 
 echo ""
-echo "2️⃣ Creando cuestionario estándar SENA..."
+echo "2️⃣ Creando cuestionario estándar OneVision..."
 
-# Poblar questionnaires - Cuestionario estándar del SENA
+# Poblar questionnaires - Cuestionario estándar de OneVision
 run_sql "
 INSERT INTO evalinservice_schema.questionnaires (id, name, description, is_active, created_at, updated_at) VALUES
-('22222222-2222-2222-2222-222222222222', 'Evaluación de Instructores SENA 2025', 'Cuestionario estándar para evaluación de instructores por parte de aprendices - Basado en lineamientos institucionales SENA', true, NOW(), NOW())
+('22222222-2222-2222-2222-222222222222', 'Evaluación de Instructores OneVision 2025', 'Cuestionario estándar para evaluación de instructores por parte de estudiantes - Basado en lineamientos institucionales OneVision', true, NOW(), NOW())
 ON CONFLICT (id) DO NOTHING;
 "
 
@@ -199,7 +199,7 @@ run_sql "SELECT status, COUNT(*) as cantidad FROM evalinservice_schema.evaluatio
 echo ""
 echo "🎯 EVALINSERVICE COMPLETADO"
 echo "=========================="
-echo "✅ 17 preguntas estándar SENA"
+echo "✅ 17 preguntas estándar OneVision"
 echo "✅ 1 cuestionario principal activo"
 echo "✅ 3 períodos de evaluación (1 activo)"
 echo "✅ ~2000 evaluaciones de muestra realistas"

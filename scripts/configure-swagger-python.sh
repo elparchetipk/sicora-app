@@ -30,12 +30,12 @@ show_header() {
 # Función para verificar dependencias
 check_dependencies() {
     echo -e "${BLUE}📋 Verificando dependencias...${NC}"
-    
+
     if ! command -v python3 &> /dev/null; then
         echo -e "${RED}❌ Python3 no encontrado${NC}"
         exit 1
     fi
-    
+
     echo -e "${GREEN}✅ Python3 encontrado: $(python3 --version)${NC}"
     echo ""
 }
@@ -44,19 +44,19 @@ check_dependencies() {
 check_service_structure() {
     local service=$1
     local service_dir="$PYTHON_BACKEND_DIR/$service"
-    
+
     echo -e "${BLUE}📁 Verificando estructura de $service...${NC}"
-    
+
     if [ ! -d "$service_dir" ]; then
         echo -e "${RED}❌ Directorio $service no encontrado${NC}"
         return 1
     fi
-    
+
     if [ ! -f "$service_dir/main.py" ]; then
         echo -e "${RED}❌ main.py no encontrado en $service${NC}"
         return 1
     fi
-    
+
     echo -e "${GREEN}✅ Estructura básica de $service correcta${NC}"
     return 0
 }
@@ -66,9 +66,9 @@ check_swagger_config() {
     local service=$1
     local service_dir="$PYTHON_BACKEND_DIR/$service"
     local port=$2
-    
+
     echo -e "${BLUE}🔍 Verificando configuración Swagger en $service...${NC}"
-    
+
     # Verificar si main.py tiene configuración FastAPI adecuada
     if grep -q "title=" "$service_dir/main.py" && grep -q "description=" "$service_dir/main.py"; then
         echo -e "${GREEN}✅ Metadatos FastAPI configurados${NC}"
@@ -76,11 +76,11 @@ check_swagger_config() {
         echo -e "${YELLOW}⚠️  Metadatos FastAPI básicos faltantes${NC}"
         return 1
     fi
-    
+
     # Verificar si los routers tienen tags
     local routers_with_tags=0
     local total_routers=0
-    
+
     if [ -d "$service_dir/app/presentation/routers" ]; then
         for router_file in "$service_dir/app/presentation/routers"/*.py; do
             if [ -f "$router_file" ] && [[ "$(basename "$router_file")" != "__init__.py" ]]; then
@@ -91,7 +91,7 @@ check_swagger_config() {
             fi
         done
     fi
-    
+
     if [ $total_routers -gt 0 ]; then
         echo -e "${GREEN}✅ Routers encontrados: $routers_with_tags/$total_routers con tags${NC}"
         if [ $routers_with_tags -lt $total_routers ]; then
@@ -101,7 +101,7 @@ check_swagger_config() {
         echo -e "${RED}❌ No se encontraron routers${NC}"
         return 1
     fi
-    
+
     return 0
 }
 
@@ -110,15 +110,15 @@ enhance_swagger_config() {
     local service=$1
     local service_dir="$PYTHON_BACKEND_DIR/$service"
     local port=$2
-    
+
     echo -e "${BLUE}🔧 Mejorando configuración Swagger para $service...${NC}"
-    
+
     # Backup del main.py original
     cp "$service_dir/main.py" "$service_dir/main.py.backup.$(date +%Y%m%d_%H%M%S)"
-    
+
     # Crear configuración Swagger mejorada
     local swagger_config_file="$service_dir/swagger_config.py"
-    
+
     cat > "$swagger_config_file" << EOF
 """
 Configuración Swagger mejorada para $service
@@ -132,7 +132,7 @@ tags_metadata = [
         "description": "Endpoints de estado y salud del servicio",
     },
     {
-        "name": "Authentication", 
+        "name": "Authentication",
         "description": "Endpoints de autenticación y autorización",
     },
     {
@@ -156,7 +156,7 @@ servers = [
         "description": "Servidor de desarrollo local"
     },
     {
-        "url": "http://localhost:$port/api/v1", 
+        "url": "http://localhost:$port/api/v1",
         "description": "API v1"
     }
 ]
@@ -164,7 +164,7 @@ servers = [
 # Configuración de contacto
 contact = {
     "name": "Equipo SICORA",
-    "email": "dev@sicora.sena.edu.co",
+    "email": "dev@sicora.onevision.edu.co",
     "url": "https://github.com/sicora-dev"
 }
 
@@ -174,7 +174,7 @@ license_info = {
     "url": "https://opensource.org/licenses/MIT"
 }
 EOF
-    
+
     echo -e "${GREEN}✅ Configuración Swagger mejorada creada${NC}"
 }
 
@@ -182,17 +182,17 @@ EOF
 test_swagger_urls() {
     local service=$1
     local port=$2
-    
+
     echo -e "${BLUE}🌐 Verificando URLs de documentación para $service...${NC}"
-    
+
     local base_url="http://localhost:$port"
     local docs_url="$base_url/docs"
     local openapi_url="$base_url/openapi.json"
-    
+
     echo -e "  📄 Swagger UI: $docs_url"
     echo -e "  📄 OpenAPI JSON: $openapi_url"
     echo -e "  📄 ReDoc: $base_url/redoc"
-    
+
     # Note: No testing actual URLs since services may not be running
     echo -e "${YELLOW}ℹ️  URLs configuradas (verificar cuando servicios estén ejecutándose)${NC}"
 }
@@ -200,13 +200,13 @@ test_swagger_urls() {
 # Función para generar reporte de estado
 generate_swagger_report() {
     local report_file="/home/epti/Documentos/epti-dev/sicora-app/_docs/reportes/SWAGGER_PYTHON_STATUS_$(date +%Y%m%d).md"
-    
+
     echo -e "${BLUE}📊 Generando reporte de estado Swagger...${NC}"
-    
+
     cat > "$report_file" << EOF
 # 📊 Reporte de Estado Swagger - Servicios Python
 
-**Fecha:** $(date)  
+**Fecha:** $(date)
 **Ubicación:** \`/_docs/reportes/\`
 
 ## 🎯 Resumen de Configuración
@@ -216,49 +216,49 @@ generate_swagger_report() {
 | Servicio | Puerto | Estado Swagger | URLs Documentación |
 |----------|--------|----------------|-------------------|
 EOF
-    
+
     for i in "${!SERVICES[@]}"; do
         local service="${SERVICES[$i]}"
         local port="${PORTS[$i]}"
-        
+
         echo "| $service | $port | ✅ Configurado | [Swagger](http://localhost:$port/docs) \| [OpenAPI](http://localhost:$port/openapi.json) |" >> "$report_file"
     done
-    
+
     cat >> "$report_file" << EOF
 
 ## 🔧 URLs de Documentación
 
 ### Swagger UI (Interfaz Interactiva)
 EOF
-    
+
     for i in "${!SERVICES[@]}"; do
         local service="${SERVICES[$i]}"
         local port="${PORTS[$i]}"
         echo "- **$service**: http://localhost:$port/docs" >> "$report_file"
     done
-    
+
     cat >> "$report_file" << EOF
 
 ### OpenAPI JSON (Especificación)
 EOF
-    
+
     for i in "${!SERVICES[@]}"; do
         local service="${SERVICES[$i]}"
         local port="${PORTS[$i]}"
         echo "- **$service**: http://localhost:$port/openapi.json" >> "$report_file"
     done
-    
+
     cat >> "$report_file" << EOF
 
 ### ReDoc (Documentación Alternativa)
 EOF
-    
+
     for i in "${!SERVICES[@]}"; do
         local service="${SERVICES[$i]}"
         local port="${PORTS[$i]}"
         echo "- **$service**: http://localhost:$port/redoc" >> "$report_file"
     done
-    
+
     cat >> "$report_file" << EOF
 
 ## 🚀 Comandos para Iniciar Servicios
@@ -282,10 +282,10 @@ python3 main.py
 
 ---
 
-**Generado por**: Script de configuración automática Swagger  
+**Generado por**: Script de configuración automática Swagger
 **Estado**: Fase 1 completada ✅
 EOF
-    
+
     echo -e "${GREEN}✅ Reporte generado: $report_file${NC}"
 }
 
@@ -293,20 +293,20 @@ EOF
 main() {
     show_header
     check_dependencies
-    
+
     local configured_services=0
     local total_services=${#SERVICES[@]}
-    
+
     echo -e "${BLUE}🔧 Procesando $total_services servicios Python...${NC}"
     echo ""
-    
+
     for i in "${!SERVICES[@]}"; do
         local service="${SERVICES[$i]}"
         local port="${PORTS[$i]}"
-        
+
         echo -e "${BLUE}▶️  Procesando: $service (puerto $port)${NC}"
         echo "----------------------------------------"
-        
+
         if check_service_structure "$service"; then
             if check_swagger_config "$service" "$port"; then
                 echo -e "${GREEN}✅ $service: Swagger ya configurado${NC}"
@@ -314,19 +314,19 @@ main() {
                 enhance_swagger_config "$service" "$port"
                 echo -e "${GREEN}✅ $service: Swagger configurado y mejorado${NC}"
             fi
-            
+
             test_swagger_urls "$service" "$port"
             configured_services=$((configured_services + 1))
         else
             echo -e "${RED}❌ $service: Error en verificación${NC}"
         fi
-        
+
         echo ""
     done
-    
+
     # Generar reporte final
     generate_swagger_report
-    
+
     # Resumen final
     echo -e "${BLUE}========================================${NC}"
     echo -e "${BLUE}📊 RESUMEN FINAL${NC}"

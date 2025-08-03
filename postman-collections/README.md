@@ -1,13 +1,14 @@
 # 🎓 SICORA Postman Collections - Educativo
 
-> Collections educativas para aprendices SENA  
-> **Endpoints**: 389 distribuidos en 16 servicios  
-> **Nivel**: Intermedio a Avanzado  
+> Collections educativas para estudiantes OneVision Open Source
+> **Endpoints**: 389 distribuidos en 16 servicios
+> **Nivel**: Intermedio a Avanzado
 > **Duración**: 4-8 semanas
 
 ## 📦 Contenido
 
 ### 📁 Collections
+
 ```
 collections/
 ├── UserService_Go.json         # 33 endpoints - Gestión usuarios Go
@@ -21,6 +22,7 @@ collections/
 ```
 
 ### 🌍 Environments
+
 ```
 environments/
 ├── sicora-development.json     # Desarrollo local
@@ -29,17 +31,19 @@ environments/
 ```
 
 ### 📚 Documentation
+
 ```
 documentation/
-├── GUIA_APRENDICES_SENA.md     # Guía principal para estudiantes
-├── ACTIVIDADES_PRACTICAS.md    # Actividades paso a paso
-├── TROUBLESHOOTING.md          # Solución de problemas
-└── EVALUACION.md               # Criterios de evaluación
+├── GUIA_ESTUDIANTES_ONEVISION.md  # Guía principal para estudiantes
+├── ACTIVIDADES_PRACTICAS.md       # Actividades paso a paso
+├── TROUBLESHOOTING.md             # Solución de problemas
+└── EVALUACION.md                  # Criterios de evaluación
 ```
 
 ## 🚀 Inicio Rápido
 
 ### 1. Importar en Postman
+
 ```bash
 # Importar collections
 1. Abrir Postman
@@ -54,17 +58,19 @@ documentation/
 ```
 
 ### 2. Configurar Environment
+
 ```json
 {
   "base_url_go": "http://localhost:8080",
   "base_url_python": "http://localhost:8000",
   "auth_token": "", // Se llena automáticamente
-  "user_id": "",    // Se llena automáticamente
+  "user_id": "", // Se llena automáticamente
   "environment_name": "development"
 }
 ```
 
 ### 3. Primer Test
+
 ```bash
 1. Seleccionar collection "UserService_Go"
 2. Ejecutar "Health Check"
@@ -76,6 +82,7 @@ documentation/
 ## 🎯 Objetivos Educativos
 
 ### 📚 Conocimientos
+
 - Conceptos fundamentales de APIs REST
 - Protocolos HTTP y códigos de estado
 - Autenticación JWT
@@ -83,6 +90,7 @@ documentation/
 - Testing automático con Postman
 
 ### 🛠️ Habilidades
+
 - Configurar environments y variables
 - Escribir tests automáticos
 - Interpretar responses JSON
@@ -90,6 +98,7 @@ documentation/
 - Usar Collection Runner
 
 ### 🏆 Competencias
+
 - Tester de APIs junior
 - Desarrollador backend junior
 - Especialista en QA manual
@@ -98,24 +107,28 @@ documentation/
 ## 📊 Estructura de Aprendizaje
 
 ### Semana 1-2: Fundamentos
+
 - ✅ Conceptos básicos HTTP
 - ✅ Configuración Postman
 - ✅ Primer requests GET/POST
 - ✅ Manejo de environments
 
 ### Semana 3-4: CRUD Operations
+
 - ✅ Operaciones completas CRUD
 - ✅ Path parameters y query strings
 - ✅ Autenticación JWT
 - ✅ Manejo de errores
 
 ### Semana 5-6: Testing Automático
+
 - ✅ Scripts pre-request y tests
 - ✅ Variables dinámicas
 - ✅ Collection Runner
 - ✅ Reportes automáticos
 
 ### Semana 7-8: Proyecto Final
+
 - ✅ Flujos completos de negocio
 - ✅ Integration testing
 - ✅ Documentation
@@ -124,6 +137,7 @@ documentation/
 ## 🔧 Mantenimiento
 
 ### Actualización de Collections
+
 ```bash
 # Regenerar collections automáticamente
 cd sicora-app
@@ -131,6 +145,7 @@ cd sicora-app
 ```
 
 ### Sincronización con APIs
+
 - Collections se actualizan automáticamente
 - Environments mantienen compatibilidad
 - Tests se ajustan a cambios de API
@@ -138,11 +153,13 @@ cd sicora-app
 ## 📞 Soporte
 
 ### Para Instructores
+
 - 📧 Email: instructor@sicora.edu.co
 - 📞 Ext: 1234
 - 💬 Slack: #sicora-instructores
 
-### Para Aprendices  
+### Para Aprendices
+
 - 📧 Email: soporte@sicora.edu.co
 - 📞 Ext: 5678
 - 💬 Slack: #sicora-aprendices
@@ -150,5 +167,5 @@ cd sicora-app
 
 ---
 
-**Generado automáticamente por SICORA Educational Tools**  
+**Generado automáticamente por SICORA Educational Tools**
 **Última actualización**: $(date)

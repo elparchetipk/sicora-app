@@ -43,7 +43,7 @@ fi
 # Configurar usuario y email para el proyecto
 log "Configuring Git user settings..."
 git config user.name "SICORA Team"
-git config user.email "desarrollo@sicora.sena.edu.co"
+git config user.email "desarrollo@sicora.onevision.edu.co"
 success "Git user settings configured"
 
 # Configurar Git para el proyecto
@@ -237,7 +237,7 @@ if ! git rev-parse --verify HEAD >/dev/null 2>&1; then
 - Set up aliases and configurations
 - Initialize project structure
 
-Co-authored-by: SICORA Development Team <desarrollo@sicora.sena.edu.co>"
+Co-authored-by: SICORA Development Team <desarrollo@sicora.onevision.edu.co>"
     success "Initial commit created"
 else
     log "Repository already has commits"

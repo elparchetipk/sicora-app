@@ -32,8 +32,8 @@
 ### FASES 4-8 (Manuales con scripts listos)
 
 - 📋 **100 Fichas**: 5 por programa, turnos MAÑANA/TARDE/NOCHE
-- 📋 **100 Instructores**: Datos realistas con emails @sena.edu.co
-- 📋 **~2,750 Aprendices**: 25-30 por ficha, emails @misena.edu.co
+- 📋 **100 Instructores**: Datos realistas con emails @onevision.edu.co
+- 📋 **~2,750 Estudiantes**: 25-30 por ficha, emails @students.onevision.edu.co
 - 📋 **~375 Horarios**: UN horario único por ficha (corregido)
 - 📋 **~206,250 Registros**: Asistencia enero 2025, 85% presencia
 
@@ -64,7 +64,7 @@ cd /home/epti/Documentos/epti-dev/sicora-app/_docs/data-vps
 ### Estructura de Datos
 
 - **Users**: Coordinadores, instructores, aprendices con roles diferenciados
-- **Academic Programs**: 20 programas realistas SENA
+- **Academic Programs**: 20 programas realistas OneVision
 - **Academic Groups**: Fichas con fechas, turnos y capacidad variable
 - **Venues**: Aulas distribuidas en 2 sedes reales CGMLTI
 - **Schedules**: Horarios únicos (corregido: 1 por ficha, no múltiples)

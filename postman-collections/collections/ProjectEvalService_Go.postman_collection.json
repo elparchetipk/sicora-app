@@ -1,7 +1,7 @@
 {
   "info": {
     "name": "SICORA - ProjectEvalService (Go) - Educativo",
-    "description": "Evaluación de proyectos\n\n📚 **Para Aprendices SENA**\n\n**Objetivos de Aprendizaje:**\n- Comprender API REST ProjectEvalService\n- Practicar requests HTTP (GET, POST, PUT, DELETE)\n- Implementar tests básicos\n- Manejar autenticación JWT\n\n**Prerrequisitos:**\n- Environment configurado (development/staging/production)\n- Servicios SICORA ejecutándose\n- Conocimientos básicos de HTTP\n\n**Endpoints incluidos:** 41\n**Stack:** Go Backend\n**Nivel:** Intermedio",
+    "description": "Evaluación de proyectos\n\n📚 **Para Estudiantes OneVision**\n\n**Objetivos de Aprendizaje:**\n- Comprender API REST ProjectEvalService\n- Practicar requests HTTP (GET, POST, PUT, DELETE)\n- Implementar tests básicos\n- Manejar autenticación JWT\n\n**Prerrequisitos:**\n- Environment configurado (development/staging/production)\n- Servicios SICORA ejecutándose\n- Conocimientos básicos de HTTP\n\n**Endpoints incluidos:** 41\n**Stack:** Go Backend\n**Nivel:** Intermedio",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_postman_id": "sicora-projectevalservice-go",
     "_exporter_id": "sicora-educational-generator"
@@ -22,7 +22,7 @@
       "script": {
         "type": "text/javascript",
         "exec": [
-          "// 🎓 Script educativo para aprendices SENA",
+          "// 🎓 Script educativo para estudiantes OneVision",
           "console.log('🚀 Iniciando request para ProjectEvalService...');",
           "console.log('📍 Environment:', pm.environment.get('environment_name'));",
           "console.log('🔗 Base URL:', pm.environment.get('base_url_go'));",

@@ -1,5 +1,5 @@
+import { AlertCircle, ArrowLeft, FileText, Scale, Shield, Users } from 'lucide-react';
 import React from 'react';
-import { ArrowLeft, FileText, AlertCircle, Scale, Users, Shield } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const TerminosUso: React.FC = () => {
@@ -60,8 +60,8 @@ const TerminosUso: React.FC = () => {
               <div className='bg-gray-50 p-4 rounded-lg'>
                 <h3 className='font-semibold text-gray-900'>SENA</h3>
                 <p className='text-gray-700 text-sm'>
-                  Servicio Nacional de Aprendizaje, establecimiento público nacional adscrito al
-                  Ministerio del Trabajo de Colombia.
+                  OneVision Open Source, establecimiento educativo dedicado al Ministerio del
+                  Trabajo de Colombia.
                 </p>
               </div>
               <div className='bg-gray-50 p-4 rounded-lg'>

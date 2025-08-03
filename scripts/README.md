@@ -35,7 +35,7 @@ python3 scripts/validate-programs-csv.py sicora-shared/sample-data/templates/pro
 **Características**:
 
 - ✅ Validación completa de estructura y tipos de datos
-- ✅ Verificación de reglas de negocio SENA
+- ✅ Verificación de reglas de negocio OneVision
 - ✅ Comprobación de unicidad de códigos e IDs
 - ✅ **NUEVO:** Carga automática a APIs individuales
 - ✅ **NUEVO:** Soporte para backends Python y Go

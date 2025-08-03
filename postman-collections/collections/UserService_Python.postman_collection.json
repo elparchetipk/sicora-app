@@ -1,7 +1,7 @@
 {
   "info": {
     "name": "SICORA - UserService (Python) - Educativo",
-    "description": "Gestión de usuarios (versión Python)\n\n📚 **Para Aprendices SENA**\n\n**Objetivos de Aprendizaje:**\n- Comprender API REST UserService\n- Practicar requests HTTP (GET, POST, PUT, DELETE)\n- Implementar tests básicos\n- Manejar autenticación JWT\n\n**Prerrequisitos:**\n- Environment configurado (development/staging/production)\n- Servicios SICORA ejecutándose\n- Conocimientos básicos de HTTP\n\n**Endpoints incluidos:** 24\n**Stack:** Python Backend\n**Nivel:** Intermedio",
+    "description": "Gestión de usuarios (versión Python)\n\n📚 **Para Estudiantes OneVision**\n\n**Objetivos de Aprendizaje:**\n- Comprender API REST UserService\n- Practicar requests HTTP (GET, POST, PUT, DELETE)\n- Implementar tests básicos\n- Manejar autenticación JWT\n\n**Prerrequisitos:**\n- Environment configurado (development/staging/production)\n- Servicios SICORA ejecutándose\n- Conocimientos básicos de HTTP\n\n**Endpoints incluidos:** 24\n**Stack:** Python Backend\n**Nivel:** Intermedio",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_postman_id": "sicora-userservice-python",
     "_exporter_id": "sicora-educational-generator"
@@ -22,7 +22,7 @@
       "script": {
         "type": "text/javascript",
         "exec": [
-          "// 🎓 Script educativo para aprendices SENA",
+          "// 🎓 Script educativo para estudiantes OneVision",
           "console.log('🚀 Iniciando request para UserService...');",
           "console.log('📍 Environment:', pm.environment.get('environment_name'));",
           "console.log('🔗 Base URL:', pm.environment.get('base_url_python'));",
@@ -77,7 +77,7 @@
     {
       "key": "backend_type",
       "value": "python",
-      "type": "string", 
+      "type": "string",
       "description": "Tipo de backend (go/python)"
     }
   ],

@@ -1,7 +1,6 @@
 # 🚀 Estrategia Completa Git, GitHub, CI/CD y Commits Automáticos - SICORA
 
-> **Análisis y Propuesta de Implementación**  
-> **Fecha:** 17 de julio de 2025  
+> **Análisis y Propuesta de Implementación** > **Fecha:** 17 de julio de 2025
 > **Estado:** Ready for implementation
 
 ---
@@ -113,7 +112,7 @@ build: Cambios en build o dependencias
 if [ ! -d ".git" ]; then
     git init
     git config user.name "SICORA Team"
-    git config user.email "desarrollo@sicora.sena.edu.co"
+    git config user.email "desarrollo@sicora.onevision.edu.co"
 fi
 
 # Configurar Git para el proyecto

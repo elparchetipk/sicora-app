@@ -43,7 +43,7 @@ error() {
 echo -e "${PURPLE}"
 echo "╔═══════════════════════════════════════════════════════════════════════════════════╗"
 echo "║                    📦 SICORA DISTRIBUTION PACKAGE GENERATOR                      ║"
-echo "║                         Gratuito para Aprendices SENA                            ║"
+echo "║                         Gratuito para Estudiantes OneVision                     ║"
 echo "╚═══════════════════════════════════════════════════════════════════════════════════╝"
 echo -e "${NC}"
 
@@ -64,17 +64,17 @@ create_week_package() {
     local week_num=$1
     local week_name=$2
     local collections=("${@:3}")
-    
+
     log "Creando paquete Semana $week_num: $week_name"
-    
+
     local week_dir="$OUTPUT_DIR/week-${week_num}-${week_name,,}"
     mkdir -p "$week_dir/collections"
     mkdir -p "$week_dir/environments"
     mkdir -p "$week_dir/documentation"
-    
+
     # Copiar environments (siempre los mismos)
     cp "$SOURCE_DIR/environments"/*.json "$week_dir/environments/"
-    
+
     # Copiar collections específicas de la semana
     for collection in "${collections[@]}"; do
         if [[ -f "$SOURCE_DIR/collections/${collection}.postman_collection.json" ]]; then
@@ -84,13 +84,13 @@ create_week_package() {
             warning "Collection no encontrada: $collection"
         fi
     done
-    
+
     # Crear guía específica de la semana
     create_week_guide "$week_num" "$week_name" "$week_dir" "${collections[@]}"
-    
+
     # Crear README para la semana
     create_week_readme "$week_num" "$week_name" "$week_dir" "${collections[@]}"
-    
+
     success "Paquete Semana $week_num completado: $week_dir"
 }
 
@@ -99,12 +99,12 @@ create_week_guide() {
     local week_name=$2
     local week_dir=$3
     local collections=("${@:4}")
-    
+
     cat > "$week_dir/GUIA_SEMANA_${week_num}.md" <<EOF
 # 📚 SICORA - Semana $week_num: $week_name
 
-> **Objetivo**: Dominar conceptos fundamentales de la semana  
-> **Duración**: 5 días académicos  
+> **Objetivo**: Dominar conceptos fundamentales de la semana
+> **Duración**: 5 días académicos
 > **Collections incluidas**: ${#collections[@]}
 
 ---
@@ -221,7 +221,7 @@ EOF
 EOF
             ;;
     esac
-    
+
     cat >> "$week_dir/GUIA_SEMANA_${week_num}.md" <<EOF
 
 ## 📊 Evaluación
@@ -252,8 +252,8 @@ EOF
 
 ---
 
-**Instructor**: Contactar para dudas en [instructor@sicora.edu.co]  
-**Soporte técnico**: [soporte@sicora.edu.co]  
+**Instructor**: Contactar para dudas en [instructor@sicora.edu.co]
+**Soporte técnico**: [soporte@sicora.edu.co]
 **Recursos adicionales**: Revisar documentación en collections
 EOF
 }
@@ -263,7 +263,7 @@ create_week_readme() {
     local week_name=$2
     local week_dir=$3
     local collections=("${@:4}")
-    
+
     cat > "$week_dir/README.md" <<EOF
 # 📦 SICORA Semana $week_num - $week_name
 
@@ -291,11 +291,11 @@ create_week_readme() {
 
 ### Collections Incluidas:
 EOF
-    
+
     for collection in "${collections[@]}"; do
         echo "- ✅ \`$collection\`" >> "$week_dir/README.md"
     done
-    
+
     cat >> "$week_dir/README.md" <<EOF
 
 ### Environments:
@@ -311,14 +311,14 @@ EOF
 
 ## 🆘 Soporte
 
-**¿Problemas?** Revisa [TROUBLESHOOTING.md](./TROUBLESHOOTING.md)  
-**¿Dudas?** Contacta a tu instructor  
+**¿Problemas?** Revisa [TROUBLESHOOTING.md](./TROUBLESHOOTING.md)
+**¿Dudas?** Contacta a tu instructor
 **¿Bugs?** Reporta en clase o email
 
 ---
 
-**Versión**: $VERSION  
-**Fecha**: $DATE  
+**Versión**: $VERSION
+**Fecha**: $DATE
 **Compatible con**: Postman Desktop v10+
 EOF
 }
@@ -347,8 +347,8 @@ cp -r "$SOURCE_DIR"/* "$FULL_DIR/"
 cat > "$FULL_DIR/README.md" <<EOF
 # 🎓 SICORA Complete Collections Package
 
-> **Todas las collections SICORA para formación completa**  
-> **389 endpoints** distribuidos en **8 servicios**  
+> **Todas las collections SICORA para formación completa**
+> **389 endpoints** distribuidos en **8 servicios**
 > **16 semanas** de contenido educativo
 
 ---
@@ -357,7 +357,7 @@ cat > "$FULL_DIR/README.md" <<EOF
 
 ### 🔧 Collections Go Backend (4 servicios)
 - ✅ UserService_Go (33 endpoints)
-- ✅ AttendanceService_Go (28 endpoints)  
+- ✅ AttendanceService_Go (28 endpoints)
 - ✅ ScheduleService_Go (35 endpoints)
 - ✅ ProjectEvalService_Go (41 endpoints)
 
@@ -395,7 +395,7 @@ cat > "$FULL_DIR/README.md" <<EOF
 ### Verificación:
 \`\`\`bash
 ✅ 8 collections importadas
-✅ 3 environments disponibles  
+✅ 3 environments disponibles
 ✅ Variables base configuradas
 ✅ Health check funcionando
 \`\`\`
@@ -441,7 +441,7 @@ Al completar todo el programa:
 - ✅ JSON manipulation
 - ✅ Authentication handling
 
-### 🧠 Conceptuales  
+### 🧠 Conceptuales
 - ✅ API design patterns
 - ✅ Testing strategies
 - ✅ Error handling
@@ -450,23 +450,23 @@ Al completar todo el programa:
 
 ### 🚀 Profesionales
 - ✅ QA Tester junior
-- ✅ API Developer junior  
+- ✅ API Developer junior
 - ✅ DevOps básico
 - ✅ Technical documentation
 - ✅ Team collaboration
 
 ---
 
-**Generado**: $DATE  
-**Versión**: $VERSION  
-**Instructor**: SENA Instructor  
-**Soporte**: sicora-support@sena.edu.co
+**Generado**: $DATE
+**Versión**: $VERSION
+**Instructor**: OneVision Instructor
+**Soporte**: sicora-support@onevision.edu.co
 EOF
 
 # Crear instalación común para todos los paquetes
 create_common_docs() {
     local target_dir=$1
-    
+
     cat > "$target_dir/INSTALACION.md" <<'EOF'
 # 🔧 Instalación de Collections SICORA
 
@@ -512,7 +512,7 @@ create_common_docs() {
 3. Opción 1 - Drag & Drop:
    - Arrastrar carpeta collections/ a la ventana
    - Confirmar importación
-   
+
 4. Opción 2 - File selector:
    - Click "Select Files"
    - Navegar a carpeta collections/
@@ -523,8 +523,8 @@ create_common_docs() {
 ### 4. Importar Environments
 ```
 1. Click en el ícono ⚙️ (Settings) en la esquina superior derecha
-2. Click en "Import" 
-3. Arrastrar archivos de environments/ 
+2. Click en "Import"
+3. Arrastrar archivos de environments/
 4. O usar "Select Files" y elegir archivos .json de environments/
 5. Confirmar importación
 ```
@@ -547,7 +547,7 @@ create_common_docs() {
 ```
 □ Postman abierto y funcionando
 □ Collections visibles en sidebar izquierdo
-□ Environment "sicora-development" seleccionado  
+□ Environment "sicora-development" seleccionado
 □ Variables de environment pobladas
 □ Primer health check exitoso
 ```
@@ -611,7 +611,7 @@ create_common_docs() {
 - Usar chat de clase si disponible
 
 ### Fuera de Clases:
-- Email: soporte-sicora@sena.edu.co
+- Email: soporte-sicora@onevision.edu.co
 - Slack: #sicora-soporte (si disponible)
 - Documentación: Revisar archivos .md en paquete
 
@@ -647,15 +647,15 @@ EOF
 ```bash
 1. Verificar URLs en environment:
    👁️ → Verificar base_url_go y base_url_python
-   
+
 2. Probar URLs en navegador:
    http://localhost:8080/health
    http://localhost:8000/health
-   
+
 3. Verificar servicios corriendo:
    # En terminal del proyecto:
    make dev-up  # o comando equivalente
-   
+
 4. Revisar Postman Console:
    View → Show Postman Console (Ctrl+Alt+C)
 ```
@@ -678,16 +678,16 @@ EOF
 #### Soluciones:
 ```bash
 1. Verificar token en environment:
-   👁️ → Buscar "auth_token" 
+   👁️ → Buscar "auth_token"
    Si está vacío, hacer login primero
-   
+
 2. Ejecutar login manual:
    Ir a collection → 🔐 Autenticación → 🔑 Login
    Verificar que guarda token automáticamente
-   
+
 3. Verificar headers:
    Authorization: Bearer {{auth_token}}
-   
+
 4. Revisar scripts de test:
    Verificar que test script guarda token en variable
 ```
@@ -712,15 +712,15 @@ EOF
 1. Verificar logs del servidor:
    Revisar terminal donde corre SICORA
    Buscar stack traces o error messages
-   
+
 2. Verificar datos de input:
    Revisar JSON body del request
    Verificar que campos requeridos están presentes
-   
+
 3. Probar con datos mínimos:
    Usar solo campos obligatorios
    Verificar formato de fechas, números, etc.
-   
+
 4. Contactar al instructor:
    Puede ser bug del servidor que necesita fix
 ```
@@ -744,13 +744,13 @@ EOF
 ```bash
 1. Verificar URL completa:
    Revisar que {{base_url_go}}/users esté correcto
-   
+
 2. Verificar path parameters:
    /users/{{user_id}} → verificar que user_id tiene valor
-   
+
 3. Revisar documentación:
    Confirmar que endpoint existe en la API
-   
+
 4. Probar endpoints básicos:
    Comenzar con /health que siempre debe funcionar
 ```
@@ -775,15 +775,15 @@ EOF
 1. Aumentar timeout en Postman:
    Settings ⚙️ → General → Request timeout
    Aumentar de 0 a 30000ms (30 segundos)
-   
+
 2. Probar endpoints más simples:
    Health checks primero
    Luego endpoints de consulta (GET)
-   
+
 3. Verificar performance del servidor:
    Revisar uso de CPU/memoria
    Puede necesitar restart
-   
+
 4. Probar en environment diferente:
    Cambiar a staging si está disponible
 ```
@@ -841,7 +841,7 @@ File → Settings → General
 ```json
 {
   "base_url_go": "http://localhost:8080",
-  "base_url_python": "http://localhost:8000", 
+  "base_url_python": "http://localhost:8000",
   "auth_token": "",
   "user_id": "",
   "project_id": ""
@@ -868,7 +868,7 @@ File → Settings → General
 - Documentar issue para otros
 
 ### Nivel 4 - Soporte técnico:
-- Email: soporte-sicora@sena.edu.co
+- Email: soporte-sicora@onevision.edu.co
 - Incluir screenshots
 - Describir pasos para reproducir
 
@@ -895,7 +895,7 @@ Cuando algo no funciona, ejecutar esta lista:
 **Si todo falla: Restart everything y comenzar de nuevo 🔄**
 
 1. Cerrar Postman
-2. Restart servicios SICORA  
+2. Restart servicios SICORA
 3. Reabrir Postman
 4. Re-importar collections si es necesario
 5. Configurar environment desde cero
@@ -917,8 +917,8 @@ done
 cat > "$OUTPUT_DIR/README.md" <<EOF
 # 📦 SICORA Collections - Distribution Packages
 
-> **Paquetes organizados para distribución gratuita a aprendices SENA**  
-> **Sin costos adicionales** - Solo Postman Desktop gratuito  
+> **Paquetes organizados para distribución gratuita a estudiantes OneVision**
+> **Sin costos adicionales** - Solo Postman Desktop gratuito
 > **Metodología progresiva** - De básico a avanzado
 
 ---
@@ -930,7 +930,7 @@ cat > "$OUTPUT_DIR/README.md" <<EOF
 \`\`\`
 📦 week-1-fundamentos/
 ├── 2 collections (User services)
-├── 3 environments 
+├── 3 environments
 ├── Guía detallada 5 días
 └── Actividades paso a paso
 
@@ -996,7 +996,7 @@ cat > "$OUTPUT_DIR/README.md" <<EOF
 - Distribución por archivos
 - Unlimited students
 
-### ✅ **Flexibilidad**  
+### ✅ **Flexibilidad**
 - Paquetes por semana o completo
 - Cada estudiante workspace propio
 - Modificaciones sin afectar otros
@@ -1038,10 +1038,10 @@ cat > "$OUTPUT_DIR/README.md" <<EOF
 
 ---
 
-**Generado**: $DATE  
-**Versión**: $VERSION  
-**Compatible con**: Postman Desktop v10+  
-**Soporte**: Instructor SENA + documentación incluida
+**Generado**: $DATE
+**Versión**: $VERSION
+**Compatible con**: Postman Desktop v10+
+**Soporte**: Instructor OneVision + documentación incluida
 EOF
 
 # Crear ZIPs para distribución fácil

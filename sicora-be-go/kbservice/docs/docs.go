@@ -12,7 +12,7 @@ const docTemplate = `{
         "termsOfService": "http://swagger.io/terms/",
         "contact": {
             "name": "Equipo de Desarrollo SICORA",
-            "email": "dev@sicora.sena.edu.co"
+            "email": "dev@sicora.onevision.edu.co"
         },
         "license": {
             "name": "MIT",
@@ -40,7 +40,7 @@ var SwaggerInfo = &swag.Spec{
 	BasePath:         "/api/v1",
 	Schemes:          []string{},
 	Title:            "SICORA kbservice API",
-	Description:      "Microservicio kbservice del Sistema de Información de Coordinación Académica (SICORA) - SENA",
+	Description:      "Microservicio kbservice del Sistema de Información de Coordinación Académica (SICORA) - OneVision",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

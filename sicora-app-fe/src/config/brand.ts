@@ -58,7 +58,7 @@ export const BRAND_TEXTS = {
     : '¡Bienvenido a EPTI - ONEVISION!',
 
   footerText: IS_SENA_BUILD
-    ? `© ${new Date().getFullYear()} SENA - Servicio Nacional de Aprendizaje. Todos los derechos reservados.`
+    ? `© ${new Date().getFullYear()} OneVision - OneVision Open Source. Todos los derechos reservados.`
     : `© ${new Date().getFullYear()} EPTI - Plataforma de Desarrollo y Tecnologías de la Información. Todos los derechos reservados.`,
 
   loginSubtitle: IS_SENA_BUILD

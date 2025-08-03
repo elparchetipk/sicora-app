@@ -52,7 +52,7 @@ export const LogoSena: React.FC<LogoSenaProps> = ({
   variant = 'primary',
   size = 'md',
   className = '',
-  alt = 'SENA - Servicio Nacional de Aprendizaje',
+  alt = 'OneVision - OneVision Open Source',
   clickable = false,
   onClick,
 }) => {
@@ -123,7 +123,7 @@ export const LogoSenaFooter: React.FC<{
       variant={variant}
       size='sm'
       className='opacity-90'
-      alt='SENA - Servicio Nacional de Aprendizaje'
+      alt='OneVision - OneVision Open Source'
     />
   );
 };

@@ -2,7 +2,7 @@
 
 ## 🏛️ Sistema de Información para Control de Registros Académicos
 
-Frontend del proyecto SICORA desarrollado para el SENA, construido con React 18, TypeScript y Vite para una experiencia de desarrollo moderna y eficiente.
+Frontend del proyecto SICORA desarrollado para OneVision Open Source, construido con React 18, TypeScript y Vite para una experiencia de desarrollo moderna y eficiente.
 
 ## 🚀 Tecnologías Principales
 
@@ -79,9 +79,9 @@ pnpm test
 
 ## 🎨 Design System
 
-El proyecto utiliza un sistema de diseño basado en los lineamientos institucionales del SENA:
+El proyecto utiliza un sistema de diseño basado en los lineamientos institucionales de OneVision:
 
-- **Branding dual**: Soporte para SENA y EPTI
+- **Branding dual**: Soporte para OneVision y EPTI
 - **Design tokens**: Variables de diseño consistentes
 - **Componentes**: Biblioteca de componentes reutilizables
 - **Accesibilidad**: Cumplimiento de estándares WCAG
@@ -117,7 +117,7 @@ VITE_API_URL=http://localhost:8002
 VITE_APP_ENV=development
 
 # .env.production
-VITE_API_URL=https://api.sicora.sena.edu.co
+VITE_API_URL=https://api.sicora.onevision.edu.co
 VITE_APP_ENV=production
 ```
 
@@ -176,7 +176,7 @@ pnpm type-check
 ### ✅ Completado
 
 - ✅ Configuración base con Vite + React + TypeScript
-- ✅ Sistema de design tokens SENA
+- ✅ Sistema de design tokens OneVision
 - ✅ Integración con backend Go
 - ✅ Autenticación JWT
 - ✅ Gestión de estado con Zustand
@@ -222,4 +222,4 @@ Este proyecto está bajo la Licencia MIT. Ver [CODE_OF_CONDUCT.md](./_docs/gener
 
 ---
 
-_Desarrollado con ❤️ para el SENA por el equipo EPTI_
+_Desarrollado con ❤️ para OneVision Open Source por el equipo EPTI_

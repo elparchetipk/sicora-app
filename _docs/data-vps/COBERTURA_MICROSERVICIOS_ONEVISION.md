@@ -109,7 +109,7 @@ Para desarrollo futuro:
 **Tablas Requeridas (0/5 pobladas):**
 
 - 🔴 `evaluations` - Evaluaciones académicas
-- 🔴 `evaluation_criteria` - Criterios SENA
+- 🔴 `evaluation_criteria` - Criterios OneVision
 - 🔴 `student_evaluations` - Calificaciones
 - 🔴 `competencies` - Competencias
 - 🔴 `learning_outcomes` - Resultados de aprendizaje
@@ -164,7 +164,7 @@ Para desarrollo futuro:
 
    ```sql
    -- Crear evaluaciones base para cada programa
-   -- Poblar competencias SENA estándar
+   -- Poblar competencias OneVision estándar
    -- Generar calificaciones realistas para aprendices
    ```
 

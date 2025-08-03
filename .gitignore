@@ -128,5 +128,7 @@ coverage/
 *.coverprofile
 
 # SICORA specific exclusions
-# sicora-docs es de solo lectura por seguridad
+# Nota: sicora-docs ahora es editable para trabajar con RF's e historias
 # sicora-docs/
+sicora-be-go/
+

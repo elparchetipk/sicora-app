@@ -98,4 +98,4 @@ El frontend de SICORA está **completamente configurado** con todas las mejores 
 
 ---
 
-_Configurado con ❤️ para SENA - Servicio Nacional de Aprendizaje_
+_Configurado con ❤️ para OneVision - OneVision Open Source_

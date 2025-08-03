@@ -1,6 +1,6 @@
 name,email,document_number,role,active
-Juan Pérez,juan.perez@sena.edu.co,12345678,instructor,true
-María García,maria.garcia@sena.edu.co,87654321,student,true
-Carlos López,carlos.lopez@sena.edu.co,11223344,admin,true
-Ana Rodríguez,ana.rodriguez@sena.edu.co,55667788,student,true
-Pedro Martínez,pedro.martinez@sena.edu.co,99887766,instructor,false
+Juan Pérez,juan.perez@onevision.edu.co,12345678,instructor,true
+María García,maria.garcia@onevision.edu.co,87654321,student,true
+Carlos López,carlos.lopez@onevision.edu.co,11223344,admin,true
+Ana Rodríguez,ana.rodriguez@onevision.edu.co,55667788,student,true
+Pedro Martínez,pedro.martinez@onevision.edu.co,99887766,instructor,false

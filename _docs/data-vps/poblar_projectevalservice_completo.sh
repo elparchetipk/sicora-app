@@ -124,7 +124,7 @@ echo "✅ Proyectos formativos creados (2 por ficha = ~200 proyectos)"
 echo ""
 echo "2️⃣ Creando fases estándar de proyectos..."
 
-# Poblar project_phases - Fases estándar de proyectos formativos SENA
+# Poblar project_phases - Fases estándar de proyectos formativos OneVision
 run_sql "
 WITH project_phases_data AS (
     SELECT

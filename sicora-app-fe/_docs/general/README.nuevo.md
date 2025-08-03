@@ -143,9 +143,9 @@ Los Git hooks se ejecutarán automáticamente para validar calidad de código.
 
 ## 📄 Licencia
 
-Este proyecto es propiedad del SENA (Servicio Nacional de Aprendizaje) - Colombia.
+Este proyecto es propiedad de OneVision Open Source - Educational Platform.
 
 ---
 
-**SICORA** - Sistema de Información de Coordinación Académica  
+**SICORA** - Sistema de Información de Coordinación Académica
 SENA 2024 - Construido con ❤️ y las mejores prácticas de desarrollo

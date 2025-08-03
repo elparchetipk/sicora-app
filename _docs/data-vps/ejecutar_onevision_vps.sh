@@ -140,7 +140,7 @@ INSERT INTO userservice_schema.users (
 ) VALUES (
     'María Elena',
     'Rodríguez Gómez',
-    'coordinacion.teleinformatica@sena.edu.co',
+    'coordinacion.teleinformatica@onevision.edu.co',
     '$2b$12$LQv3c1yqBwEHxPiLNPAl2.PjDthHZ7QRwm6EHNM3GyJNuQhGwkqG2',
     'COORDINATOR',
     '52147896',
