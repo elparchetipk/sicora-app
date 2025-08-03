@@ -29,6 +29,24 @@ services:
     env_file:
       - .env
 
+  mongodb:
+    image: mongo:8.0
+    container_name: sicora_mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGODB_ROOT_USER:-sicora_admin}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_ROOT_PASSWORD:-your_mongodb_password}
+      MONGO_INITDB_DATABASE: ${MONGODB_DATABASE:-sicora_nosql}
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongodb_data:/data/db
+      - ./database/mongodb-init:/docker-entrypoint-initdb.d
+    networks:
+      - sicora_network
+    restart: unless-stopped
+    env_file:
+      - .env
+
   userservice:
     build:
       context: ./01-fastapi/userservice
@@ -224,6 +242,7 @@ services:
 volumes:
   postgres_data:
   redis_data:
+  mongodb_data:
 
 networks:
   sicora_network:
