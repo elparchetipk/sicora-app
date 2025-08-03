@@ -1,0 +1,21 @@
+#!/bin/bash
+# Pre-commit hook mínimo - Solo advertencias
+
+echo "🔍 Verificación básica antes del commit..."
+
+# Verificar archivos grandes (solo advertencia)
+large_files=$(find . -type f -size +50M -not -path "./.git/*" 2>/dev/null || true)
+if [ -n "$large_files" ]; then
+    echo "⚠️  Archivos grandes detectados:"
+    echo "$large_files"
+    echo "Considera usar Git LFS para archivos grandes"
+fi
+
+# Verificar credenciales en código (solo advertencia)
+if git diff --cached --name-only | xargs grep -l "password\|secret\|key\|token" 2>/dev/null; then
+    echo "⚠️  Posibles credenciales detectadas en el código"
+    echo "Revisa los archivos antes de confirmar el commit"
+fi
+
+echo "✅ Verificación básica completada"
+exit 0  # Nunca bloquear en etapa inicial

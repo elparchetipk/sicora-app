@@ -4,8 +4,7 @@
 
 set -e
 
-# Colores para output
-RED='\033[0;31m'
+# Colores para output (solo los necesarios)
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
