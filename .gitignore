@@ -129,4 +129,4 @@ coverage/
 
 # SICORA specific exclusions
 # sicora-docs es de solo lectura por seguridad
-sicora-docs/
+# sicora-docs/
