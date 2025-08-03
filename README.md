@@ -3,9 +3,10 @@
 ![SICORA Logo](./assets/logo-sicora.svg)
 
 # SICORA
+
 ## Sistema de Información para Control de Registros Académicos
 
-*OneVision Open Source - Gestión Académica Integral*
+_OneVision Open Source - Gestión Académica Integral_
 
 ---
 
