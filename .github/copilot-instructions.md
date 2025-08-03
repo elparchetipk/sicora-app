@@ -2,6 +2,9 @@
 
 ## � REGLAS CRÍTICAS - CUMPLIMIENTO OBLIGATORIO
 
+**SIEMPRE** que sea relevante, como es un proyecto de estudio, crear archivos .svg para mejorar la compresión de los temas. los svg van en la carpeta: assets
+Vincularlos con los readme que corresponda. usar siempre tema dark. no usar degrades.
+
 ### ❌ PROHIBIDO ABSOLUTO:
 
 - **NUNCA** crear archivos `.md` en la raíz de `/sicora-app/` (excepto README.md)
