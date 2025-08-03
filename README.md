@@ -148,10 +148,22 @@ Para documentación detallada, consulta la [documentación organizada](./_docs/)
 
 - [📋 Integración](./_docs/integracion/) - Integración frontend-backend, verificaciones de conectividad
 - [🤖 MCP](./_docs/mcp/) - Servidor MCP, guías para principiantes, configuración
-- [⚙️ Configuración](./_docs/configuracion/) - Setup de servicios, variables de entorno
+- [⚙️ Configuración](./_docs/configuracion/) - Setup de servicios, variables de entorno, **diagnóstico de errores Docker**
 - [🔧 Desarrollo](./_docs/desarrollo/) - Guías de desarrollo, estándares de código
 - [📊 Reportes](./_docs/reportes/) - Reportes de estado, análisis, métricas
 - [📖 Guías](./_docs/guias/) - Tutoriales, mejores prácticas, casos de uso
+
+### 🚨 Solución de Problemas Docker
+
+Para resolver errores comunes de red en Docker:
+
+- **[📋 Errores de Red Docker](./_docs/configuracion/ERRORES_RED_DOCKER_SICORA.md)** - Diagnóstico y solución completa
+- **Scripts automáticos**:
+  - `./scripts/diagnose-docker-network.sh` - Diagnóstico automático
+  - `./scripts/repair-docker-network.sh` - Reparación automática
+  - `./scripts/health-check-services.sh` - Monitoreo de salud
+
+![Errores de Red Docker](./assets/errores-red-docker-sicora.svg)
 
 ### Documentación por Componente
 
