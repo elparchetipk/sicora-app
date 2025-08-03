@@ -20,10 +20,6 @@
 - [Configuración de Docker](./CONFIGURACION_DOCKER.md)
 - [Configuración de CI/CD](./CONFIGURACION_CICD.md)
 
-### 🚨 Solución de Problemas
-
-- [**Errores de Red Docker SICORA**](./ERRORES_RED_DOCKER_SICORA.md) - **Diagnóstico y solución de errores de red**
-
 ## 🎯 Propósito
 
 Esta sección contiene toda la documentación relacionada con la configuración del proyecto SICORA, incluyendo:
@@ -33,7 +29,6 @@ Esta sección contiene toda la documentación relacionada con la configuración 
 - Setup de servicios y herramientas
 - Configuración de base de datos
 - Configuración de contenedores
-- **Diagnóstico y resolución de errores de red Docker**
 
 ## 📖 Documentos Relacionados
 
