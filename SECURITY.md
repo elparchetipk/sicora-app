@@ -4,10 +4,10 @@
 
 Actualmente soportamos las siguientes versiones de SICORA con actualizaciones de seguridad:
 
-| Versión | Soportada          |
-| ------- | ------------------ |
-| 1.0.x   | ✅ Sí             |
-| < 1.0   | ❌ No             |
+| Versión | Soportada |
+| ------- | --------- |
+| 1.0.x   | ✅ Sí     |
+| < 1.0   | ❌ No     |
 
 ## Reportar una Vulnerabilidad
 
@@ -18,6 +18,7 @@ La seguridad es muy importante para nosotros. Si descubres una vulnerabilidad de
 **NO** crear un issue público para vulnerabilidades de seguridad. En su lugar:
 
 1. **Email**: Envía un email a **security@onevision.education** con:
+
    - Descripción detallada de la vulnerabilidad
    - Pasos para reproducir el problema
    - Impacto potencial

@@ -87,7 +87,7 @@ Agrega screenshots que muestren los cambios visuales.
 - [ ] Simplifica la configuración para estudiantes
 - [ ] Añade ejemplos prácticos
 - [ ] Mejora la comprensión del código
-- [ ] Otro: _________________
+- [ ] Otro: ********\_********
 
 ### ¿Requiere actualización de materiales educativos?
 
@@ -113,11 +113,13 @@ Agrega screenshots que muestren los cambios visuales.
 Si es relevante, incluye métricas antes y después:
 
 ### Antes
+
 - Tiempo de respuesta:
 - Uso de memoria:
 - Tamaño del bundle:
 
 ### Después
+
 - Tiempo de respuesta:
 - Uso de memoria:
 - Tamaño del bundle:

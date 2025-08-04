@@ -51,6 +51,7 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.h
 #### Backend Go (sicora-be-go)
 
 - ✅ 8 microservicios completamente implementados:
+
   - **UserService** (8001): Gestión de usuarios y autenticación
   - **ScheduleService** (8002): Gestión de horarios académicos
   - **AttendanceService** (8003): Control de asistencia
@@ -70,6 +71,7 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.h
 #### Backend Python (sicora-be-python)
 
 - ✅ 7 microservicios implementados:
+
   - **API Gateway** (8101): Enrutamiento y balanceeo
   - **UserService** (8102): Gestión de usuarios Python
   - **EvalInService** (8103): Evaluaciones Python

@@ -41,7 +41,7 @@ Describe los pasos que ya has tomado para resolver tu pregunta.
 - [ ] MCP (Model Context Protocol)
 - [ ] Arquitectura de microservicios
 - [ ] Configuración del entorno
-- [ ] Otra: _________________
+- [ ] Otra: ********\_********
 
 ## 🖥️ Información del Entorno
 

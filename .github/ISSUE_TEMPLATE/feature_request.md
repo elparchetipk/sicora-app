@@ -48,7 +48,7 @@ Describe cualquier solución alternativa o características que hayas considerad
 - [ ] Proporciona ejemplos prácticos
 - [ ] Automatiza tareas educativas
 - [ ] Mejora la documentación
-- [ ] Otro: _________________
+- [ ] Otro: ********\_********
 
 ## 🚀 Impacto Esperado
 
@@ -59,12 +59,14 @@ Describe cualquier solución alternativa o características que hayas considerad
 ## 🔧 Consideraciones Técnicas
 
 ### Complejidad Estimada
+
 - [ ] Baja (< 1 día)
 - [ ] Media (1-3 días)
 - [ ] Alta (> 3 días)
 - [ ] Épica (requiere división en subtareas)
 
 ### Dependencias
+
 - [ ] Requiere cambios en múltiples servicios
 - [ ] Necesita nuevas dependencias
 - [ ] Impacta la base de datos
@@ -72,6 +74,7 @@ Describe cualquier solución alternativa o características que hayas considerad
 - [ ] Necesita actualización de documentación
 
 ### Compatibilidad
+
 - [ ] Compatible con versión actual
 - [ ] Requiere migración
 - [ ] Breaking change
@@ -122,7 +125,7 @@ Agrega cualquier otro contexto, screenshots, mockups, o ejemplos sobre la featur
 - [ ] Feedback de usuarios
 - [ ] Mejora en rendimiento
 - [ ] Reducción de errores
-- [ ] Otro: _________________
+- [ ] Otro: ********\_********
 
 ---
 
