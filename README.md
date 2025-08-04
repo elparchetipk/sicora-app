@@ -1,5 +1,7 @@
 # SICORA - Sistema de Información para Control de Registros Académicos
 
+![SICORA Logo](./assets/logos/logo-sicora.svg)
+
 ## 📊 Backend API Statistics
 
 > Last updated: 2025-07-04
