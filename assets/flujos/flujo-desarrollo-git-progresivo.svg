@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" style="background-color: #1a1a1a;">
+  <defs>
+    <style>
+      .title { fill: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; font-size: 20px; font-weight: bold; }
+      .subtitle { fill: #e0e0e0; font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; }
+      .label { fill: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; font-size: 12px; }
+      .small-text { fill: #b0b0b0; font-family: 'Segoe UI', Arial, sans-serif; font-size: 10px; }
+      .phase-box { fill: none; stroke: #4a90e2; stroke-width: 2; rx: 8; }
+      .arrow { fill: none; stroke: #4a90e2; stroke-width: 2; marker-end: url(#arrowhead); }
+      .git-box { fill: #2d3748; stroke: #4a90e2; stroke-width: 1; rx: 4; }
+      .minimal-box { fill: #1a365d; stroke: #63b3ed; stroke-width: 1; rx: 4; }
+      .strict-box { fill: #2d5a3d; stroke: #68d391; stroke-width: 1; rx: 4; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#4a90e2" />
+    </marker>
+  </defs>
+
+  <!-- Título -->
+  <text x="400" y="30" text-anchor="middle" class="title">Estrategia de Configuración Git Progresiva - SICORA</text>
+  <text x="400" y="50" text-anchor="middle" class="subtitle">De configuración mínima a estricta según madurez del proyecto</text>
+
+  <!-- Fase 1: Configuración Mínima -->
+  <rect x="50" y="80" width="200" height="220" class="phase-box"/>
+  <text x="150" y="105" text-anchor="middle" class="label">FASE 1: MÍNIMA</text>
+  <text x="150" y="120" text-anchor="middle" class="small-text">Desarrollo inicial</text>
+
+  <rect x="60" y="130" width="180" height="30" class="minimal-box"/>
+  <text x="150" y="150" text-anchor="middle" class="small-text">✓ .gitignore básico</text>
+
+  <rect x="60" y="170" width="180" height="30" class="minimal-box"/>
+  <text x="150" y="190" text-anchor="middle" class="small-text">✓ Hooks no bloqueantes</text>
+
+  <rect x="60" y="210" width="180" height="30" class="minimal-box"/>
+  <text x="150" y="230" text-anchor="middle" class="small-text">✓ Linting básico</text>
+
+  <rect x="60" y="250" width="180" height="30" class="minimal-box"/>
+  <text x="150" y="270" text-anchor="middle" class="small-text">✓ Aliases simples</text>
+
+  <!-- Flecha 1 -->
+  <line x1="250" y1="190" x2="300" y2="190" class="arrow"/>
+  <text x="275" y="185" text-anchor="middle" class="small-text">Madurez</text>
+
+  <!-- Fase 2: Configuración Estricta -->
+  <rect x="350" y="80" width="200" height="220" class="phase-box"/>
+  <text x="450" y="105" text-anchor="middle" class="label">FASE 2: ESTRICTA</text>
+  <text x="450" y="120" text-anchor="middle" class="small-text">Producción/Equipos</text>
+
+  <rect x="360" y="130" width="180" height="30" class="strict-box"/>
+  <text x="450" y="150" text-anchor="middle" class="small-text">✓ Conventional Commits</text>
+
+  <rect x="360" y="170" width="180" height="30" class="strict-box"/>
+  <text x="450" y="190" text-anchor="middle" class="small-text">✓ Hooks bloqueantes</text>
+
+  <rect x="360" y="210" width="180" height="30" class="strict-box"/>
+  <text x="450" y="230" text-anchor="middle" class="small-text">✓ Linting estricto</text>
+
+  <rect x="360" y="250" width="180" height="30" class="strict-box"/>
+  <text x="450" y="270" text-anchor="middle" class="small-text">✓ Aliases avanzados</text>
+
+  <!-- Scripts -->
+  <rect x="600" y="80" width="180" height="120" class="git-box"/>
+  <text x="690" y="105" text-anchor="middle" class="label">SCRIPTS</text>
+
+  <text x="690" y="130" text-anchor="middle" class="small-text">init-git-sicora.sh</text>
+  <text x="690" y="145" text-anchor="middle" class="small-text">(Configuración mínima)</text>
+
+  <text x="690" y="170" text-anchor="middle" class="small-text">upgrade-git-config.sh</text>
+  <text x="690" y="185" text-anchor="middle" class="small-text">(Actualización estricta)</text>
+
+  <!-- Flecha hacia scripts -->
+  <line x1="550" y1="140" x2="600" y2="140" class="arrow"/>
+
+  <!-- Beneficios -->
+  <rect x="100" y="350" width="600" height="200" class="phase-box"/>
+  <text x="400" y="375" text-anchor="middle" class="label">BENEFICIOS DE LA ESTRATEGIA PROGRESIVA</text>
+
+  <!-- Columna Izquierda -->
+  <text x="130" y="400" class="small-text">🚀 INICIO RÁPIDO:</text>
+  <text x="140" y="420" class="small-text">• Sin barreras de entrada</text>
+  <text x="140" y="435" class="small-text">• Desarrollo fluido</text>
+  <text x="140" y="450" class="small-text">• Aprendizaje gradual</text>
+
+  <text x="130" y="480" class="small-text">📚 EDUCATIVO:</text>
+  <text x="140" y="500" class="small-text">• Comprensión paso a paso</text>
+  <text x="140" y="515" class="small-text">• Práctica sin presión</text>
+
+  <!-- Columna Derecha -->
+  <text x="430" y="400" class="small-text">🎯 MADUREZ CONTROLADA:</text>
+  <text x="440" y="420" class="small-text">• Transición planificada</text>
+  <text x="440" y="435" class="small-text">• Calidad incremental</text>
+  <text x="440" y="450" class="small-text">• Adopción natural</text>
+
+  <text x="430" y="480" class="small-text">🔧 FLEXIBILIDAD:</text>
+  <text x="440" y="500" class="small-text">• Adaptación al contexto</text>
+  <text x="440" y="515" class="small-text">• Equipos de cualquier nivel</text>
+</svg>

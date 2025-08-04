@@ -51,29 +51,88 @@ assets/
   - Scripts automáticos disponibles
   - Tema dark consistente
 
+### `resolucion-problemas-docker.svg` - Resolución Problemas Docker
+
+- **Dimensiones**: 1000x750px
+- **Uso**: Documentación de resolución de problemas Docker
+- **Ruta**: `./assets/diagramas/resolucion-problemas-docker.svg`
+- **Características**:
+  - Flujo completo de diagnóstico y reparación
+  - Herramientas automáticas integradas
+  - Casos específicos y soluciones
+  - Estrategias de prevención
+
 ## 🏗️ Arquitectura (`/arquitectura/`)
 
-_Próximamente:_
+### `arquitectura-sistema-sicora.svg` - Arquitectura General
 
-- `arquitectura-sistema-sicora.svg` - Arquitectura general del sistema
-- `arquitectura-microservicios.svg` - Microservicios y comunicación
-- `arquitectura-base-datos.svg` - Esquema de base de datos
+- **Dimensiones**: 1000x700px
+- **Uso**: Documentación técnica principal
+- **Ruta**: `./assets/arquitectura/arquitectura-sistema-sicora.svg`
+- **Características**:
+  - Vista completa del sistema
+  - Componentes principales
+  - Tecnologías utilizadas
+  - Conexiones entre servicios
+
+### `microservicios-sicora.svg` - Microservicios Detallados
+
+- **Dimensiones**: 1000x700px
+- **Uso**: Documentación de arquitectura de microservicios
+- **Ruta**: `./assets/arquitectura/microservicios-sicora.svg`
+- **Características**:
+  - Servicios Go y Python detallados
+  - Puertos y tecnologías específicas
+  - Bases de datos y cache
+  - Leyenda explicativa
 
 ## 🔄 Flujos (`/flujos/`)
 
-_Próximamente:_
+### `flujo-desarrollo-git-progresivo.svg` - Git Progresivo
 
-- `flujo-autenticacion.svg` - Proceso de autenticación
-- `flujo-registro-estudiante.svg` - Registro de estudiantes
-- `flujo-evaluacion.svg` - Proceso de evaluación
+- **Dimensiones**: 800x600px
+- **Uso**: Documentación de configuración Git
+- **Ruta**: `./assets/flujos/flujo-desarrollo-git-progresivo.svg`
+- **Características**:
+  - Estrategia de configuración mínima a estricta
+  - Beneficios de cada fase
+  - Scripts disponibles
+  - Enfoque educativo
+
+### `flujo-datos-sicora.svg` - Procesamiento de Datos
+
+- **Dimensiones**: 900x650px
+- **Uso**: Documentación de flujo de datos
+- **Ruta**: `./assets/flujos/flujo-datos-sicora.svg`
+- **Características**:
+  - Entrada, validación y procesamiento
+  - Servicios específicos por dominio
+  - Múltiples bases de datos
+  - Salidas y reportes
 
 ## 📚 Educativos (`/educativos/`)
 
-_Próximamente:_
+### `estructura-documentacion-sicora.svg` - Estructura Docs
 
-- `conceptos-git.svg` - Conceptos básicos de Git
-- `docker-contenedores.svg` - Explicación de contenedores Docker
-- `api-rest-explicacion.svg` - Conceptos de APIs REST
+- **Dimensiones**: 900x700px
+- **Uso**: Guía de organización de documentación
+- **Ruta**: `./assets/educativos/estructura-documentacion-sicora.svg`
+- **Características**:
+  - Estructura de carpetas obligatoria
+  - Reglas prohibidas y obligatorias
+  - Flujo de trabajo para nueva documentación
+  - Ejemplos prácticos
+
+### `conceptos-mcp-sicora.svg` - Conceptos MCP
+
+- **Dimensiones**: 1000x800px
+- **Uso**: Educación sobre Model Context Protocol
+- **Ruta**: `./assets/educativos/conceptos-mcp-sicora.svg`
+- **Características**:
+  - Explicación completa de MCP
+  - Arquitectura y flujo de comunicación
+  - Implementación específica en SICORA
+  - Casos de uso prácticos
 
 ## 🎨 Guía de Estilo Visual
 

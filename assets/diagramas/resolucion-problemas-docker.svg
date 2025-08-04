@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 750" style="background-color: #1a1a1a;">
+  <defs>
+    <style>
+      .title { fill: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; font-size: 18px; font-weight: bold; }
+      .subtitle { fill: #e0e0e0; font-family: 'Segoe UI', Arial, sans-serif; font-size: 12px; }
+      .section-label { fill: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; font-size: 11px; font-weight: bold; }
+      .step-label { fill: #d0d0d0; font-family: 'Segoe UI', Arial, sans-serif; font-size: 9px; }
+      .command-text { fill: #ffd700; font-family: 'Consolas', monospace; font-size: 8px; }
+      .small-text { fill: #b0b0b0; font-family: 'Segoe UI', Arial, sans-serif; font-size: 8px; }
+
+      .problem-box { fill: #5a2d2d; stroke: #e53e3e; stroke-width: 2; rx: 8; }
+      .solution-box { fill: #2d5a3d; stroke: #68d391; stroke-width: 2; rx: 8; }
+      .tool-box { fill: #2d4a5a; stroke: #4a90e2; stroke-width: 2; rx: 8; }
+      .prevention-box { fill: #5a5a2d; stroke: #f6e05e; stroke-width: 2; rx: 8; }
+      .network-box { fill: #3d2d5a; stroke: #b794f6; stroke-width: 2; rx: 8; }
+
+      .error-flow { fill: none; stroke: #e53e3e; stroke-width: 2; marker-end: url(#errorhead); }
+      .solution-flow { fill: none; stroke: #68d391; stroke-width: 2; marker-end: url(#solutionhead); }
+      .tool-flow { fill: none; stroke: #4a90e2; stroke-width: 1.5; stroke-dasharray: 3,3; }
+    </style>
+    <marker id="errorhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#e53e3e" />
+    </marker>
+    <marker id="solutionhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#68d391" />
+    </marker>
+  </defs>
+
+  <!-- Título -->
+  <text x="500" y="25" text-anchor="middle" class="title">Resolución de Problemas de Red Docker - SICORA</text>
+  <text x="500" y="45" text-anchor="middle" class="subtitle">Diagnóstico, reparación y prevención de errores de conectividad</text>
+
+  <!-- PROBLEMAS COMUNES -->
+  <rect x="50" y="70" width="200" height="140" class="problem-box"/>
+  <text x="150" y="90" text-anchor="middle" class="section-label">🚨 PROBLEMAS COMUNES</text>
+
+  <text x="60" y="110" class="step-label">1. Puerto ya en uso</text>
+  <text x="65" y="125" class="small-text">• PostgreSQL: 5432 → 5433</text>
+  <text x="65" y="140" class="small-text">• MongoDB: 27017</text>
+
+  <text x="60" y="160" class="step-label">2. Red Docker corrupta</text>
+  <text x="65" y="175" class="small-text">• Containers no se comunican</text>
+  <text x="65" y="190" class="small-text">• DNS interno falló</text>
+
+  <text x="60" y="205" class="step-label">3. Servicios no disponibles</text>
+
+  <!-- HERRAMIENTAS DE DIAGNÓSTICO -->
+  <rect x="280" y="70" width="220" height="140" class="tool-box"/>
+  <text x="390" y="90" text-anchor="middle" class="section-label">🔍 HERRAMIENTAS</text>
+
+  <text x="290" y="110" class="step-label">diagnose-docker-network.sh</text>
+  <text x="295" y="125" class="command-text">• docker network ls</text>
+  <text x="295" y="140" class="command-text">• docker ps -a</text>
+  <text x="295" y="155" class="command-text">• netstat -tulnp</text>
+
+  <text x="290" y="175" class="step-label">health-check-services.sh</text>
+  <text x="295" y="190" class="command-text">• curl health endpoints</text>
+  <text x="295" y="205" class="command-text">• service connectivity</text>
+
+  <!-- SOLUCIONES AUTOMÁTICAS -->
+  <rect x="530" y="70" width="220" height="140" class="solution-box"/>
+  <text x="640" y="90" text-anchor="middle" class="section-label">🔧 SOLUCIONES</text>
+
+  <text x="540" y="110" class="step-label">repair-docker-network.sh</text>
+  <text x="545" y="125" class="command-text">• docker network prune -f</text>
+  <text x="545" y="140" class="command-text">• docker system prune -f</text>
+  <text x="545" y="155" class="command-text">• recreate networks</text>
+
+  <text x="540" y="175" class="step-label">Restart automático</text>
+  <text x="545" y="190" class="command-text">• docker compose down</text>
+  <text x="545" y="205" class="command-text">• docker compose up -d</text>
+
+  <!-- PREVENCIÓN -->
+  <rect x="780" y="70" width="200" height="140" class="prevention-box"/>
+  <text x="880" y="90" text-anchor="middle" class="section-label">🛡️ PREVENCIÓN</text>
+
+  <text x="790" y="110" class="step-label">Configuración robusta</text>
+  <text x="795" y="125" class="small-text">• Puertos específicos</text>
+  <text x="795" y="140" class="small-text">• Health checks</text>
+  <text x="795" y="155" class="small-text">• Restart policies</text>
+
+  <text x="790" y="175" class="step-label">Monitoreo continuo</text>
+  <text x="795" y="190" class="small-text">• Logs centralizados</text>
+  <text x="795" y="205" class="small-text">• Alertas automáticas</text>
+
+  <!-- FLUJO DE DIAGNÓSTICO -->
+  <rect x="100" y="250" width="800" height="200" class="network-box"/>
+  <text x="500" y="275" text-anchor="middle" class="section-label">🔄 FLUJO DE DIAGNÓSTICO Y REPARACIÓN</text>
+
+  <!-- Paso 1: Detectar -->
+  <rect x="120" y="290" width="140" height="60" class="problem-box"/>
+  <text x="190" y="310" text-anchor="middle" class="step-label">1. DETECTAR</text>
+  <text x="190" y="325" text-anchor="middle" class="small-text">Error de conexión</text>
+  <text x="190" y="340" text-anchor="middle" class="command-text">./diagnose-docker-network.sh</text>
+
+  <!-- Paso 2: Analizar -->
+  <rect x="280" y="290" width="140" height="60" class="tool-box"/>
+  <text x="350" y="310" text-anchor="middle" class="step-label">2. ANALIZAR</text>
+  <text x="350" y="325" text-anchor="middle" class="small-text">Revisar logs y estado</text>
+  <text x="350" y="340" text-anchor="middle" class="command-text">Identificar causa raíz</text>
+
+  <!-- Paso 3: Reparar -->
+  <rect x="440" y="290" width="140" height="60" class="solution-box"/>
+  <text x="510" y="310" text-anchor="middle" class="step-label">3. REPARAR</text>
+  <text x="510" y="325" text-anchor="middle" class="small-text">Aplicar solución</text>
+  <text x="510" y="340" text-anchor="middle" class="command-text">./repair-docker-network.sh</text>
+
+  <!-- Paso 4: Verificar -->
+  <rect x="600" y="290" width="140" height="60" class="prevention-box"/>
+  <text x="670" y="310" text-anchor="middle" class="step-label">4. VERIFICAR</text>
+  <text x="670" y="325" text-anchor="middle" class="small-text">Health check</text>
+  <text x="670" y="340" text-anchor="middle" class="command-text">./health-check-services.sh</text>
+
+  <!-- Paso 5: Documentar -->
+  <rect x="760" y="290" width="120" height="60" class="tool-box"/>
+  <text x="820" y="310" text-anchor="middle" class="step-label">5. DOCUMENTAR</text>
+  <text x="820" y="325" text-anchor="middle" class="small-text">Log del incidente</text>
+  <text x="820" y="340" text-anchor="middle" class="small-text">Mejoras</text>
+
+  <!-- Bucle de retroalimentación -->
+  <rect x="360" y="370" width="140" height="60" class="network-box"/>
+  <text x="430" y="390" text-anchor="middle" class="step-label">RETROALIMENTACIÓN</text>
+  <text x="430" y="405" text-anchor="middle" class="small-text">Mejorar procesos</text>
+  <text x="430" y="420" text-anchor="middle" class="small-text">Actualizar scripts</text>
+
+  <!-- CASOS ESPECÍFICOS -->
+  <rect x="50" y="480" width="280" height="180" class="problem-box"/>
+  <text x="190" y="505" text-anchor="middle" class="section-label">📋 CASOS ESPECÍFICOS</text>
+
+  <text x="60" y="525" class="step-label">Puerto 5432 ocupado (PostgreSQL local)</text>
+  <text x="65" y="540" class="command-text">• Cambiar a puerto 5433</text>
+  <text x="65" y="555" class="command-text">• Actualizar .env</text>
+
+  <text x="60" y="575" class="step-label">Red docker corrupta</text>
+  <text x="65" y="590" class="command-text">• docker network prune -f</text>
+  <text x="65" y="605" class="command-text">• docker system prune -f</text>
+
+  <text x="60" y="625" class="step-label">Servicios no responden</text>
+  <text x="65" y="640" class="command-text">• Verificar health checks</text>
+  <text x="65" y="655" class="command-text">• Reiniciar contenedores</text>
+
+  <!-- MONITOREO CONTINUO -->
+  <rect x="360" y="480" width="280" height="180" class="prevention-box"/>
+  <text x="500" y="505" text-anchor="middle" class="section-label">📊 MONITOREO</text>
+
+  <text x="370" y="525" class="step-label">Health checks automáticos</text>
+  <text x="375" y="540" class="command-text">• Cada 30 segundos</text>
+  <text x="375" y="555" class="command-text">• Alertas por email/Slack</text>
+
+  <text x="370" y="575" class="step-label">Logs centralizados</text>
+  <text x="375" y="590" class="command-text">• docker logs --follow</text>
+  <text x="375" y="605" class="command-text">• Análisis de patrones</text>
+
+  <text x="370" y="625" class="step-label">Métricas de rendimiento</text>
+  <text x="375" y="640" class="command-text">• Tiempo de respuesta</text>
+  <text x="375" y="655" class="command-text">• Uso de recursos</text>
+
+  <!-- AUTOMATIZACIÓN -->
+  <rect x="670" y="480" width="280" height="180" class="solution-box"/>
+  <text x="810" y="505" text-anchor="middle" class="section-label">🤖 AUTOMATIZACIÓN</text>
+
+  <text x="680" y="525" class="step-label">Scripts integrados en Makefile</text>
+  <text x="685" y="540" class="command-text">• make diagnose</text>
+  <text x="685" y="555" class="command-text">• make repair</text>
+  <text x="685" y="570" class="command-text">• make health-check</text>
+
+  <text x="680" y="590" class="step-label">CI/CD integration</text>
+  <text x="685" y="605" class="command-text">• Tests automáticos</text>
+  <text x="685" y="620" class="command-text">• Deploy verificado</text>
+
+  <text x="680" y="640" class="step-label">Notificaciones inteligentes</text>
+  <text x="685" y="655" class="command-text">• Solo problemas críticos</text>
+
+  <!-- CONEXIONES DEL FLUJO -->
+  <line x1="260" y1="320" x2="280" y2="320" class="solution-flow"/>
+  <line x1="420" y1="320" x2="440" y2="320" class="solution-flow"/>
+  <line x1="580" y1="320" x2="600" y2="320" class="solution-flow"/>
+  <line x1="740" y1="320" x2="760" y2="320" class="solution-flow"/>
+
+  <!-- Retroalimentación -->
+  <line x1="820" y1="350" x2="820" y2="400" class="tool-flow"/>
+  <line x1="820" y1="400" x2="500" y2="400" class="tool-flow"/>
+  <line x1="500" y1="400" x2="430" y2="370" class="tool-flow"/>
+
+  <!-- Conexión a automatización -->
+  <line x1="430" y1="430" x2="430" y2="450" class="solution-flow"/>
+  <line x1="430" y1="450" x2="810" y2="450" class="solution-flow"/>
+  <line x1="810" y1="450" x2="810" y2="480" class="solution-flow"/>
+</svg>

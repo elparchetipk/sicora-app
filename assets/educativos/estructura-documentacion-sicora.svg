@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700" style="background-color: #1a1a1a;">
+  <defs>
+    <style>
+      .title { fill: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; font-size: 18px; font-weight: bold; }
+      .subtitle { fill: #e0e0e0; font-family: 'Segoe UI', Arial, sans-serif; font-size: 12px; }
+      .folder-label { fill: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; font-size: 11px; font-weight: bold; }
+      .file-label { fill: #d0d0d0; font-family: 'Segoe UI', Arial, sans-serif; font-size: 9px; }
+      .description { fill: #b0b0b0; font-family: 'Segoe UI', Arial, sans-serif; font-size: 8px; }
+      .forbidden { fill: #e53e3e; font-family: 'Segoe UI', Arial, sans-serif; font-size: 10px; font-weight: bold; }
+      .rule { fill: #68d391; font-family: 'Segoe UI', Arial, sans-serif; font-size: 8px; }
+
+      .root-folder { fill: #2d5a87; stroke: #4a90e2; stroke-width: 2; rx: 6; }
+      .docs-folder { fill: #2d5a3d; stroke: #68d391; stroke-width: 2; rx: 6; }
+      .category-folder { fill: #5a2d87; stroke: #9f7aea; stroke-width: 2; rx: 6; }
+      .file-box { fill: #3d3d3d; stroke: #a0a0a0; stroke-width: 1; rx: 3; }
+      .forbidden-box { fill: #5a2d2d; stroke: #e53e3e; stroke-width: 2; rx: 6; }
+      .rule-box { fill: #2d5a3d; stroke: #68d391; stroke-width: 1; rx: 4; }
+
+      .connection { fill: none; stroke: #4a90e2; stroke-width: 1; }
+      .tree-line { fill: none; stroke: #666666; stroke-width: 1; }
+    </style>
+  </defs>
+
+  <!-- Título -->
+  <text x="450" y="25" text-anchor="middle" class="title">Estructura de Documentación SICORA</text>
+  <text x="450" y="45" text-anchor="middle" class="subtitle">Organización jerárquica y reglas de ubicación</text>
+
+  <!-- ESTRUCTURA PRINCIPAL -->
+  <rect x="50" y="70" width="400" height="500" style="fill: none; stroke: #4a90e2; stroke-width: 2; rx: 8;"/>
+  <text x="250" y="95" text-anchor="middle" class="folder-label">📁 ESTRUCTURA DE ARCHIVOS</text>
+
+  <!-- Raíz del proyecto -->
+  <rect x="70" y="110" width="200" height="30" class="root-folder"/>
+  <text x="80" y="130" class="folder-label">📂 sicora-app/</text>
+
+  <!-- README principal -->
+  <rect x="90" y="150" width="160" height="20" class="file-box"/>
+  <text x="95" y="165" class="file-label">📄 README.md</text>
+  <text x="95" y="175" class="description">(ÚNICO .md en raíz)</text>
+
+  <!-- Carpeta _docs -->
+  <rect x="90" y="190" width="160" height="25" class="docs-folder"/>
+  <text x="95" y="208" class="folder-label">📂 _docs/</text>
+
+  <!-- README de _docs -->
+  <rect x="110" y="225" width="130" height="20" class="file-box"/>
+  <text x="115" y="240" class="file-label">📄 README.md (índice)</text>
+
+  <!-- Categorías -->
+  <rect x="110" y="255" width="130" height="20" class="category-folder"/>
+  <text x="115" y="270" class="file-label">📂 integracion/</text>
+
+  <rect x="110" y="285" width="130" height="20" class="category-folder"/>
+  <text x="115" y="300" class="file-label">📂 mcp/</text>
+
+  <rect x="110" y="315" width="130" height="20" class="category-folder"/>
+  <text x="115" y="330" class="file-label">📂 configuracion/</text>
+
+  <rect x="110" y="345" width="130" height="20" class="category-folder"/>
+  <text x="115" y="360" class="file-label">📂 desarrollo/</text>
+
+  <rect x="110" y="375" width="130" height="20" class="category-folder"/>
+  <text x="115" y="390" class="file-label">📂 reportes/</text>
+
+  <rect x="110" y="405" width="130" height="20" class="category-folder"/>
+  <text x="115" y="420" class="file-label">📂 guias/</text>
+
+  <!-- Ejemplos de archivos en categorías -->
+  <rect x="260" y="255" width="170" height="15" class="file-box"/>
+  <text x="265" y="267" class="description">REPORTE_INTEGRACION_FE_BE.md</text>
+
+  <rect x="260" y="285" width="170" height="15" class="file-box"/>
+  <text x="265" y="297" class="description">CONFIGURACION_MCP_SERVER.md</text>
+
+  <rect x="260" y="315" width="170" height="15" class="file-box"/>
+  <text x="265" y="327" class="description">SETUP_ENTORNO_DESARROLLO.md</text>
+
+  <!-- Assets -->
+  <rect x="90" y="445" width="160" height="25" class="docs-folder"/>
+  <text x="95" y="463" class="folder-label">📂 assets/</text>
+
+  <rect x="110" y="480" width="100" height="15" class="category-folder"/>
+  <text x="115" y="492" class="description">📂 logos/</text>
+
+  <rect x="215" y="480" width="100" height="15" class="category-folder"/>
+  <text x="220" y="492" class="description">📂 diagramas/</text>
+
+  <rect x="110" y="500" width="100" height="15" class="category-folder"/>
+  <text x="115" y="512" class="description">📂 arquitectura/</text>
+
+  <rect x="215" y="500" width="100" height="15" class="category-folder"/>
+  <text x="220" y="512" class="description">📂 flujos/</text>
+
+  <rect x="110" y="520" width="100" height="15" class="category-folder"/>
+  <text x="115" y="532" class="description">📂 educativos/</text>
+
+  <!-- REGLAS PROHIBIDAS -->
+  <rect x="480" y="70" width="380" height="200" class="forbidden-box"/>
+  <text x="670" y="95" text-anchor="middle" class="forbidden">❌ PROHIBIDO ABSOLUTO</text>
+
+  <text x="490" y="120" class="forbidden">NUNCA crear .md en la raíz excepto README.md</text>
+
+  <rect x="500" y="135" width="340" height="15" style="fill: #3d2d2d; stroke: #e53e3e; stroke-width: 1;"/>
+  <text x="505" y="147" class="description">❌ /sicora-app/DOCUMENTO_INCORRECTO.md</text>
+
+  <text x="490" y="170" class="forbidden">NUNCA duplicar documentación</text>
+  <text x="490" y="190" class="forbidden">NUNCA ignorar estructura de carpetas</text>
+  <text x="490" y="210" class="forbidden">NUNCA crear carpetas adicionales sin consultar</text>
+
+  <text x="490" y="240" class="rule">✅ Verificar antes de crear:</text>
+  <text x="500" y="255" class="description">ls -la /sicora-app/*.md | grep -v README.md</text>
+
+  <!-- REGLAS OBLIGATORIAS -->
+  <rect x="480" y="290" width="380" height="280" class="rule-box"/>
+  <text x="670" y="315" text-anchor="middle" class="folder-label">✅ REGLAS OBLIGATORIAS</text>
+
+  <text x="490" y="340" class="rule">1. VERIFICAR ubicación existente</text>
+  <text x="500" y="355" class="description">• Buscar documentos similares</text>
+  <text x="500" y="370" class="description">• find /sicora-app/_docs/ -name "*TEMA*"</text>
+
+  <text x="490" y="390" class="rule">2. DETERMINAR categoría correcta</text>
+  <text x="500" y="405" class="description">• integracion/ → reportes de conectividad</text>
+  <text x="500" y="420" class="description">• mcp/ → Model Context Protocol</text>
+  <text x="500" y="435" class="description">• configuracion/ → setup de entornos</text>
+  <text x="500" y="450" class="description">• desarrollo/ → guías de desarrollo</text>
+  <text x="500" y="465" class="description">• reportes/ → análisis y métricas</text>
+  <text x="500" y="480" class="description">• guias/ → tutoriales paso a paso</text>
+
+  <text x="490" y="500" class="rule">3. USAR nomenclatura correcta</text>
+  <text x="500" y="515" class="description">• TITULO_DOCUMENTO.md (mayúsculas)</text>
+  <text x="500" y="530" class="description">• REPORTE_[TEMA].md para reportes</text>
+  <text x="500" y="545" class="description">• GUIA_[TEMA].md para guías</text>
+
+  <text x="490" y="560" class="rule">4. ACTUALIZAR índices</text>
+  <text x="500" y="575" class="description">• Añadir en README de categoría</text>
+
+  <!-- FLUJO DE TRABAJO -->
+  <rect x="50" y="590" width="800" height="80" style="fill: none; stroke: #68d391; stroke-width: 2; rx: 8;"/>
+  <text x="450" y="615" text-anchor="middle" class="folder-label">🔄 FLUJO DE TRABAJO PARA NUEVA DOCUMENTACIÓN</text>
+
+  <rect x="70" y="630" width="120" height="30" class="rule-box"/>
+  <text x="130" y="650" text-anchor="middle" class="description">1. Verificar existencia</text>
+
+  <rect x="210" y="630" width="120" height="30" class="rule-box"/>
+  <text x="270" y="650" text-anchor="middle" class="description">2. Elegir categoría</text>
+
+  <rect x="350" y="630" width="120" height="30" class="rule-box"/>
+  <text x="410" y="650" text-anchor="middle" class="description">3. Crear en _docs/</text>
+
+  <rect x="490" y="630" width="120" height="30" class="rule-box"/>
+  <text x="550" y="650" text-anchor="middle" class="description">4. Actualizar índice</text>
+
+  <rect x="630" y="630" width="120" height="30" class="rule-box"/>
+  <text x="690" y="650" text-anchor="middle" class="description">5. Vincular SVGs</text>
+
+  <rect x="770" y="630" width="100" height="30" class="rule-box"/>
+  <text x="820" y="650" text-anchor="middle" class="description">6. Verificar</text>
+
+  <!-- Conexiones del flujo -->
+  <line x1="190" y1="645" x2="210" y2="645" class="connection"/>
+  <line x1="330" y1="645" x2="350" y2="645" class="connection"/>
+  <line x1="470" y1="645" x2="490" y2="645" class="connection"/>
+  <line x1="610" y1="645" x2="630" y2="645" class="connection"/>
+  <line x1="750" y1="645" x2="770" y2="645" class="connection"/>
+
+  <!-- Líneas de conexión de estructura -->
+  <line x1="80" y1="140" x2="80" y2="190" class="tree-line"/>
+  <line x1="80" y1="140" x2="100" y2="140" class="tree-line"/>
+  <line x1="100" y1="140" x2="100" y2="160" class="tree-line"/>
+
+  <line x1="100" y1="202" x2="120" y2="202" class="tree-line"/>
+  <line x1="120" y1="202" x2="120" y2="235" class="tree-line"/>
+
+  <line x1="120" y1="202" x2="120" y2="420" class="tree-line"/>
+  <line x1="120" y1="265" x2="250" y2="265" class="tree-line"/>
+  <line x1="120" y1="295" x2="250" y2="295" class="tree-line"/>
+  <line x1="120" y1="325" x2="250" y2="325" class="tree-line"/>
+</svg>
