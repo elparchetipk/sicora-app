@@ -1,8 +1,6 @@
 # SICORA - Sistema de Información de Coordinación Académica
 
-<div align="center">
-  <img src="./assets/logos/logo-sicora.svg" alt="SICORA Logo" width="400" />
-</div>
+![SICORA - Sistema de Información de Coordinación Académica](./assets/logos/logo-sicora-wide.svg)
 
 ## 📊 Backend API Statistics
 

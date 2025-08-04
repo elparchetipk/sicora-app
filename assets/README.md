@@ -27,6 +27,17 @@ assets/
   - Texto completo "SICORA" con subtítulo
   - Badge "OneVision Open Source"
 
+### `logo-sicora-wide.svg` - Logo Amplio
+
+- **Dimensiones**: 400x100px
+- **Uso**: Headers de README, presentaciones, banners
+- **Ruta**: `./assets/logos/logo-sicora-wide.svg`
+- **Características**:
+  - Formato amplio optimizado para headers
+  - Texto completo del sistema
+  - Versión mejorada para mejor legibilidad
+  - Diseño optimizado para GitHub y documentación
+
 ### `logo-sicora-small.svg` - Logo Compacto
 
 - **Dimensiones**: 200x60px
