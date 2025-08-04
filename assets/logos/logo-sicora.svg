@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="300" height="80" viewBox="0 0 300 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fondo con tema dark -->
+  <rect width="300" height="80" rx="8" fill="#0D1117" stroke="#30363D" stroke-width="1"/>
+
+  <!-- Ícono de SICORA -->
+  <g transform="translate(15, 15)">
+    <!-- Base del ícono - forma académica -->
+    <rect x="0" y="10" width="35" height="40" rx="3" fill="#238636" stroke="#2EA043" stroke-width="1"/>
+
+    <!-- Líneas de registro/datos -->
+    <line x1="5" y1="18" x2="30" y2="18" stroke="#F0F6FC" stroke-width="2"/>
+    <line x1="5" y1="25" x2="25" y2="25" stroke="#F0F6FC" stroke-width="2"/>
+    <line x1="5" y1="32" x2="28" y2="32" stroke="#F0F6FC" stroke-width="2"/>
+    <line x1="5" y1="39" x2="22" y2="39" stroke="#F0F6FC" stroke-width="2"/>
+
+    <!-- Indicador de sistema -->
+    <circle cx="30" cy="15" r="3" fill="#1F6FEB" stroke="#58A6FF" stroke-width="1"/>
+  </g>
+
+  <!-- Texto SICORA -->
+  <text x="65" y="35" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#F0F6FC">
+    SICORA
+  </text>
+
+  <!-- Subtítulo -->
+  <text x="65" y="52" font-family="Arial, sans-serif" font-size="12" fill="#8B949E">
+    Sistema de Información para Control de Registros Académicos
+  </text>
+
+  <!-- Indicador OneVision -->
+  <text x="65" y="67" font-family="Arial, sans-serif" font-size="10" fill="#1F6FEB">
+    OneVision Educational Platform
+  </text>
+
+  <!-- Icono de código abierto -->
+  <g transform="translate(270, 55)">
+    <circle cx="0" cy="0" r="8" fill="#238636" stroke="#2EA043" stroke-width="1"/>
+    <text x="0" y="3" font-family="Arial, sans-serif" font-size="8" fill="#F0F6FC" text-anchor="middle">OS</text>
+  </g>
+</svg>
