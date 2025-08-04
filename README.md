@@ -23,32 +23,11 @@
 
 📋 [Ver conteo completo](./_docs/reportes/CONTEO_ENDPOINTS_BACKEND_SICORA.md)
 
-## 🏛️ OneVision Open Source - Gestión Académica Integral
+## 🏗️ Arquitectura del Sistema
 
-Este es el repositorio principal del proyecto SICORA, desarrollado como una solución integral open source para la gestión de registros académicos y coordinación de programas formativos en instituciones educativas.
+![Arquitectura SICORA](./assets/arquitectura-sistema-sicora.svg)
 
-## 📊 Backend API Statistics
-
-> Last updated: 2024-12-19
-
-- **Total Endpoints**: **389**
-- **Go Backend**: 237 endpoints (8 servicios)
-- **Python Backend**: 152 endpoints (7 servicios + API Gateway)
-
-### Service Distribution:
-
-- **SoftwareFactoryService (Go)**: 58 endpoints
-- **EvalInService (Go)**: 42 endpoints
-- **KbService (Go)**: 32 endpoints
-- **UserService (Go)**: 31 endpoints
-- **ScheduleService (Go)**: 28 endpoints
-- **AttendanceService (Go)**: 25 endpoints
-- **MevalService (Go)**: 18 endpoints
-- **API Gateway (Python)**: 49 endpoints
-- **EvalInService (Python)**: 28 endpoints
-- **UserService (Python)**: 28 endpoints
-
-📋 [Ver conteo completo](./_docs/reportes/CONTEO_ENDPOINTS_BACKEND_SICORA.md)
+_Diagrama de la arquitectura completa del sistema SICORA mostrando las capas de presentación, API Gateway, servicios backend, persistencia e infraestructura._
 
 ## 📋 Estructura del Proyecto
 
