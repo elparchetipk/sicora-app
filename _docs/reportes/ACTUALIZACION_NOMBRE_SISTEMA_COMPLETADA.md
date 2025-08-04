@@ -2,6 +2,8 @@
 
 ![Logo SICORA](../../assets/logos/logo-sicora.svg)
 
+![Resumen de la Actualización](../../assets/educativos/actualizacion-nombre-sistema-sicora.svg)
+
 ## 📋 Resumen de la Actualización
 
 **Fecha**: $(date +"%Y-%m-%d %H:%M:%S")

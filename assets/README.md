@@ -145,6 +145,17 @@ assets/
   - Enfoque educativo y open source
   - Componentes principales del sistema
 
+### `actualizacion-nombre-sistema-sicora.svg` - Actualización de Nomenclatura
+
+- **Dimensiones**: 800x600px
+- **Uso**: Resumen visual del cambio de nomenclatura del sistema
+- **Ruta**: `./assets/educativos/actualizacion-nombre-sistema-sicora.svg`
+- **Características**:
+  - Comparativa de la antigua y nueva nomenclatura
+  - Ejemplos prácticos de cada categoría
+  - Enfoque educativo para facilitar la transición
+  - Diseño coherente con el resto de los assets educativos
+
 ## 🎨 Guía de Estilo Visual
 
 ### Colores Principales

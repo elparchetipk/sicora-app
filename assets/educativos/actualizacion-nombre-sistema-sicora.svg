@@ -10,99 +10,99 @@
       .stats { font-family: 'Arial', sans-serif; font-size: 14px; font-weight: bold; fill: #7c3aed; }
     </style>
   </defs>
-  
+
   <!-- Fondo -->
   <rect width="900" height="600" fill="#0f172a"/>
-  
+
   <!-- Título Principal -->
   <text x="450" y="40" text-anchor="middle" class="title">Actualización del Nombre del Sistema SICORA</text>
   <text x="450" y="65" text-anchor="middle" class="subtitle">Cambio Completo de Nomenclatura - Proyecto Open Source</text>
-  
+
   <!-- Sección: Antes y Después -->
   <rect x="50" y="100" width="800" height="120" fill="#1e293b" stroke="#475569" stroke-width="2" rx="8"/>
   <text x="70" y="130" class="section-title">📝 Cambio de Nomenclatura</text>
-  
+
   <!-- Antes -->
   <rect x="70" y="150" width="360" height="50" fill="#7f1d1d" stroke="#dc2626" stroke-width="1" rx="4"/>
   <text x="80" y="170" class="label">❌ ANTERIOR:</text>
   <text x="80" y="185" class="old-text">Sistema de Información para Control de</text>
   <text x="80" y="200" class="old-text">Registros Académicos</text>
-  
+
   <!-- Después -->
   <rect x="470" y="150" width="360" height="50" fill="#14532d" stroke="#059669" stroke-width="1" rx="4"/>
   <text x="480" y="170" class="label">✅ NUEVO:</text>
   <text x="480" y="185" class="new-text">Sistema de Información de</text>
   <text x="480" y="200" class="new-text">Coordinación Académica</text>
-  
+
   <!-- Sección: Archivos Actualizados -->
   <rect x="50" y="250" width="390" height="280" fill="#1e293b" stroke="#475569" stroke-width="2" rx="8"/>
   <text x="70" y="280" class="section-title">📁 Archivos Actualizados</text>
-  
+
   <!-- Lista de archivos -->
   <circle cx="80" cy="305" r="3" fill="#059669"/>
   <text x="95" y="310" class="new-text">README.md (principal)</text>
-  
+
   <circle cx="80" cy="325" r="3" fill="#059669"/>
   <text x="95" y="330" class="new-text">logo-sicora.svg</text>
-  
+
   <circle cx="80" cy="345" r="3" fill="#059669"/>
   <text x="95" y="350" class="new-text">sicora-app-fe/README.md</text>
-  
+
   <circle cx="80" cy="365" r="3" fill="#059669"/>
   <text x="95" y="370" class="new-text">sicora-be-python/README.md</text>
-  
+
   <circle cx="80" cy="385" r="3" fill="#059669"/>
   <text x="95" y="390" class="new-text">sicora-be-go/README.md</text>
-  
+
   <circle cx="80" cy="405" r="3" fill="#059669"/>
   <text x="95" y="410" class="new-text">sicora-mcp-server/*</text>
-  
+
   <circle cx="80" cy="425" r="3" fill="#059669"/>
   <text x="95" y="430" class="new-text">docs swagger (Go services)</text>
-  
+
   <circle cx="80" cy="445" r="3" fill="#059669"/>
   <text x="95" y="450" class="new-text">package.json (MCP)</text>
-  
+
   <circle cx="80" cy="465" r="3" fill="#059669"/>
   <text x="95" y="470" class="new-text">Documentación _docs/</text>
-  
+
   <circle cx="80" cy="485" r="3" fill="#059669"/>
   <text x="95" y="490" class="new-text">Scripts y configuraciones</text>
-  
+
   <circle cx="80" cy="505" r="3" fill="#059669"/>
   <text x="95" y="510" class="new-text">Referencias SENA → OneVision</text>
-  
+
   <!-- Sección: Estadísticas -->
   <rect x="460" y="250" width="390" height="280" fill="#1e293b" stroke="#475569" stroke-width="2" rx="8"/>
   <text x="480" y="280" class="section-title">📊 Estadísticas del Cambio</text>
-  
+
   <!-- Estadísticas -->
   <rect x="480" y="300" width="120" height="60" fill="#7c2d12" stroke="#ea580c" stroke-width="1" rx="4"/>
   <text x="540" y="320" text-anchor="middle" class="stats">15+</text>
   <text x="540" y="335" text-anchor="middle" class="label">Archivos</text>
   <text x="540" y="350" text-anchor="middle" class="label">Modificados</text>
-  
+
   <rect x="620" y="300" width="120" height="60" fill="#4c1d95" stroke="#8b5cf6" stroke-width="1" rx="4"/>
   <text x="680" y="320" text-anchor="middle" class="stats">25+</text>
   <text x="680" y="335" text-anchor="middle" class="label">Referencias</text>
   <text x="680" y="350" text-anchor="middle" class="label">Actualizadas</text>
-  
+
   <rect x="480" y="380" width="120" height="60" fill="#14532d" stroke="#059669" stroke-width="1" rx="4"/>
   <text x="540" y="400" text-anchor="middle" class="stats">100%</text>
   <text x="540" y="415" text-anchor="middle" class="label">Cobertura</text>
   <text x="540" y="430" text-anchor="middle" class="label">Completa</text>
-  
+
   <rect x="620" y="380" width="120" height="60" fill="#1e40af" stroke="#3b82f6" stroke-width="1" rx="4"/>
   <text x="680" y="400" text-anchor="middle" class="stats">1</text>
   <text x="680" y="415" text-anchor="middle" class="label">Logo SVG</text>
   <text x="680" y="430" text-anchor="middle" class="label">Actualizado</text>
-  
+
   <!-- Verificaciones -->
   <text x="480" y="470" class="section-title">✅ Verificaciones Completadas</text>
   <text x="480" y="490" class="new-text">• Búsqueda de nombre anterior: 0 resultados</text>
   <text x="480" y="505" class="new-text">• Nuevo nombre en archivos principales: ✅</text>
   <text x="480" y="520" class="new-text">• Logo SVG actualizado: ✅</text>
-  
+
   <!-- Footer -->
   <rect x="50" y="550" width="800" height="40" fill="#065f46" stroke="#059669" stroke-width="1" rx="4"/>
   <text x="450" y="575" text-anchor="middle" class="new-text">🎓 SICORA - Sistema de Información de Coordinación Académica | OneVision Open Source</text>
