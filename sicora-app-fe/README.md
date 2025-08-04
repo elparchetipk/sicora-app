@@ -1,6 +1,6 @@
 # SICORA Frontend - React + TypeScript + Vite
 
-## 🏛️ Sistema de Información para Control de Registros Académicos
+## 🏛️ Sistema de Información de Coordinación Académica
 
 Frontend del proyecto SICORA desarrollado para OneVision Open Source, construido con React 18, TypeScript y Vite para una experiencia de desarrollo moderna y eficiente.
 

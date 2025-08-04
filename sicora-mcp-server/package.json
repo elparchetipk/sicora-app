@@ -1,7 +1,7 @@
 {
   "name": "sicora-mcp-server",
   "version": "1.0.0",
-  "description": "Servidor MCP especializado para el desarrollo de SICORA - Sistema de Control de Registros Académicos",
+  "description": "Servidor MCP especializado para el desarrollo de SICORA - Sistema de Información de Coordinación Académica",
   "main": "dist/index.js",
   "type": "module",
   "scripts": {
@@ -28,7 +28,7 @@
   "keywords": [
     "mcp",
     "sicora",
-    "sena",
+    "onevision",
     "academic",
     "education",
     "development",

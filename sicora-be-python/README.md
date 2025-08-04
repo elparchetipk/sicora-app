@@ -1,8 +1,8 @@
 # SICORA Backend - Python Stack (FastAPI)
 
-## 🏛️ Sistema de Información para Control de Registros Académicos
+## 🏛️ Sistema de Información de Coordinación Académica
 
-Backend de SICORA implementado en Python con FastAPI, diseñado como repositorio independiente con arquitectura de microservicios. Incluye integración completa con IA y servicios avanzados para gestión académica del SENA.
+Backend de SICORA implementado en Python con FastAPI, diseñado como repositorio independiente con arquitectura de microservicios. Incluye integración completa con IA y servicios avanzados para gestión académica del OneVision.
 
 ## 🚀 Tecnologías Principales
 
@@ -409,5 +409,5 @@ swagger-codegen generate -i openapi.json -l html2 -o docs/
 
 ---
 
-_Desarrollado con 🐍 para el SENA por el equipo EPTI_
+_Desarrollado con 🐍 para OneVision por el equipo EPTI_
 _Python: Versatility meets AI integration_

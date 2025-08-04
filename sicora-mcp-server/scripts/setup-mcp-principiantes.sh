@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Script interactivo para configurar y usar MCP por primera vez
-# SICORA - Sistema de Control de Registros Académicos
+# SICORA - Sistema de Información de Coordinación Académica
 
 set -e
 

@@ -1,4 +1,4 @@
-# SICORA - Sistema de Información para Control de Registros Académicos
+# SICORA - Sistema de Información de Coordinación Académica
 
 ![SICORA Logo](./assets/logos/logo-sicora.svg)
 
@@ -379,4 +379,4 @@ _SICORA utiliza una estrategia de configuración Git progresiva: configuración 
 ---
 
 **SICORA** - Desarrollado con ❤️ por OneVision Open Source
-_Sistema de Información para Control de Registros Académicos - Open Source Educational Platform_
+_Sistema de Información de Coordinación Académica - Open Source Educational Platform_

@@ -268,7 +268,7 @@ class SicoraMcpServer {
               role: 'system',
               content: {
                 type: 'text',
-                text: `Eres un asistente especializado en el desarrollo del proyecto SICORA (Sistema de Información para Control de Registros Académicos) del SENA.
+                text: `Eres un asistente especializado en el desarrollo del proyecto SICORA (Sistema de Información de Coordinación Académica) del OneVision.
 
 Conocimientos especializados:
 - Arquitectura multi-stack (React + TypeScript frontend, Go backend)

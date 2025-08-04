@@ -314,7 +314,7 @@ La integración frontend-backend de SICORA está **COMPLETAMENTE LISTA** para se
 
 ---
 
-**🏛️ SICORA - Sistema de Información para Control de Registros Académicos**
+**🏛️ SICORA - Sistema de Información de Coordinación Académica**
 _Desarrollado para OneVision Open Source por el equipo EPTI_
 _Integración Frontend-Backend: ✅ COMPLETADA_
 
