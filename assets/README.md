@@ -134,6 +134,17 @@ assets/
   - Implementación específica en SICORA
   - Casos de uso prácticos
 
+### `resumen-general-sicora.svg` - Resumen General del Proyecto
+
+- **Dimensiones**: 1200x800px
+- **Uso**: Vista general completa del proyecto SICORA
+- **Ruta**: `./assets/educativos/resumen-general-sicora.svg`
+- **Características**:
+  - Stack tecnológico completo
+  - Estadísticas del proyecto
+  - Enfoque educativo y open source
+  - Componentes principales del sistema
+
 ## 🎨 Guía de Estilo Visual
 
 ### Colores Principales

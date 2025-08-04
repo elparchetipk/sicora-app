@@ -25,9 +25,15 @@
 
 ## 🏗️ Arquitectura del Sistema
 
-![Arquitectura SICORA](./assets/arquitectura-sistema-sicora.svg)
+![Arquitectura SICORA](./assets/arquitectura/arquitectura-sistema-sicora.svg)
 
 _Diagrama de la arquitectura completa del sistema SICORA mostrando las capas de presentación, API Gateway, servicios backend, persistencia e infraestructura._
+
+### Microservicios Detallados
+
+![Microservicios SICORA](./assets/arquitectura/microservicios-sicora.svg)
+
+_Vista detallada de la arquitectura de microservicios con tecnologías específicas, puertos y conexiones entre servicios._
 
 ## 📋 Estructura del Proyecto
 
@@ -77,6 +83,10 @@ sicora-app/
 - **Pruebas de integración**: Completadas ✅
 - **Estado**: **INTEGRACIÓN COMPLETADA**
 
+![Flujo de Datos SICORA](./assets/flujos/flujo-datos-sicora.svg)
+
+_Diagrama del flujo de procesamiento de datos desde la entrada hasta las salidas del sistema, mostrando validación, servicios específicos y almacenamiento._
+
 ### 🤖 Servidor MCP (Model Context Protocol)
 
 - **Herramientas**: Análisis, generación de código, integración, pruebas
@@ -84,6 +94,10 @@ sicora-app/
 - **Gestor de paquetes**: pnpm
 - **Integración**: VS Code + MCP Protocol
 - **Estado**: **COMPLETADO Y FUNCIONAL**
+
+![Conceptos MCP SICORA](./assets/educativos/conceptos-mcp-sicora.svg)
+
+_Diagrama educativo explicando qué es MCP, su arquitectura, beneficios y implementación específica en SICORA._
 
 ## 🛠️ Tecnologías Utilizadas
 
@@ -278,7 +292,36 @@ PORT=8002
 - [ ] Notificaciones en tiempo real
 - [ ] API mobile
 
+## 🔧 Resolución de Problemas
+
+### Problemas de Docker y Red
+
+![Resolución de Problemas Docker](./assets/diagramas/resolucion-problemas-docker.svg)
+
+_Diagrama completo para diagnosticar y resolver problemas comunes de Docker, incluye herramientas automáticas y scripts de reparación._
+
+### Scripts de Diagnóstico Automático
+
+```bash
+# Diagnosticar problemas de red Docker
+./scripts/diagnose-docker-network.sh
+
+# Reparar automáticamente problemas comunes
+./scripts/repair-docker-network.sh
+
+# Verificar estado de todos los servicios
+./scripts/health-check-services.sh
+```
+
+Para más información detallada: [📋 Errores de Red Docker](./_docs/configuracion/ERRORES_RED_DOCKER_SICORA.md)
+
 ## 🤝 Contribución
+
+### Estrategia Git Progresiva
+
+![Flujo de Desarrollo Git Progresivo](./assets/flujos/flujo-desarrollo-git-progresivo.svg)
+
+_SICORA utiliza una estrategia de configuración Git progresiva: configuración mínima para desarrollo inicial, que evoluciona a estricta para equipos y producción._
 
 ### Workflow de Desarrollo
 

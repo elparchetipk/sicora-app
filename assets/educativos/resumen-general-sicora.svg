@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" style="background-color: #1a1a1a;">
+  <defs>
+    <style>
+      .title { fill: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; font-size: 22px; font-weight: bold; }
+      .subtitle { fill: #e0e0e0; font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; }
+      .section-title { fill: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; font-weight: bold; }
+      .feature-label { fill: #d0d0d0; font-family: 'Segoe UI', Arial, sans-serif; font-size: 10px; }
+      .tech-label { fill: #b0b0b0; font-family: 'Segoe UI', Arial, sans-serif; font-size: 9px; }
+      .small-text { fill: #a0a0a0; font-family: 'Segoe UI', Arial, sans-serif; font-size: 8px; }
+      .highlight { fill: #68d391; font-family: 'Segoe UI', Arial, sans-serif; font-size: 10px; font-weight: bold; }
+
+      .main-box { fill: #2d4a5a; stroke: #4a90e2; stroke-width: 3; rx: 12; }
+      .feature-box { fill: #2d5a3d; stroke: #68d391; stroke-width: 2; rx: 8; }
+      .tech-box { fill: #5a2d87; stroke: #9f7aea; stroke-width: 2; rx: 8; }
+      .stats-box { fill: #5a3d2d; stroke: #ed8936; stroke-width: 2; rx: 8; }
+      .education-box { fill: #3d2d5a; stroke: #b794f6; stroke-width: 2; rx: 8; }
+      .opensource-box { fill: #2d5a5a; stroke: #4dd0e1; stroke-width: 2; rx: 8; }
+
+      .connection { fill: none; stroke: #4a90e2; stroke-width: 2; }
+      .data-flow { fill: none; stroke: #68d391; stroke-width: 1.5; stroke-dasharray: 3,3; }
+    </style>
+  </defs>
+
+  <!-- Logo SICORA en la parte superior -->
+  <rect x="400" y="20" width="400" height="80" class="main-box"/>
+  <text x="600" y="50" text-anchor="middle" class="title">SICORA</text>
+  <text x="600" y="70" text-anchor="middle" class="subtitle">Sistema Integral de Control de Recursos Académicos</text>
+  <text x="600" y="85" text-anchor="middle" class="small-text">OneVision Open Source Educational Platform</text>
+
+  <!-- TECNOLOGÍAS PRINCIPALES -->
+  <rect x="50" y="130" width="280" height="180" class="tech-box"/>
+  <text x="190" y="155" text-anchor="middle" class="section-title">🛠️ STACK TECNOLÓGICO</text>
+
+  <!-- Frontend -->
+  <rect x="70" y="170" width="110" height="60" style="fill: #2d5a87; stroke: #4a90e2; stroke-width: 1; rx: 4;"/>
+  <text x="125" y="190" text-anchor="middle" class="feature-label">FRONTEND</text>
+  <text x="125" y="205" text-anchor="middle" class="tech-label">React 18 + TypeScript</text>
+  <text x="125" y="220" text-anchor="middle" class="tech-label">Vite + TailwindCSS</text>
+
+  <!-- Backend -->
+  <rect x="200" y="170" width="110" height="60" style="fill: #2d5a3d; stroke: #68d391; stroke-width: 1; rx: 4;"/>
+  <text x="255" y="190" text-anchor="middle" class="feature-label">BACKEND</text>
+  <text x="255" y="205" text-anchor="middle" class="tech-label">Go + Python</text>
+  <text x="255" y="220" text-anchor="middle" class="tech-label">Microservicios</text>
+
+  <!-- Base de Datos -->
+  <rect x="70" y="240" width="110" height="60" style="fill: #5a3d2d; stroke: #ed8936; stroke-width: 1; rx: 4;"/>
+  <text x="125" y="260" text-anchor="middle" class="feature-label">DATOS</text>
+  <text x="125" y="275" text-anchor="middle" class="tech-label">PostgreSQL</text>
+  <text x="125" y="290" text-anchor="middle" class="tech-label">MongoDB + Redis</text>
+
+  <!-- DevOps -->
+  <rect x="200" y="240" width="110" height="60" style="fill: #3d2d5a; stroke: #b794f6; stroke-width: 1; rx: 4;"/>
+  <text x="255" y="260" text-anchor="middle" class="feature-label">DEVOPS</text>
+  <text x="255" y="275" text-anchor="middle" class="tech-label">Docker Compose</text>
+  <text x="255" y="290" text-anchor="middle" class="tech-label">GitHub Actions</text>
+
+  <!-- ESTADÍSTICAS DEL PROYECTO -->
+  <rect x="360" y="130" width="280" height="180" class="stats-box"/>
+  <text x="500" y="155" text-anchor="middle" class="section-title">📊 ESTADÍSTICAS</text>
+
+  <text x="380" y="180" class="highlight">389 Endpoints de API</text>
+  <text x="385" y="195" class="tech-label">• Go Backend: 237 endpoints</text>
+  <text x="385" y="210" class="tech-label">• Python Backend: 152 endpoints</text>
+
+  <text x="380" y="235" class="highlight">15 Microservicios</text>
+  <text x="385" y="250" class="tech-label">• 8 servicios en Go</text>
+  <text x="385" y="265" class="tech-label">• 7 servicios en Python</text>
+
+  <text x="380" y="290" class="highlight">Cobertura Completa</text>
+  <text x="385" y="305" class="tech-label">• Autenticación JWT</text>
+
+  <!-- CARACTERÍSTICAS PRINCIPALES -->
+  <rect x="670" y="130" width="280" height="180" class="feature-box"/>
+  <text x="810" y="155" text-anchor="middle" class="section-title">✨ CARACTERÍSTICAS</text>
+
+  <text x="690" y="180" class="feature-label">🔐 Sistema de Autenticación</text>
+  <text x="695" y="195" class="small-text">• JWT + Refresh tokens</text>
+  <text x="695" y="210" class="small-text">• Roles y permisos</text>
+
+  <text x="690" y="230" class="feature-label">👥 Gestión de Usuarios</text>
+  <text x="695" y="245" class="small-text">• CRUD completo</text>
+  <text x="695" y="260" class="small-text">• Operaciones en lote</text>
+
+  <text x="690" y="280" class="feature-label">📈 Monitoreo y Analytics</text>
+  <text x="695" y="295" class="small-text">• Health checks</text>
+
+  <!-- ENFOQUE EDUCATIVO -->
+  <rect x="50" y="340" width="380" height="200" class="education-box"/>
+  <text x="240" y="365" text-anchor="middle" class="section-title">🎓 ENFOQUE EDUCATIVO</text>
+
+  <text x="70" y="390" class="feature-label">📚 Documentación Completa</text>
+  <text x="75" y="405" class="small-text">• Guías paso a paso</text>
+  <text x="75" y="420" class="small-text">• Diagramas explicativos SVG</text>
+  <text x="75" y="435" class="small-text">• Casos de uso reales</text>
+
+  <text x="70" y="460" class="feature-label">🔧 Herramientas de Aprendizaje</text>
+  <text x="75" y="475" class="small-text">• MCP Server para automatización</text>
+  <text x="75" y="490" class="small-text">• Scripts de diagnóstico</text>
+  <text x="75" y="505" class="small-text">• Configuración Git progresiva</text>
+
+  <text x="250" y="390" class="feature-label">🎯 Objetivos Pedagógicos</text>
+  <text x="255" y="405" class="small-text">• Arquitectura de microservicios</text>
+  <text x="255" y="420" class="small-text">• Desarrollo full-stack</text>
+  <text x="255" y="435" class="small-text">• DevOps y containerización</text>
+  <text x="255" y="450" class="small-text">• Mejores prácticas</text>
+
+  <text x="250" y="475" class="feature-label">📖 Recursos Incluidos</text>
+  <text x="255" y="490" class="small-text">• Código bien documentado</text>
+  <text x="255" y="505" class="small-text">• Tests de integración</text>
+  <text x="255" y="520" class="small-text">• Ejemplos prácticos</text>
+
+  <!-- OPEN SOURCE -->
+  <rect x="460" y="340" width="380" height="200" class="opensource-box"/>
+  <text x="650" y="365" text-anchor="middle" class="section-title">🌍 OPEN SOURCE</text>
+
+  <text x="480" y="390" class="feature-label">📜 Licencia MIT</text>
+  <text x="485" y="405" class="small-text">• Uso libre y modificación</text>
+  <text x="485" y="420" class="small-text">• Comercial y educativo</text>
+  <text x="485" y="435" class="small-text">• Distribución sin restricciones</text>
+
+  <text x="480" y="460" class="feature-label">🤝 Contribución Bienvenida</text>
+  <text x="485" y="475" class="small-text">• Issues y pull requests</text>
+  <text x="485" y="490" class="small-text">• Documentación mejorada</text>
+  <text x="485" y="505" class="small-text">• Nuevas características</text>
+
+  <text x="660" y="390" class="feature-label">🎯 Casos de Uso</text>
+  <text x="665" y="405" class="small-text">• Instituciones educativas</text>
+  <text x="665" y="420" class="small-text">• Proyectos de aprendizaje</text>
+  <text x="665" y="435" class="small-text">• Base para otros sistemas</text>
+  <text x="665" y="450" class="small-text">• Portfolio de desarrollo</text>
+
+  <text x="660" y="475" class="feature-label">🔗 Comunidad</text>
+  <text x="665" y="490" class="small-text">• Documentación accesible</text>
+  <text x="665" y="505" class="small-text">• Soporte comunitario</text>
+  <text x="665" y="520" class="small-text">• Actualizaciones regulares</text>
+
+  <!-- COMPONENTES PRINCIPALES -->
+  <rect x="50" y="570" width="1100" height="180" style="fill: none; stroke: #4a90e2; stroke-width: 2; rx: 8;"/>
+  <text x="600" y="595" text-anchor="middle" class="section-title">🏗️ COMPONENTES DEL SISTEMA</text>
+
+  <!-- Frontend -->
+  <rect x="80" y="610" width="140" height="120" style="fill: #2d5a87; stroke: #4a90e2; stroke-width: 1; rx: 6;"/>
+  <text x="150" y="630" text-anchor="middle" class="feature-label">FRONTEND</text>
+  <text x="150" y="645" text-anchor="middle" class="tech-label">sicora-app-fe</text>
+  <text x="90" y="665" class="small-text">• Interface moderna</text>
+  <text x="90" y="680" class="small-text">• Responsive design</text>
+  <text x="90" y="695" class="small-text">• Testing integrado</text>
+  <text x="90" y="710" class="small-text">• Vite + Hot reload</text>
+
+  <!-- Backend Go -->
+  <rect x="240" y="610" width="140" height="120" style="fill: #2d5a3d; stroke: #68d391; stroke-width: 1; rx: 6;"/>
+  <text x="310" y="630" text-anchor="middle" class="feature-label">BACKEND GO</text>
+  <text x="310" y="645" text-anchor="middle" class="tech-label">sicora-be-go</text>
+  <text x="250" y="665" class="small-text">• 8 microservicios</text>
+  <text x="250" y="680" class="small-text">• Clean Architecture</text>
+  <text x="250" y="695" class="small-text">• Gin framework</text>
+  <text x="250" y="710" class="small-text">• Swagger docs</text>
+
+  <!-- Backend Python -->
+  <rect x="400" y="610" width="140" height="120" style="fill: #5a2d87; stroke: #9f7aea; stroke-width: 1; rx: 6;"/>
+  <text x="470" y="630" text-anchor="middle" class="feature-label">BACKEND PYTHON</text>
+  <text x="470" y="645" text-anchor="middle" class="tech-label">sicora-be-python</text>
+  <text x="410" y="665" class="small-text">• 7 microservicios</text>
+  <text x="410" y="680" class="small-text">• FastAPI</text>
+  <text x="410" y="695" class="small-text">• SQLAlchemy ORM</text>
+  <text x="410" y="710" class="small-text">• API Gateway</text>
+
+  <!-- Infraestructura -->
+  <rect x="560" y="610" width="140" height="120" style="fill: #5a3d2d; stroke: #ed8936; stroke-width: 1; rx: 6;"/>
+  <text x="630" y="630" text-anchor="middle" class="feature-label">INFRAESTRUCTURA</text>
+  <text x="630" y="645" text-anchor="middle" class="tech-label">sicora-infra</text>
+  <text x="570" y="665" class="small-text">• Docker Compose</text>
+  <text x="570" y="680" class="small-text">• PostgreSQL</text>
+  <text x="570" y="695" class="small-text">• MongoDB</text>
+  <text x="570" y="710" class="small-text">• Redis cache</text>
+
+  <!-- MCP Server -->
+  <rect x="720" y="610" width="140" height="120" style="fill: #3d2d5a; stroke: #b794f6; stroke-width: 1; rx: 6;"/>
+  <text x="790" y="630" text-anchor="middle" class="feature-label">MCP SERVER</text>
+  <text x="790" y="645" text-anchor="middle" class="tech-label">sicora-mcp-server</text>
+  <text x="730" y="665" class="small-text">• Automatización IA</text>
+  <text x="730" y="680" class="small-text">• Herramientas dev</text>
+  <text x="730" y="695" class="small-text">• VS Code integration</text>
+  <text x="730" y="710" class="small-text">• Node.js + TypeScript</text>
+
+  <!-- Documentación -->
+  <rect x="880" y="610" width="140" height="120" style="fill: #2d5a5a; stroke: #4dd0e1; stroke-width: 1; rx: 6;"/>
+  <text x="950" y="630" text-anchor="middle" class="feature-label">DOCUMENTACIÓN</text>
+  <text x="950" y="645" text-anchor="middle" class="tech-label">sicora-docs</text>
+  <text x="890" y="665" class="small-text">• Guías completas</text>
+  <text x="890" y="680" class="small-text">• Diagramas SVG</text>
+  <text x="890" y="695" class="small-text">• Casos de uso</text>
+  <text x="890" y="710" class="small-text">• Arquitectura clara</text>
+
+  <!-- Conexiones entre componentes -->
+  <line x1="220" y1="670" x2="240" y2="670" class="connection"/>
+  <line x1="380" y1="670" x2="400" y2="670" class="connection"/>
+  <line x1="540" y1="670" x2="560" y2="670" class="connection"/>
+  <line x1="700" y1="670" x2="720" y2="670" class="connection"/>
+  <line x1="860" y1="670" x2="880" y2="670" class="connection"/>
+
+  <!-- Conexiones de datos -->
+  <line x1="310" y1="730" x2="630" y2="730" class="data-flow"/>
+  <line x1="470" y1="730" x2="630" y2="730" class="data-flow"/>
+  <line x1="630" y1="730" x2="630" y2="610" class="data-flow"/>
+
+  <!-- Título del footer -->
+  <text x="600" y="770" text-anchor="middle" class="small-text">Sistema Integral de Control de Recursos Académicos - Plataforma Educativa Open Source</text>
+  <text x="600" y="785" text-anchor="middle" class="tech-label">OneVision | MIT License | Desarrollado con ❤️ para la educación</text>
+</svg>
