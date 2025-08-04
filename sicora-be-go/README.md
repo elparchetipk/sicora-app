@@ -1,6 +1,6 @@
 # SICORA Backend - Go Stack
 
-## 🏛️ Sistema de Información para Control de Registros Académicos
+## 🏛️ Sistema de Información de Coordinación Académica
 
 Backend de SICORA implementado en Go con arquitectura de microservicios para gestión de usuarios, horarios, asistencia y evaluación de proyectos. Desarrollado para el SENA con enfoque en alta concurrencia y rendimiento.
 

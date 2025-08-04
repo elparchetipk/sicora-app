@@ -211,7 +211,7 @@ info:
   contact:
     email: dev@sicora.sena.edu.co
     name: Equipo de Desarrollo SICORA
-  description: Sistema de Información para Control de Registros Académicos - UserService
+  description: Sistema de Información de Coordinación Académica - UserService
     implementado con Go, Gin y Clean Architecture
   license:
     name: MIT

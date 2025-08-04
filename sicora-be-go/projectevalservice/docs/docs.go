@@ -1271,7 +1271,7 @@ var SwaggerInfo = &swag.Spec{
 	BasePath:         "/api/v1",
 	Schemes:          []string{},
 	Title:            "SICORA ProjectEvalService API - Go",
-	Description:      "Sistema de Información para Control de Registros Académicos - ProjectEvalService implementado con Go, Gin y Clean Architecture",
+	Description:      "Sistema de Información de Coordinación Académica - ProjectEvalService implementado con Go, Gin y Clean Architecture",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

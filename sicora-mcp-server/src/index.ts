@@ -4,14 +4,13 @@ import { Server } from '@modelcontextprotocol/sdk/server/index.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import {
   CallToolRequestSchema,
-  ListToolsRequestSchema,
-  ListResourcesRequestSchema,
-  ReadResourceRequestSchema,
-  ListPromptsRequestSchema,
   GetPromptRequestSchema,
+  ListPromptsRequestSchema,
+  ListResourcesRequestSchema,
+  ListToolsRequestSchema,
+  ReadResourceRequestSchema,
 } from '@modelcontextprotocol/sdk/types.js';
 import dotenv from 'dotenv';
-import path from 'path';
 
 // Cargar variables de entorno
 dotenv.config();
@@ -316,7 +315,7 @@ ${JSON.stringify(analysis.structure, null, 2)}
 
 ## Estado de Salud
 - Frontend React: Operativo
-- Backend Go: Operativo  
+- Backend Go: Operativo
 - Base de datos: Conectada
 - Integración: Funcional
 
@@ -587,7 +586,7 @@ func (h *Handler) ${name}(c *gin.Context) {
   // Validar entrada
   // Procesar lógica de negocio
   // Retornar respuesta
-  
+
   c.JSON(http.StatusOK, gin.H{
     "success": true,
     "data": nil,
@@ -609,7 +608,7 @@ type ${name} struct {
   CreatedAt time.Time      \`json:"created_at"\`
   UpdatedAt time.Time      \`json:"updated_at"\`
   DeletedAt gorm.DeletedAt \`json:"deleted_at" gorm:"index"\`
-  
+
   // Campos específicos aquí
 }
 

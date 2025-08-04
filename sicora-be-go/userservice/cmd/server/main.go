@@ -2,7 +2,7 @@ package main
 
 //	@title			SICORA UserService API - Go
 //	@version		1.0.0
-//	@description	Sistema de Información para Control de Registros Académicos - UserService implementado con Go, Gin y Clean Architecture
+//	@description	Sistema de Información de Coordinación Académica - UserService implementado con Go, Gin y Clean Architecture
 //	@termsOfService	http://swagger.io/terms/
 
 //	@contact.name	Equipo de Desarrollo SICORA

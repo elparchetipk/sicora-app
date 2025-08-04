@@ -2,7 +2,7 @@ package main
 
 //	@title			SICORA ProjectEvalService API - Go
 //	@version		1.0.0
-//	@description	Sistema de Información para Control de Registros Académicos - ProjectEvalService implementado con Go, Gin y Clean Architecture
+//	@description	Sistema de Información de Coordinación Académica - ProjectEvalService implementado con Go, Gin y Clean Architecture
 //	@termsOfService	http://swagger.io/terms/
 
 //	@contact.name	Equipo de Desarrollo SICORA
@@ -20,14 +20,12 @@ package main
 //	@description				Type "Bearer" followed by a space and JWT token.
 
 import (
-	_ "projectevalservice/docs"
-	_ "projectevalservice/docs"
-	_ "projectevalservice/docs"
 	"context"
 	"log"
 	"net/http"
 	"os"
 	"os/signal"
+	_ "projectevalservice/docs"
 	"syscall"
 	"time"
 

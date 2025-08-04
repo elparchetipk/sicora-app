@@ -65,7 +65,7 @@ show_welcome() {
 # Verificar prerequisitos
 check_prerequisites() {
     log_step "1/5 - Verificando prerequisitos..."
-    
+
     # Verificar Node.js
     if command -v node &> /dev/null; then
         NODE_VERSION=$(node --version)
@@ -74,7 +74,7 @@ check_prerequisites() {
         log_error "❌ Node.js no encontrado. Por favor instala Node.js >= 18.0.0"
         exit 1
     fi
-    
+
     # Verificar pnpm
     if command -v pnpm &> /dev/null; then
         PNPM_VERSION=$(pnpm --version)
@@ -84,14 +84,14 @@ check_prerequisites() {
         npm install -g pnpm
         log_success "✅ pnpm instalado correctamente"
     fi
-    
+
     # Verificar VS Code
     if command -v code &> /dev/null; then
         log_info "✅ VS Code encontrado"
     else
         log_warn "⚠️  VS Code no encontrado en PATH. Asegúrate de tenerlo instalado."
     fi
-    
+
     # Verificar directorio del proyecto
     if [ -f "package.json" ]; then
         log_info "✅ Estás en el directorio correcto del servidor MCP"
@@ -99,7 +99,7 @@ check_prerequisites() {
         log_error "❌ No se encontró package.json. Ejecuta este script desde sicora-mcp-server/"
         exit 1
     fi
-    
+
     log_success "✅ Todos los prerequisitos están listos"
     pause_for_user
 }
@@ -107,13 +107,13 @@ check_prerequisites() {
 # Configurar el servidor MCP
 setup_mcp_server() {
     log_step "2/5 - Configurando servidor MCP..."
-    
+
     log_info "Instalando dependencias con pnpm..."
     pnpm install
-    
+
     log_info "Compilando el servidor MCP..."
     pnpm run build
-    
+
     log_info "Verificando que el servidor compile correctamente..."
     if [ -f "dist/index.js" ]; then
         log_success "✅ Servidor MCP compilado correctamente"
@@ -121,7 +121,7 @@ setup_mcp_server() {
         log_error "❌ Error al compilar el servidor MCP"
         exit 1
     fi
-    
+
     log_success "✅ Servidor MCP configurado correctamente"
     pause_for_user
 }
@@ -129,7 +129,7 @@ setup_mcp_server() {
 # Configurar VS Code
 setup_vscode() {
     log_step "3/5 - Configurando VS Code..."
-    
+
     # Verificar archivo de configuración MCP
     MCP_CONFIG="../.vscode/mcp.json"
     if [ -f "$MCP_CONFIG" ]; then
@@ -139,7 +139,7 @@ setup_vscode() {
     else
         log_error "❌ No se encontró .vscode/mcp.json"
         log_info "Creando configuración MCP..."
-        
+
         mkdir -p ../.vscode
         cat > "$MCP_CONFIG" << EOF
 {
@@ -159,7 +159,7 @@ setup_vscode() {
 EOF
         log_success "✅ Configuración MCP creada"
     fi
-    
+
     log_warn "⚠️  IMPORTANTE: Necesitas reiniciar VS Code para que detecte la configuración MCP"
     echo ""
     echo -e "${YELLOW}Por favor:${NC}"
@@ -173,10 +173,10 @@ EOF
 # Iniciar el servidor MCP
 start_mcp_server() {
     log_step "4/5 - Iniciando servidor MCP..."
-    
+
     log_info "Iniciando servidor MCP en modo background..."
     log_warn "El servidor se ejecutará en segundo plano"
-    
+
     # Verificar si ya hay un servidor ejecutándose
     if pgrep -f "sicora-mcp-server" > /dev/null; then
         log_info "Ya hay un servidor MCP ejecutándose"
@@ -184,15 +184,15 @@ start_mcp_server() {
         pkill -f "sicora-mcp-server" || true
         sleep 2
     fi
-    
+
     # Iniciar servidor
     log_info "Iniciando servidor MCP..."
     pnpm start &
     SERVER_PID=$!
-    
+
     # Esperar un poco para que inicie
     sleep 3
-    
+
     # Verificar que esté ejecutándose
     if kill -0 $SERVER_PID 2>/dev/null; then
         log_success "✅ Servidor MCP iniciado correctamente (PID: $SERVER_PID)"
@@ -201,7 +201,7 @@ start_mcp_server() {
         log_error "❌ Error al iniciar el servidor MCP"
         exit 1
     fi
-    
+
     log_success "✅ Servidor MCP ejecutándose en background"
     pause_for_user
 }
@@ -209,7 +209,7 @@ start_mcp_server() {
 # Hacer primera prueba
 first_test() {
     log_step "5/5 - Primera prueba de MCP..."
-    
+
     echo -e "${CYAN}🎉 ¡Todo listo! Ahora puedes usar MCP${NC}"
     echo ""
     echo -e "${GREEN}¿Cómo usar MCP?${NC}"

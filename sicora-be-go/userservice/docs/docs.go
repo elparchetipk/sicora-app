@@ -1031,7 +1031,7 @@ var SwaggerInfo = &swag.Spec{
 	BasePath:         "/api/v1",
 	Schemes:          []string{},
 	Title:            "SICORA UserService API - Go",
-	Description:      "Sistema de Información para Control de Registros Académicos - UserService implementado con Go, Gin y Clean Architecture",
+	Description:      "Sistema de Información de Coordinación Académica - UserService implementado con Go, Gin y Clean Architecture",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

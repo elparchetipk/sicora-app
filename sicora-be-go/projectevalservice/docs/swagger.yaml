@@ -63,11 +63,11 @@ definitions:
         type: number
       status:
         allOf:
-        - $ref: '#/definitions/entities.EvaluationStatus'
+          - $ref: '#/definitions/entities.EvaluationStatus'
         description: Status and Timestamps
       submission:
         allOf:
-        - $ref: '#/definitions/entities.Submission'
+          - $ref: '#/definitions/entities.Submission'
         description: Relationships
       submission_id:
         type: string
@@ -83,20 +83,20 @@ definitions:
       updated_at:
         type: string
     required:
-    - evaluator_id
-    - status
-    - submission_id
+      - evaluator_id
+      - status
+      - submission_id
     type: object
   entities.EvaluationStatus:
     enum:
-    - draft
-    - completed
-    - published
+      - draft
+      - completed
+      - published
     type: string
     x-enum-varnames:
-    - EvaluationStatusDraft
-    - EvaluationStatusCompleted
-    - EvaluationStatusPublished
+      - EvaluationStatusDraft
+      - EvaluationStatusCompleted
+      - EvaluationStatusPublished
   entities.Project:
     properties:
       created_at:
@@ -130,23 +130,23 @@ definitions:
       updated_at:
         type: string
     required:
-    - delivery_date
-    - instructor_id
-    - max_score
-    - name
-    - status
-    - technology_stack
+      - delivery_date
+      - instructor_id
+      - max_score
+      - name
+      - status
+      - technology_stack
     type: object
   entities.ProjectStatus:
     enum:
-    - active
-    - inactive
-    - archived
+      - active
+      - inactive
+      - archived
     type: string
     x-enum-varnames:
-    - ProjectStatusActive
-    - ProjectStatusInactive
-    - ProjectStatusArchived
+      - ProjectStatusActive
+      - ProjectStatusInactive
+      - ProjectStatusArchived
   entities.Submission:
     properties:
       deployment_url:
@@ -161,7 +161,7 @@ definitions:
         type: string
       project:
         allOf:
-        - $ref: '#/definitions/entities.Project'
+          - $ref: '#/definitions/entities.Project'
         description: Relationships
       project_id:
         type: string
@@ -178,23 +178,23 @@ definitions:
       updated_at:
         type: string
     required:
-    - project_id
-    - repository_url
-    - status
-    - student_id
+      - project_id
+      - repository_url
+      - status
+      - student_id
     type: object
   entities.SubmissionStatus:
     enum:
-    - submitted
-    - evaluating
-    - evaluated
-    - rejected
+      - submitted
+      - evaluating
+      - evaluated
+      - rejected
     type: string
     x-enum-varnames:
-    - SubmissionStatusSubmitted
-    - SubmissionStatusEvaluating
-    - SubmissionStatusEvaluated
-    - SubmissionStatusRejected
+      - SubmissionStatusSubmitted
+      - SubmissionStatusEvaluating
+      - SubmissionStatusEvaluated
+      - SubmissionStatusRejected
   handlers.CreateEvaluationRequest:
     properties:
       architecture_comments:
@@ -254,8 +254,8 @@ definitions:
         minimum: 0
         type: number
     required:
-    - evaluator_id
-    - submission_id
+      - evaluator_id
+      - submission_id
     type: object
   handlers.CreateProjectRequest:
     properties:
@@ -277,10 +277,10 @@ definitions:
       technology_stack:
         type: string
     required:
-    - delivery_date
-    - instructor_id
-    - name
-    - technology_stack
+      - delivery_date
+      - instructor_id
+      - name
+      - technology_stack
     type: object
   handlers.CreateSubmissionRequest:
     properties:
@@ -297,9 +297,9 @@ definitions:
       technical_documentation:
         type: string
     required:
-    - project_id
-    - repository_url
-    - student_id
+      - project_id
+      - repository_url
+      - student_id
     type: object
   handlers.UpdateProjectRequest:
     properties:
@@ -321,17 +321,18 @@ definitions:
       technology_stack:
         type: string
     required:
-    - delivery_date
-    - name
-    - status
-    - technology_stack
+      - delivery_date
+      - name
+      - status
+      - technology_stack
     type: object
 host: localhost:8007
 info:
   contact:
     email: dev@sicora.sena.edu.co
     name: Equipo de Desarrollo SICORA
-  description: Sistema de Información para Control de Registros Académicos - ProjectEvalService
+  description:
+    Sistema de Información de Coordinación Académica - ProjectEvalService
     implementado con Go, Gin y Clean Architecture
   license:
     name: MIT
@@ -344,495 +345,495 @@ paths:
     get:
       description: Get evaluations filtered by submission or evaluator
       parameters:
-      - description: Filter by submission ID
-        in: query
-        name: submission_id
-        type: string
-      - description: Filter by evaluator ID
-        in: query
-        name: evaluator_id
-        type: string
+        - description: Filter by submission ID
+          in: query
+          name: submission_id
+          type: string
+        - description: Filter by evaluator ID
+          in: query
+          name: evaluator_id
+          type: string
       produces:
-      - application/json
+        - application/json
       responses:
-        "200":
+        '200':
           description: OK
           schema:
             items:
               $ref: '#/definitions/entities.Evaluation'
             type: array
-        "400":
+        '400':
           description: Bad Request
           schema:
             additionalProperties:
               type: string
             type: object
-        "500":
+        '500':
           description: Internal Server Error
           schema:
             additionalProperties:
               type: string
             type: object
       security:
-      - BearerAuth: []
+        - BearerAuth: []
       summary: Get evaluations
       tags:
-      - evaluations
+        - evaluations
     post:
       consumes:
-      - application/json
+        - application/json
       description: Create an evaluation for a submission
       parameters:
-      - description: Evaluation data
-        in: body
-        name: request
-        required: true
-        schema:
-          $ref: '#/definitions/handlers.CreateEvaluationRequest'
+        - description: Evaluation data
+          in: body
+          name: request
+          required: true
+          schema:
+            $ref: '#/definitions/handlers.CreateEvaluationRequest'
       produces:
-      - application/json
+        - application/json
       responses:
-        "201":
+        '201':
           description: Created
           schema:
             $ref: '#/definitions/entities.Evaluation'
-        "400":
+        '400':
           description: Bad Request
           schema:
             additionalProperties:
               type: string
             type: object
-        "500":
+        '500':
           description: Internal Server Error
           schema:
             additionalProperties:
               type: string
             type: object
       security:
-      - BearerAuth: []
+        - BearerAuth: []
       summary: Create a new evaluation
       tags:
-      - evaluations
+        - evaluations
   /evaluations/{id}:
     get:
       description: Get a specific evaluation by its ID
       parameters:
-      - description: Evaluation ID
-        in: path
-        name: id
-        required: true
-        type: string
+        - description: Evaluation ID
+          in: path
+          name: id
+          required: true
+          type: string
       produces:
-      - application/json
+        - application/json
       responses:
-        "200":
+        '200':
           description: OK
           schema:
             $ref: '#/definitions/entities.Evaluation'
-        "400":
+        '400':
           description: Bad Request
           schema:
             additionalProperties:
               type: string
             type: object
-        "404":
+        '404':
           description: Not Found
           schema:
             additionalProperties:
               type: string
             type: object
       security:
-      - BearerAuth: []
+        - BearerAuth: []
       summary: Get evaluation by ID
       tags:
-      - evaluations
+        - evaluations
   /evaluations/{id}/complete:
     patch:
       description: Complete and calculate final scores for an evaluation
       parameters:
-      - description: Evaluation ID
-        in: path
-        name: id
-        required: true
-        type: string
+        - description: Evaluation ID
+          in: path
+          name: id
+          required: true
+          type: string
       responses:
-        "200":
+        '200':
           description: OK
           schema:
             $ref: '#/definitions/entities.Evaluation'
-        "400":
+        '400':
           description: Bad Request
           schema:
             additionalProperties:
               type: string
             type: object
-        "404":
+        '404':
           description: Not Found
           schema:
             additionalProperties:
               type: string
             type: object
-        "500":
+        '500':
           description: Internal Server Error
           schema:
             additionalProperties:
               type: string
             type: object
       security:
-      - BearerAuth: []
+        - BearerAuth: []
       summary: Complete evaluation
       tags:
-      - evaluations
+        - evaluations
   /evaluations/{id}/publish:
     patch:
       description: Publish a completed evaluation to make it visible to students
       parameters:
-      - description: Evaluation ID
-        in: path
-        name: id
-        required: true
-        type: string
+        - description: Evaluation ID
+          in: path
+          name: id
+          required: true
+          type: string
       responses:
-        "200":
+        '200':
           description: OK
           schema:
             $ref: '#/definitions/entities.Evaluation'
-        "400":
+        '400':
           description: Bad Request
           schema:
             additionalProperties:
               type: string
             type: object
-        "404":
+        '404':
           description: Not Found
           schema:
             additionalProperties:
               type: string
             type: object
-        "500":
+        '500':
           description: Internal Server Error
           schema:
             additionalProperties:
               type: string
             type: object
       security:
-      - BearerAuth: []
+        - BearerAuth: []
       summary: Publish evaluation
       tags:
-      - evaluations
+        - evaluations
   /projects:
     get:
       description: Get all projects with optional filtering
       parameters:
-      - description: Filter by instructor ID
-        in: query
-        name: instructor_id
-        type: string
-      - description: Filter by status
-        in: query
-        name: status
-        type: string
+        - description: Filter by instructor ID
+          in: query
+          name: instructor_id
+          type: string
+        - description: Filter by status
+          in: query
+          name: status
+          type: string
       produces:
-      - application/json
+        - application/json
       responses:
-        "200":
+        '200':
           description: OK
           schema:
             items:
               $ref: '#/definitions/entities.Project'
             type: array
-        "500":
+        '500':
           description: Internal Server Error
           schema:
             additionalProperties:
               type: string
             type: object
       security:
-      - BearerAuth: []
+        - BearerAuth: []
       summary: Get all projects
       tags:
-      - projects
+        - projects
     post:
       consumes:
-      - application/json
+        - application/json
       description: Create a new software development project for evaluation
       parameters:
-      - description: Project creation data
-        in: body
-        name: request
-        required: true
-        schema:
-          $ref: '#/definitions/handlers.CreateProjectRequest'
+        - description: Project creation data
+          in: body
+          name: request
+          required: true
+          schema:
+            $ref: '#/definitions/handlers.CreateProjectRequest'
       produces:
-      - application/json
+        - application/json
       responses:
-        "201":
+        '201':
           description: Created
           schema:
             $ref: '#/definitions/entities.Project'
-        "400":
+        '400':
           description: Bad Request
           schema:
             additionalProperties:
               type: string
             type: object
-        "500":
+        '500':
           description: Internal Server Error
           schema:
             additionalProperties:
               type: string
             type: object
       security:
-      - BearerAuth: []
+        - BearerAuth: []
       summary: Create a new project
       tags:
-      - projects
+        - projects
   /projects/{id}:
     delete:
       description: Delete a project by ID
       parameters:
-      - description: Project ID
-        in: path
-        name: id
-        required: true
-        type: string
+        - description: Project ID
+          in: path
+          name: id
+          required: true
+          type: string
       responses:
-        "204":
+        '204':
           description: No Content
-        "400":
+        '400':
           description: Bad Request
           schema:
             additionalProperties:
               type: string
             type: object
-        "404":
+        '404':
           description: Not Found
           schema:
             additionalProperties:
               type: string
             type: object
-        "500":
+        '500':
           description: Internal Server Error
           schema:
             additionalProperties:
               type: string
             type: object
       security:
-      - BearerAuth: []
+        - BearerAuth: []
       summary: Delete project
       tags:
-      - projects
+        - projects
     get:
       description: Get a specific project by its ID
       parameters:
-      - description: Project ID
-        in: path
-        name: id
-        required: true
-        type: string
+        - description: Project ID
+          in: path
+          name: id
+          required: true
+          type: string
       produces:
-      - application/json
+        - application/json
       responses:
-        "200":
+        '200':
           description: OK
           schema:
             $ref: '#/definitions/entities.Project'
-        "400":
+        '400':
           description: Bad Request
           schema:
             additionalProperties:
               type: string
             type: object
-        "404":
+        '404':
           description: Not Found
           schema:
             additionalProperties:
               type: string
             type: object
       security:
-      - BearerAuth: []
+        - BearerAuth: []
       summary: Get project by ID
       tags:
-      - projects
+        - projects
     put:
       consumes:
-      - application/json
+        - application/json
       description: Update an existing project
       parameters:
-      - description: Project ID
-        in: path
-        name: id
-        required: true
-        type: string
-      - description: Project update data
-        in: body
-        name: request
-        required: true
-        schema:
-          $ref: '#/definitions/handlers.UpdateProjectRequest'
+        - description: Project ID
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: Project update data
+          in: body
+          name: request
+          required: true
+          schema:
+            $ref: '#/definitions/handlers.UpdateProjectRequest'
       produces:
-      - application/json
+        - application/json
       responses:
-        "200":
+        '200':
           description: OK
           schema:
             $ref: '#/definitions/entities.Project'
-        "400":
+        '400':
           description: Bad Request
           schema:
             additionalProperties:
               type: string
             type: object
-        "404":
+        '404':
           description: Not Found
           schema:
             additionalProperties:
               type: string
             type: object
-        "500":
+        '500':
           description: Internal Server Error
           schema:
             additionalProperties:
               type: string
             type: object
       security:
-      - BearerAuth: []
+        - BearerAuth: []
       summary: Update project
       tags:
-      - projects
+        - projects
   /submissions:
     get:
       description: Get all submissions for a specific project
       parameters:
-      - description: Filter by project ID
-        in: query
-        name: project_id
-        type: string
-      - description: Filter by student ID
-        in: query
-        name: student_id
-        type: string
+        - description: Filter by project ID
+          in: query
+          name: project_id
+          type: string
+        - description: Filter by student ID
+          in: query
+          name: student_id
+          type: string
       produces:
-      - application/json
+        - application/json
       responses:
-        "200":
+        '200':
           description: OK
           schema:
             items:
               $ref: '#/definitions/entities.Submission'
             type: array
-        "400":
+        '400':
           description: Bad Request
           schema:
             additionalProperties:
               type: string
             type: object
-        "500":
+        '500':
           description: Internal Server Error
           schema:
             additionalProperties:
               type: string
             type: object
       security:
-      - BearerAuth: []
+        - BearerAuth: []
       summary: Get submissions by project
       tags:
-      - submissions
+        - submissions
     post:
       consumes:
-      - application/json
+        - application/json
       description: Submit a project for evaluation
       parameters:
-      - description: Submission data
-        in: body
-        name: request
-        required: true
-        schema:
-          $ref: '#/definitions/handlers.CreateSubmissionRequest'
+        - description: Submission data
+          in: body
+          name: request
+          required: true
+          schema:
+            $ref: '#/definitions/handlers.CreateSubmissionRequest'
       produces:
-      - application/json
+        - application/json
       responses:
-        "201":
+        '201':
           description: Created
           schema:
             $ref: '#/definitions/entities.Submission'
-        "400":
+        '400':
           description: Bad Request
           schema:
             additionalProperties:
               type: string
             type: object
-        "500":
+        '500':
           description: Internal Server Error
           schema:
             additionalProperties:
               type: string
             type: object
       security:
-      - BearerAuth: []
+        - BearerAuth: []
       summary: Create a new submission
       tags:
-      - submissions
+        - submissions
   /submissions/{id}:
     get:
       description: Get a specific submission by its ID
       parameters:
-      - description: Submission ID
-        in: path
-        name: id
-        required: true
-        type: string
+        - description: Submission ID
+          in: path
+          name: id
+          required: true
+          type: string
       produces:
-      - application/json
+        - application/json
       responses:
-        "200":
+        '200':
           description: OK
           schema:
             $ref: '#/definitions/entities.Submission'
-        "400":
+        '400':
           description: Bad Request
           schema:
             additionalProperties:
               type: string
             type: object
-        "404":
+        '404':
           description: Not Found
           schema:
             additionalProperties:
               type: string
             type: object
       security:
-      - BearerAuth: []
+        - BearerAuth: []
       summary: Get submission by ID
       tags:
-      - submissions
+        - submissions
   /submissions/pending:
     get:
       description: Get all submissions pending evaluation
       produces:
-      - application/json
+        - application/json
       responses:
-        "200":
+        '200':
           description: OK
           schema:
             items:
               $ref: '#/definitions/entities.Submission'
             type: array
-        "500":
+        '500':
           description: Internal Server Error
           schema:
             additionalProperties:
               type: string
             type: object
       security:
-      - BearerAuth: []
+        - BearerAuth: []
       summary: Get pending evaluations
       tags:
-      - submissions
+        - submissions
 securityDefinitions:
   BearerAuth:
     description: Type "Bearer" followed by a space and JWT token.
     in: header
     name: Authorization
     type: apiKey
-swagger: "2.0"
+swagger: '2.0'

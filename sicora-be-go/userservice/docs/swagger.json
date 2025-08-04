@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "Sistema de Información para Control de Registros Académicos - UserService implementado con Go, Gin y Clean Architecture",
+        "description": "Sistema de Información de Coordinación Académica - UserService implementado con Go, Gin y Clean Architecture",
         "title": "SICORA UserService API - Go",
         "termsOfService": "http://swagger.io/terms/",
         "contact": {
