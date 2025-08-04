@@ -340,7 +340,29 @@ _SICORA utiliza una estrategia de configuración Git progresiva: configuración 
 - **Commits**: Conventional Commits
 - **Documentación**: README actualizado
 
-## 📞 Soporte
+## � Documentación Open Source
+
+### Archivos de Proyecto Open Source
+
+- [LICENSE](./LICENSE) - Licencia MIT
+- [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md) - Código de conducta de la comunidad
+- [CONTRIBUTING.md](./CONTRIBUTING.md) - Guía detallada para contribuyentes
+- [SECURITY.md](./SECURITY.md) - Política de seguridad y reporte de vulnerabilidades
+- [CHANGELOG.md](./CHANGELOG.md) - Registro de cambios del proyecto
+
+### Templates para Issues y PRs
+
+- [🐛 Bug Report](./.github/ISSUE_TEMPLATE/bug_report.md)
+- [✨ Feature Request](./.github/ISSUE_TEMPLATE/feature_request.md)
+- [❓ Question/Help](./.github/ISSUE_TEMPLATE/question.md)
+- [📝 Pull Request Template](./.github/pull_request_template.md)
+
+### CI/CD y Automatización
+
+- [GitHub Actions Workflow](./.github/workflows/ci-cd.yml) - Pipeline completo de CI/CD
+- [Scripts de automatización](./scripts/) - Herramientas de desarrollo y deployment
+
+## �📞 Soporte
 
 ### Contacto Técnico
 

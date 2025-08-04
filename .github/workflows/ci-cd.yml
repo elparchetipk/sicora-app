@@ -1,0 +1,397 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+env:
+  NODE_VERSION: '18'
+  GO_VERSION: '1.21'
+  PYTHON_VERSION: '3.11'
+
+jobs:
+  # Job 1: Lint y validación de archivos
+  lint-and-validate:
+    runs-on: ubuntu-latest
+    name: 🔍 Lint & Validate
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: |
+        cd sicora-app-fe
+        npm ci
+        
+    - name: Lint Frontend
+      run: |
+        cd sicora-app-fe
+        npm run lint
+        
+    - name: Validate Markdown
+      uses: DavidAnson/markdownlint-cli2-action@v13
+      with:
+        globs: '**/*.md'
+        
+    - name: Validate YAML
+      uses: ibiqlik/action-yamllint@v3
+      with:
+        config_file: .yamllint.yml
+        file_or_dir: .github/
+        
+  # Job 2: Tests Frontend
+  test-frontend:
+    runs-on: ubuntu-latest
+    name: 🧪 Test Frontend
+    needs: lint-and-validate
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: |
+        cd sicora-app-fe
+        npm ci
+        
+    - name: Run tests
+      run: |
+        cd sicora-app-fe
+        npm run test:ci
+        
+    - name: Upload coverage
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./sicora-app-fe/coverage/lcov.info
+        name: frontend-coverage
+        
+  # Job 3: Tests Backend Go
+  test-backend-go:
+    runs-on: ubuntu-latest
+    name: 🧪 Test Backend Go
+    needs: lint-and-validate
+    
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: sicora_test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: ${{ env.GO_VERSION }}
+        
+    - name: Cache Go modules
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.cache/go-build
+          ~/go/pkg/mod
+        key: ${{ runner.os }}-go-${{ hashFiles('sicora-be-go/go.sum') }}
+        restore-keys: |
+          ${{ runner.os }}-go-
+          
+    - name: Install dependencies
+      run: |
+        cd sicora-be-go
+        go mod download
+        
+    - name: Run tests
+      run: |
+        cd sicora-be-go
+        go test -v -race -coverprofile=coverage.out ./...
+        
+    - name: Upload coverage
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./sicora-be-go/coverage.out
+        name: backend-go-coverage
+        
+  # Job 4: Tests Backend Python
+  test-backend-python:
+    runs-on: ubuntu-latest
+    name: 🧪 Test Backend Python
+    needs: lint-and-validate
+    
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: sicora_test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+        
+    - name: Cache pip
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('sicora-be-python/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+          
+    - name: Install dependencies
+      run: |
+        cd sicora-be-python
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pytest pytest-cov
+        
+    - name: Run tests
+      run: |
+        cd sicora-be-python
+        pytest --cov=. --cov-report=xml
+        
+    - name: Upload coverage
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./sicora-be-python/coverage.xml
+        name: backend-python-coverage
+        
+  # Job 5: Security Scanning
+  security-scan:
+    runs-on: ubuntu-latest
+    name: 🔒 Security Scan
+    needs: lint-and-validate
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@master
+      with:
+        scan-type: 'fs'
+        scan-ref: '.'
+        format: 'sarif'
+        output: 'trivy-results.sarif'
+        
+    - name: Upload Trivy scan results
+      uses: github/codeql-action/upload-sarif@v2
+      with:
+        sarif_file: 'trivy-results.sarif'
+        
+    - name: Audit npm dependencies
+      run: |
+        cd sicora-app-fe
+        npm audit --audit-level moderate
+        
+    - name: Audit Go dependencies
+      uses: securecodewarrior/github-action-gosec@master
+      with:
+        args: './sicora-be-go/...'
+        
+  # Job 6: Build and Test Docker
+  docker-build:
+    runs-on: ubuntu-latest
+    name: 🐳 Docker Build
+    needs: [test-frontend, test-backend-go, test-backend-python]
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+      
+    - name: Build Frontend
+      run: |
+        cd sicora-app-fe
+        docker build -t sicora-frontend .
+        
+    - name: Build Backend Go
+      run: |
+        cd sicora-be-go
+        docker build -t sicora-backend-go .
+        
+    - name: Build Backend Python
+      run: |
+        cd sicora-be-python
+        docker build -t sicora-backend-python .
+        
+    - name: Test Docker Compose
+      run: |
+        docker compose -f docker-compose.test.yml up -d
+        sleep 30
+        docker compose -f docker-compose.test.yml down
+        
+  # Job 7: Documentation Check
+  docs-check:
+    runs-on: ubuntu-latest
+    name: 📚 Documentation Check
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Check documentation structure
+      run: |
+        chmod +x scripts/verify-docs-structure-strict.sh
+        ./scripts/verify-docs-structure-strict.sh
+        
+    - name: Validate SVG assets
+      run: |
+        find assets -name "*.svg" -type f | while read file; do
+          if ! xmllint --noout "$file" 2>/dev/null; then
+            echo "Invalid SVG: $file"
+            exit 1
+          fi
+        done
+        
+    - name: Check broken links
+      uses: lycheeverse/lychee-action@v1.8.0
+      with:
+        args: --verbose --no-progress --exclude-mail **.md
+        
+  # Job 8: MCP Server Test
+  mcp-server-test:
+    runs-on: ubuntu-latest
+    name: 🤖 MCP Server Test
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        
+    - name: Install MCP Server dependencies
+      run: |
+        cd sicora-mcp-server
+        npm ci
+        
+    - name: Test MCP Server
+      run: |
+        cd sicora-mcp-server
+        npm test
+        
+    - name: Test MCP Integration
+      run: |
+        cd sicora-mcp-server
+        npm start &
+        sleep 10
+        curl -f http://localhost:3000/health || exit 1
+        
+  # Job 9: Performance Test
+  performance-test:
+    runs-on: ubuntu-latest
+    name: ⚡ Performance Test
+    needs: docker-build
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup services
+      run: |
+        docker compose up -d
+        sleep 60
+        
+    - name: Run Lighthouse CI
+      uses: treosh/lighthouse-ci-action@v10
+      with:
+        configPath: './lighthouserc.json'
+        uploadArtifacts: true
+        temporaryPublicStorage: true
+        
+    - name: Load test APIs
+      run: |
+        # Placeholder para tests de carga
+        echo "Running API load tests..."
+        
+  # Job 10: Deploy (solo en main)
+  deploy:
+    runs-on: ubuntu-latest
+    name: 🚀 Deploy
+    needs: [docker-build, security-scan, docs-check, mcp-server-test]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Deploy to staging
+      run: |
+        echo "Deploying to staging environment..."
+        # Aquí iría la lógica de deployment real
+        
+    - name: Run health checks
+      run: |
+        echo "Running post-deployment health checks..."
+        # Health checks post-deployment
+        
+    - name: Notify deployment
+      uses: 8398a7/action-slack@v3
+      if: always()
+      with:
+        status: ${{ job.status }}
+        text: 'SICORA deployment completed'
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        
+  # Job 11: Release (solo en tags)
+  release:
+    runs-on: ubuntu-latest
+    name: 🏷️ Release
+    if: startsWith(github.ref, 'refs/tags/')
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Create Release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        body: |
+          Ver CHANGELOG.md para detalles de los cambios.
+        draft: false
+        prerelease: false
